@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="贵人的博客">
+    <meta name="keyword" content="CUMT">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        base64编码原理理解 - LeeHung的博客 | LeeHung&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> sometimes create， sometimes work </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>JCH</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#base64-decode"><span class="toc-text">base64_decode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#base64-encode"><span class="toc-text">base64_encode</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> sometimes create， sometimes work </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        base64编码原理理解
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-09-11 23:30:40</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#算法分析" title="算法分析">算法分析</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <ul>
+<li><p>编码</p>
+<p>1、取待编码字符串前3位（8bit/位），转换为二进制的ascii编码（共24bit）。</p>
+<p>2、将转换后的二进制编码按每6位分为4块，将每块二进制转换成ascii码值</p>
+<p>3、对照base64解码表即可得到对应的base64编码</p>
+<p>4、若取不到3位待编码字符串则用0补充，划分区间后全0的块用‘=’代替</p>
+<p><img src="https://s2.ax1x.com/2019/09/11/nw4fN6.png" alt="nw4fN6.png"></p>
+</li>
+<li><p>解码</p>
+<p>1、取待解码字符串前4位（8bit/位），对照base64编码表，转换为映射的数字，并将每一个数转成6位二进制数（共24bit），</p>
+<p>2、将24位二进制分为3份8bit数据</p>
+<p>3、对照ascii码表转换对应字符，解码完成</p>
+<p>4、在第一步中若有‘=’字符则将其转为000000</p>
+<p><img src="https://s2.ax1x.com/2019/12/13/Q2PWVJ.png" alt="Q2PWVJ.png"></p>
+</li>
+</ul>
+<p>附base64编码对照表</p>
+<p><img src="https://s2.ax1x.com/2019/09/11/nw4Hud.png" alt="nw4Hud.png"></p>
+<h2 id="base64-decode"><a href="#base64-decode" class="headerlink" title="base64_decode"></a>base64_decode</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> * base64 = <span class="string">"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"</span>;<span class="comment">//可以自己定制，比如说把+和/改成-和_以满足url编码的要求。</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">base64_decode</span><span class="params">( <span class="keyword">const</span> <span class="keyword">char</span> * base64, <span class="keyword">unsigned</span> <span class="keyword">char</span> * bindata )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, j;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> k;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> t;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> temp[<span class="number">4</span>];</span><br><span class="line">    <span class="keyword">for</span> ( i = <span class="number">0</span>, j = <span class="number">0</span>; base64[i] != <span class="string">'\0'</span> ; i += <span class="number">4</span> )<span class="comment">//每四个字节为一组</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">memset</span>( temp, <span class="number">0xFF</span>, <span class="keyword">sizeof</span>(temp) );</span><br><span class="line">        <span class="keyword">for</span> ( k = <span class="number">0</span> ; k &lt; <span class="number">64</span> ; k ++ )</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> ( base64char[k] == base64[i] )</span><br><span class="line">                temp[<span class="number">0</span>]= k;<span class="comment">//获取一组中每个字节对应的编号</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> ( k = <span class="number">0</span> ; k &lt; <span class="number">64</span> ; k ++ )</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> ( base64char[k] == base64[i+<span class="number">1</span>] )</span><br><span class="line">                temp[<span class="number">1</span>]= k;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> ( k = <span class="number">0</span> ; k &lt; <span class="number">64</span> ; k ++ )</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> ( base64char[k] == base64[i+<span class="number">2</span>] )</span><br><span class="line">                temp[<span class="number">2</span>]= k;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> ( k = <span class="number">0</span> ; k &lt; <span class="number">64</span> ; k ++ )</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> ( base64char[k] == base64[i+<span class="number">3</span>] )</span><br><span class="line">                temp[<span class="number">3</span>]= k;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        bindata[j++] = ((<span class="keyword">unsigned</span> <span class="keyword">char</span>)(((<span class="keyword">unsigned</span> <span class="keyword">char</span>)(temp[<span class="number">0</span>] &lt;&lt; <span class="number">2</span>))&amp;<span class="number">0xFC</span>)) |((<span class="keyword">unsigned</span> <span class="keyword">char</span>)((<span class="keyword">unsigned</span> <span class="keyword">char</span>)(temp[<span class="number">1</span>]&gt;&gt;<span class="number">4</span>)&amp;<span class="number">0x03</span>));<span class="comment">//这些就是补0补位的操作了</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> ( base64[i+<span class="number">2</span>] == <span class="string">'='</span> )</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">        bindata[j++] = ((<span class="keyword">unsigned</span> <span class="keyword">char</span>)(((<span class="keyword">unsigned</span> <span class="keyword">char</span>)(temp[<span class="number">1</span>] &lt;&lt; <span class="number">4</span>))&amp;<span class="number">0xF0</span>)) | ((<span class="keyword">unsigned</span> <span class="keyword">char</span>)((<span class="keyword">unsigned</span> <span class="keyword">char</span>)(temp[<span class="number">2</span>]&gt;&gt;<span class="number">2</span>)&amp;<span class="number">0x0F</span>));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> ( base64[i+<span class="number">3</span>] == <span class="string">'='</span> )</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">        bindata[j++] = ((<span class="keyword">unsigned</span> <span class="keyword">char</span>)(((<span class="keyword">unsigned</span> <span class="keyword">char</span>)(temp[<span class="number">2</span>] &lt;&lt; <span class="number">6</span>))&amp;<span class="number">0xF0</span>)) |((<span class="keyword">unsigned</span> <span class="keyword">char</span>)(temp[<span class="number">3</span>]&amp;<span class="number">0x3F</span>));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> j;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="base64-encode"><a href="#base64-encode" class="headerlink" title="base64_encode"></a>base64_encode</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">char</span> * <span class="title">base64_encode</span><span class="params">( <span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">char</span> * bindata, <span class="keyword">char</span> * base64, <span class="keyword">int</span> binlength )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, j;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> current;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> ( i = <span class="number">0</span>, j = <span class="number">0</span> ; i &lt; binlength ; i += <span class="number">3</span> )</span><br><span class="line">    &#123;</span><br><span class="line">        current = (bindata[i] &gt;&gt; <span class="number">2</span>) ;</span><br><span class="line">        current &amp;= (<span class="keyword">unsigned</span> <span class="keyword">char</span>)<span class="number">0x3F</span>;</span><br><span class="line">        base64[j++] = base64char[(<span class="keyword">int</span>)current];</span><br><span class="line"></span><br><span class="line">        current = ( (<span class="keyword">unsigned</span> <span class="keyword">char</span>)(bindata[i] &lt;&lt; <span class="number">4</span> ) ) &amp; ( (<span class="keyword">unsigned</span> <span class="keyword">char</span>)<span class="number">0x30</span> ) ;</span><br><span class="line">        <span class="keyword">if</span> ( i + <span class="number">1</span> &gt;= binlength )</span><br><span class="line">        &#123;</span><br><span class="line">            base64[j++] = base64char[(<span class="keyword">int</span>)current];</span><br><span class="line">            base64[j++] = <span class="string">'='</span>;</span><br><span class="line">            base64[j++] = <span class="string">'='</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        current |= ( (<span class="keyword">unsigned</span> <span class="keyword">char</span>)(bindata[i+<span class="number">1</span>] &gt;&gt; <span class="number">4</span>) ) &amp; ( (<span class="keyword">unsigned</span> <span class="keyword">char</span>) <span class="number">0x0F</span> );</span><br><span class="line">        base64[j++] = base64char[(<span class="keyword">int</span>)current];</span><br><span class="line"></span><br><span class="line">        current = ( (<span class="keyword">unsigned</span> <span class="keyword">char</span>)(bindata[i+<span class="number">1</span>] &lt;&lt; <span class="number">2</span>) ) &amp; ( (<span class="keyword">unsigned</span> <span class="keyword">char</span>)<span class="number">0x3C</span> ) ;</span><br><span class="line">        <span class="keyword">if</span> ( i + <span class="number">2</span> &gt;= binlength )</span><br><span class="line">        &#123;</span><br><span class="line">            base64[j++] = base64char[(<span class="keyword">int</span>)current];</span><br><span class="line">            base64[j++] = <span class="string">'='</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        current |= ( (<span class="keyword">unsigned</span> <span class="keyword">char</span>)(bindata[i+<span class="number">2</span>] &gt;&gt; <span class="number">6</span>) ) &amp; ( (<span class="keyword">unsigned</span> <span class="keyword">char</span>) <span class="number">0x03</span> );</span><br><span class="line">        base64[j++] = base64char[(<span class="keyword">int</span>)current];</span><br><span class="line"></span><br><span class="line">        current = ( (<span class="keyword">unsigned</span> <span class="keyword">char</span>)bindata[i+<span class="number">2</span>] ) &amp; ( (<span class="keyword">unsigned</span> <span class="keyword">char</span>)<span class="number">0x3F</span> ) ;</span><br><span class="line">        base64[j++] = base64char[(<span class="keyword">int</span>)current];</span><br><span class="line">    &#125;</span><br><span class="line">    base64[j] = <span class="string">'\0'</span>;</span><br><span class="line">    <span class="keyword">return</span> base64;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        
+            <div class="donate-container">
+    <div class="donate-button">
+        <button id="donate-button">请我吃生蚝</button>
+    </div>
+    <div class="donate-img-container hide" id="donate-img-container">
+        <img id="donate-img" src="" data-src="/img/donate.jpg">
+        <p> 感谢鼓励 </p>
+    </div>
+</div>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+        <li>
+            <a target="_blank" href="http://weibo.com/Lil_hooJC">
+                            <span class="fa-stack fa-lg">
+                                  <i class="iconfont icon-weibo"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/LeeHun9">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://3nd.xyz">3ND</a></span>
+        <span>/</span>
+        
+        <span><a href="https://comydream.github.io">ComyDream</a></span>
+        <span>/</span>
+        
+        <span><a href="#">旺铺招租</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="贵人的博客">
+    <meta name="keyword" content="CUMT">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        buuoj findit 初探Android逆向 - LeeHung的博客 | LeeHung&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> sometimes create， sometimes work </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>JCH</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#反编译代码"><span class="toc-text">反编译代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反编译res资源部分"><span class="toc-text">反编译res资源部分</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> sometimes create， sometimes work </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        buuoj findit 初探Android逆向
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-10-25 11:49:53</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#buuctf" title="buuctf">buuctf</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>这题给的是一个<code>apk文件</code>，刚接触安卓，简要学习了一下安卓逆向的大致流程</p>
+<p><strong>反编译代码</strong>的工具下载：</p>
+<ul>
+<li>dex2jar: 把<code>dex文件</code>转成<code>jar文件</code>下载地址：<a href="https://sourceforge.net/projects/dex2jar/files/" target="_blank" rel="noopener">https://sourceforge.net/projects/dex2jar/files/</a></li>
+<li>jd-gui: 这个工具用于将<code>jar文件</code>转换成<code>java代码</code>下载地址：<a href="http://jd.benow.ca/" target="_blank" rel="noopener">http://jd.benow.ca/</a></li>
+</ul>
+<p><strong>反编译资源</strong>的工具：</p>
+<ul>
+<li>APKTool: APK逆向工具，使用简单下载地址: <a href="http://ibotpeaches.github.io/Apktool/install/" target="_blank" rel="noopener">http://ibotpeaches.github.io/Apktool/install/</a></li>
+<li>简单介绍下大概流程，首先把后缀为<code>.apk</code>的文件改为<code>.zip</code>的一个压缩文件，方便解压。<code>dex2jar</code>和<code>jd-gui</code>配套使用，用于逆向代码部分，<code>APKTool</code>用于逆向res文件夹下的图片布局等部分。<code>.apk</code> 修改成.zip文件解压后的目录树长这样：</li>
+</ul>
+<p><img src="https://s2.ax1x.com/2019/10/25/KdPb28.png" alt="KdPb28.png"></p>
+<h3 id="反编译代码"><a href="#反编译代码" class="headerlink" title="反编译代码"></a>反编译代码</h3><p>用到<code>dex2jar包</code>中三个文件<code>d2j_invoke.bat</code>, <code>d2j-dex2jar.bat</code>, <code>lib</code>，将上面解压的<code>classes.dex文件</code>和这三个文件一起复制到同一文件夹。</p>
+<p>在当前窗口运行<code>d2j-dex2jar.bat classes.dex</code>，即可得到<code>classes-dex2jar.jar</code>文件</p>
+<p><a href="https://imgchr.com/i/KdiUit" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/10/25/KdiUit.png" alt="KdiUit.png"></a></p>
+<p>再运行<code>jd-gui</code>，将<code>classes-dex2jar.jar</code>拖入，即可得到想要的 java 代码</p>
+<p><img src="https://s2.ax1x.com/2019/10/25/Kdi7w9.png" alt="Kdi7w9.png"></p>
+<h3 id="反编译res资源部分"><a href="#反编译res资源部分" class="headerlink" title="反编译res资源部分"></a>反编译res资源部分</h3><p>apktool跟着官网的安装步骤即可完成安装</p>
+<p>在find.apk文件目录下cmd运行 <code>apktool find.apk</code>可得到同名文件夹</p>
+<p>这个文件夹下会得到若干文件，主要内容介绍如下：</p>
+<ul>
+<li>AndroidManifest.xml：描述文件</li>
+<li>res：资源文件</li>
+<li>smail：反编译出来的所有代码，语法与java不同，类似汇编，是Android<a href="https://www.52pojie.cn/thread-661779-1-1.html" target="_blank" rel="noopener">虚拟机</a>所使用的寄存器语言</li>
+</ul>
+<p><img src="https://s2.ax1x.com/2019/10/25/KdFJ6U.png" alt="KdFJ6U.png"></p>
+<p>查看<code>MainActivity.smali</code>文件，得到以下关键信息，结合<code>.line 22</code> 和<code>.line 23</code>可知两串字符串分别对应上面java代码中的<code>arrayOfChar1</code>和<code>arrayOfChar2</code></p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">.line</span> 22</span><br><span class="line">:array_0</span><br><span class="line"><span class="keyword">.array</span>-data 2</span><br><span class="line">    0x54s</span><br><span class="line">    0x68s</span><br><span class="line">    0x69s</span><br><span class="line">    0x73s</span><br><span class="line">    0x49s</span><br><span class="line">    0x73s</span><br><span class="line">    0x54s</span><br><span class="line">    0x68s</span><br><span class="line">    0x65s</span><br><span class="line">    0x46s</span><br><span class="line">    0x6cs</span><br><span class="line">    0x61s</span><br><span class="line">    0x67s</span><br><span class="line">    0x48s</span><br><span class="line">    0x6fs</span><br><span class="line">    0x6ds</span><br><span class="line">    0x65s</span><br><span class="line"><span class="keyword">.end array</span>-data</span><br><span class="line"></span><br><span class="line"><span class="keyword">.line</span> 23</span><br><span class="line">nop</span><br><span class="line"></span><br><span class="line">:array_1</span><br><span class="line"><span class="keyword">.array</span>-data 2</span><br><span class="line">    0x70s</span><br><span class="line">    0x76s</span><br><span class="line">    0x6bs</span><br><span class="line">    0x71s</span><br><span class="line">    0x7bs</span><br><span class="line">    0x6ds</span><br><span class="line">    0x31s</span><br><span class="line">    0x36s</span><br><span class="line">    0x34s</span><br><span class="line">    0x36s</span><br><span class="line">    0x37s</span><br><span class="line">    0x35s</span><br><span class="line">    0x32s</span><br><span class="line">    0x36s</span><br><span class="line">    0x32s</span><br><span class="line">    0x30s</span><br><span class="line">    0x33s</span><br><span class="line">    0x33s</span><br><span class="line">    0x6cs</span><br><span class="line">    0x34s</span><br><span class="line">    0x6ds</span><br><span class="line">    0x34s</span><br><span class="line">    0x39s</span><br><span class="line">    0x6cs</span><br><span class="line">    0x6es</span><br><span class="line">    0x70s</span><br><span class="line">    0x37s</span><br><span class="line">    0x70s</span><br><span class="line">    0x39s</span><br><span class="line">    0x6ds</span><br><span class="line">    0x6es</span><br><span class="line">    0x6bs</span><br><span class="line">    0x32s</span><br><span class="line">    0x38s</span><br><span class="line">    0x6bs</span><br><span class="line">    0x37s</span><br><span class="line">    0x35s</span><br><span class="line">    0x7ds</span><br><span class="line"><span class="keyword">.end array</span>-data</span><br></pre></td></tr></table></figure>
+<p>分析java代码，判断对<code>arrayOfChar2</code>中字母进行凯撒加密，爆破脚本如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">model = <span class="string">"abcdefghijklmnopqrstuvwxyz"</span></span><br><span class="line"></span><br><span class="line">str1 = <span class="string">"pvkq&#123;m164675262033l4m49lnp7p9mnk28k75&#125;"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">27</span>):</span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> str1:</span><br><span class="line">        <span class="keyword">if</span> s.isalpha():</span><br><span class="line">            n = model.find(s)</span><br><span class="line">            s = model[n-i]</span><br><span class="line">        print(s, end=<span class="string">''</span>)</span><br><span class="line">    print(<span class="string">'\n'</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.ax1x.com/2019/10/25/KdkfrF.png" alt="KdkfrF.png"></p>
+
+        
+            <div class="donate-container">
+    <div class="donate-button">
+        <button id="donate-button">请我吃生蚝</button>
+    </div>
+    <div class="donate-img-container hide" id="donate-img-container">
+        <img id="donate-img" src="" data-src="/img/donate.jpg">
+        <p> 感谢鼓励 </p>
+    </div>
+</div>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+        <li>
+            <a target="_blank" href="http://weibo.com/Lil_hooJC">
+                            <span class="fa-stack fa-lg">
+                                  <i class="iconfont icon-weibo"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/LeeHun9">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://3nd.xyz">3ND</a></span>
+        <span>/</span>
+        
+        <span><a href="https://comydream.github.io">ComyDream</a></span>
+        <span>/</span>
+        
+        <span><a href="#">旺铺招租</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

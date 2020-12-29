@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="贵人的博客">
+    <meta name="keyword" content="CUMT">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        DVWA部分复现（Brute Force、SQL Injection、SQL Injection (Blind)、XSS（Reflected）、XSS（Stored）） - LeeHung的博客 | LeeHung&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> sometimes create， sometimes work </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>JCH</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Brute-Force"><span class="toc-text">Brute Force</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#low级别"><span class="toc-text">low级别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#medium级别"><span class="toc-text">medium级别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#high级别"><span class="toc-text">high级别</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL-Injection"><span class="toc-text">SQL Injection</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#low级别-1"><span class="toc-text">low级别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#medium级别-1"><span class="toc-text">medium级别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#high级别-1"><span class="toc-text">high级别</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL-Injection-Blind"><span class="toc-text">SQL Injection (Blind)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#low级别-2"><span class="toc-text">low级别</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#medium级别-2"><span class="toc-text">medium级别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#high级别-2"><span class="toc-text">high级别</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XSS（Reflected）"><span class="toc-text">XSS（Reflected）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Low级别"><span class="toc-text">Low级别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Medium级别"><span class="toc-text">Medium级别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#High级别"><span class="toc-text">High级别</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XSS（Stored）"><span class="toc-text">XSS（Stored）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Low级别-1"><span class="toc-text">Low级别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Medium级别-1"><span class="toc-text">Medium级别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#High级别-1"><span class="toc-text">High级别</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> sometimes create， sometimes work </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        DVWA部分复现（Brute Force、SQL Injection、SQL Injection (Blind)、XSS（Reflected）、XSS（Stored））
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-12-09 10:46:19</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#漏洞复现" title="漏洞复现">漏洞复现</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h3 id="Brute-Force"><a href="#Brute-Force" class="headerlink" title="Brute Force"></a>Brute Force</h3><h4 id="low级别"><a href="#low级别" class="headerlink" title="low级别"></a>low级别</h4><p><img src="https://s2.ax1x.com/2019/12/03/QMFPu6.png" alt="QMFPu6.png"></p>
+<p><strong>爆破利用burpsuite即可完成</strong></p>
+<p>抓包，并送至intruder</p>
+<p><img src="https://s2.ax1x.com/2019/12/03/QMFUvq.png" alt="QMFUvq.png"></p>
+<p>选择爆破点password和字典开始爆破</p>
+<p><img src="https://s2.ax1x.com/2019/12/03/QMFs54.png" alt="QMFs54.png"></p>
+<p>点击页面长度进行排序，可看到密码为<code>password</code>返回的页面长度与别的明显不同</p>
+<p><img src="https://s2.ax1x.com/2019/12/03/QMFoIe.png" alt="QMFoIe.png"></p>
+<p>载入详情，查看渲染，回显登录成功，由此爆破出密码为<code>password</code>。</p>
+<p><img src="https://s2.ax1x.com/2019/12/03/QMkPRs.png" alt="QMkPRs.png"></p>
+<h4 id="medium级别"><a href="#medium级别" class="headerlink" title="medium级别"></a>medium级别</h4><p>查看源代码如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>( <span class="keyword">isset</span>( $_GET[ <span class="string">'Login'</span> ] ) ) &#123;</span><br><span class="line">    <span class="comment">// Sanitise username input</span></span><br><span class="line">    $user = $_GET[ <span class="string">'username'</span> ];</span><br><span class="line">    $user = ((<span class="keyword">isset</span>($GLOBALS[<span class="string">"___mysqli_ston"</span>]) &amp;&amp; is_object($GLOBALS[<span class="string">"___mysqli_ston"</span>])) ? mysqli_real_escape_string($GLOBALS[<span class="string">"___mysqli_ston"</span>],  $user ) : ((trigger_error(<span class="string">"[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work."</span>, E_USER_ERROR)) ? <span class="string">""</span> : <span class="string">""</span>));</span><br><span class="line">    <span class="comment">// Sanitise password input</span></span><br><span class="line">    $pass = $_GET[ <span class="string">'password'</span> ];</span><br><span class="line">    $pass = ((<span class="keyword">isset</span>($GLOBALS[<span class="string">"___mysqli_ston"</span>]) &amp;&amp; is_object($GLOBALS[<span class="string">"___mysqli_ston"</span>])) ? mysqli_real_escape_string($GLOBALS[<span class="string">"___mysqli_ston"</span>],  $pass ) : ((trigger_error(<span class="string">"[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work."</span>, E_USER_ERROR)) ? <span class="string">""</span> : <span class="string">""</span>));</span><br><span class="line">    $pass = md5( $pass );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Check the database</span></span><br><span class="line">    $query  = <span class="string">"SELECT * FROM `users` WHERE user = '$user' AND password = '$pass';"</span>;</span><br><span class="line">    $result = mysqli_query($GLOBALS[<span class="string">"___mysqli_ston"</span>],  $query ) <span class="keyword">or</span> <span class="keyword">die</span>( <span class="string">'&lt;pre&gt;'</span> . ((is_object($GLOBALS[<span class="string">"___mysqli_ston"</span>])) ? mysqli_error($GLOBALS[<span class="string">"___mysqli_ston"</span>]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : <span class="keyword">false</span>)) . <span class="string">'&lt;/pre&gt;'</span> );</span><br><span class="line">    <span class="keyword">if</span>( $result &amp;&amp; mysqli_num_rows( $result ) == <span class="number">1</span> ) &#123;</span><br><span class="line">        <span class="comment">// Get users details</span></span><br><span class="line">        $row    = mysqli_fetch_assoc( $result );</span><br><span class="line">        $avatar = $row[<span class="string">"avatar"</span>];</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Login successful</span></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"&lt;p&gt;Welcome to the password protected area &#123;$user&#125;&lt;/p&gt;"</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"&lt;img src=\"&#123;$avatar&#125;\" /&gt;"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// Login failed</span></span><br><span class="line">        sleep( <span class="number">2</span> );</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"&lt;pre&gt;&lt;br /&gt;Username and/or password incorrect.&lt;/pre&gt;"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ((is_null($___mysqli_res = mysqli_close($GLOBALS[<span class="string">"___mysqli_ston"</span>]))) ? <span class="keyword">false</span> : $___mysqli_res);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>比low级别增加了<code>mysqli_real_escape_string()</code>函数，此函数会转义在 SQL 语句中使用的字符串中的特殊字符。可以抵御sql注入。登录失败会做<code>sleep(2)</code>但仍可以进行爆破，可用同low方法进行爆破，只是速度会变慢。</p>
+<h4 id="high级别"><a href="#high级别" class="headerlink" title="high级别"></a>high级别</h4><p>查看源代码如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>( <span class="keyword">isset</span>( $_GET[ <span class="string">'Login'</span> ] ) ) &#123;</span><br><span class="line">    <span class="comment">// Check Anti-CSRF token</span></span><br><span class="line">    checkToken( $_REQUEST[ <span class="string">'user_token'</span> ], $_SESSION[ <span class="string">'session_token'</span> ], <span class="string">'index.php'</span> );</span><br><span class="line">    <span class="comment">// Sanitise username input</span></span><br><span class="line">    $user = $_GET[ <span class="string">'username'</span> ];</span><br><span class="line">    $user = stripslashes( $user );</span><br><span class="line">    $user = ((<span class="keyword">isset</span>($GLOBALS[<span class="string">"___mysqli_ston"</span>]) &amp;&amp; is_object($GLOBALS[<span class="string">"___mysqli_ston"</span>])) ? mysqli_real_escape_string($GLOBALS[<span class="string">"___mysqli_ston"</span>],  $user ) : ((trigger_error(<span class="string">"[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work."</span>, E_USER_ERROR)) ? <span class="string">""</span> : <span class="string">""</span>));</span><br><span class="line">    <span class="comment">// Sanitise password input</span></span><br><span class="line">    $pass = $_GET[ <span class="string">'password'</span> ];</span><br><span class="line">    $pass = stripslashes( $pass );</span><br><span class="line">    $pass = ((<span class="keyword">isset</span>($GLOBALS[<span class="string">"___mysqli_ston"</span>]) &amp;&amp; is_object($GLOBALS[<span class="string">"___mysqli_ston"</span>])) ? mysqli_real_escape_string($GLOBALS[<span class="string">"___mysqli_ston"</span>],  $pass ) : ((trigger_error(<span class="string">"[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work."</span>, E_USER_ERROR)) ? <span class="string">""</span> : <span class="string">""</span>));</span><br><span class="line">    $pass = md5( $pass );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Check database</span></span><br><span class="line">    $query  = <span class="string">"SELECT * FROM `users` WHERE user = '$user' AND password = '$pass';"</span>;</span><br><span class="line">    $result = mysqli_query($GLOBALS[<span class="string">"___mysqli_ston"</span>],  $query ) <span class="keyword">or</span> <span class="keyword">die</span>( <span class="string">'&lt;pre&gt;'</span> . ((is_object($GLOBALS[<span class="string">"___mysqli_ston"</span>])) ? mysqli_error($GLOBALS[<span class="string">"___mysqli_ston"</span>]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : <span class="keyword">false</span>)) . <span class="string">'&lt;/pre&gt;'</span> );</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>( $result &amp;&amp; mysqli_num_rows( $result ) == <span class="number">1</span> ) &#123;</span><br><span class="line">        <span class="comment">// Get users details</span></span><br><span class="line">        $row    = mysqli_fetch_assoc( $result );</span><br><span class="line">        $avatar = $row[<span class="string">"avatar"</span>];</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Login successful</span></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"&lt;p&gt;Welcome to the password protected area &#123;$user&#125;&lt;/p&gt;"</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"&lt;img src=\"&#123;$avatar&#125;\" /&gt;"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// Login failed</span></span><br><span class="line">        sleep( rand( <span class="number">0</span>, <span class="number">3</span> ) );</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"&lt;pre&gt;&lt;br /&gt;Username and/or password incorrect.&lt;/pre&gt;"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ((is_null($___mysqli_res = mysqli_close($GLOBALS[<span class="string">"___mysqli_ston"</span>]))) ? <span class="keyword">false</span> : $___mysqli_res);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Generate Anti-CSRF token</span></span><br><span class="line">generateSessionToken();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>对比medium级别，username和password的过滤机制增加了<code>stripslashes()</code>函数，可以进一步的抵御sql注入，代码加入了user_token，每次服务器返回的登陆页面中都会包含一个随机的user_token的值，用户每次登录时都要将user_token一起提交。服务器收到请求后，会优先做token的检查，再进行sql查询。并在结尾处增加了<code>sleep( rand( 0, 3 ) )</code>登录失败的延时机制。low方式无法再次使用。每次登录都要提交Login、user_token、username和password。</p>
+<p>代理抓包，发送至intruder，选择Pitchfork攻击方式，并确认爆破点password和user_token</p>
+<p><img src="https://s2.ax1x.com/2019/12/03/QMlEOe.png" alt="QMlEOe.png"></p>
+<p>在options栏找到Grep - Extract，点击Add。</p>
+<p><img src="https://s2.ax1x.com/2019/12/03/QMltTs.png" alt="QMltTs.png"></p>
+<p>点击Refetch response，进行一个请求，即可看到响应报文，直接选取需要提取的token</p>
+<p><img src="https://s2.ax1x.com/2019/12/03/QMtlUe.png" alt="QMtlUe.png"></p>
+<p>设置payload1为常用密码</p>
+<p><img src="https://s2.ax1x.com/2019/12/03/QMtB5Q.png" alt="QMtB5Q.png"></p>
+<p>设置payload2，选择payload type为“Recursive grep”</p>
+<p><img src="https://s2.ax1x.com/2019/12/03/QMtoG9.png" alt="QMtoG9.png"></p>
+<p>开始爆破，查看爆破结果，爆破成功，密码password</p>
+<p><img src="https://s2.ax1x.com/2019/12/03/QMN9xI.png" alt="QMN9xI.png"></p>
+<h3 id="SQL-Injection"><a href="#SQL-Injection" class="headerlink" title="SQL Injection"></a>SQL Injection</h3><h4 id="low级别-1"><a href="#low级别-1" class="headerlink" title="low级别"></a>low级别</h4><p><img src="https://i.loli.net/2019/12/03/63LydJsGWtjeQIO.png" alt="image.png"></p>
+<p>输入<code>1&#39; and &#39;1&#39;=&#39;1</code>，回显正常id=1的情况，存在SQL注入</p>
+<p><img src="https://i.loli.net/2019/12/03/buUpDNHmhsBtTkg.png" alt="image.png"></p>
+<p>之后猜测SQL语句字段数，输入<code>1&#39; order by 3 #</code> ，提示不存在，由此判断查询语句存在2字段。</p>
+<p><img src="https://i.loli.net/2019/12/03/d5Oos6fS2rKTQa8.png" alt="image.png"></p>
+<p>之后可用<code>1′ union select 1,database() #</code>查询数据库</p>
+<p><img src="https://i.loli.net/2019/12/03/TjgIWwQpKOdmVFH.png" alt="image.png"></p>
+<p>查表<code>1′ union select 1,group_concat(table_name) from information_schema.tables where table_schema=database() #</code></p>
+<p><img src="https://i.loli.net/2019/12/03/tWDmjkMqE4QoHiI.png" alt="image.png"></p>
+<p>查字段名<code>1&#39; union select 1,group_concat(column_name) from information_schema.columns where table_name=&#39;users&#39; #</code></p>
+<p><img src="https://i.loli.net/2019/12/03/QCw1hrlXDN4FPyo.png" alt="image.png"></p>
+<p>查字段值<code>1&#39; or 1=1 union select group_concat(user_id,first_name,last_name),group_concat(password) from users #</code></p>
+<p><img src="https://i.loli.net/2019/12/03/uvRCBSrXeDNw9HU.png" alt="image.png"></p>
+<h4 id="medium级别-1"><a href="#medium级别-1" class="headerlink" title="medium级别"></a>medium级别</h4><p>本题只能选择再提交，所以选择抓包的方式进行数据包修改参数id</p>
+<p><img src="https://s2.ax1x.com/2019/12/03/QMzIzV.png" alt="QMzIzV.png"></p>
+<p>更改成1‘ and 1=2 #，出现报错，说明不是字符型注入</p>
+<p><img src="https://s2.ax1x.com/2019/12/03/QQpM1x.png" alt="QQpM1x.png"></p>
+<p>尝试数字型注入，1 and 1=1#，回显正常，找到注入点</p>
+<p><img src="https://s2.ax1x.com/2019/12/03/QQpN4A.png" alt="QQpN4A.png"></p>
+<p>剩下爆数据库，表名可参考low级别payload</p>
+<h4 id="high级别-1"><a href="#high级别-1" class="headerlink" title="high级别"></a>high级别</h4><p>与Medium级别的代码相比，High级别的只是在SQL查询语句中添加了LIMIT 1，控制只输出一个结果。</p>
+<p><code>1&#39; or 1=1 union select group_concat(user_id,first_name,last_name),group_concat(password) from users #</code></p>
+<p><img src="https://s2.ax1x.com/2019/12/03/QQ90i9.png" alt="QQ90i9.png"></p>
+<p>High级别的查询提交页面与查询结果显示页面不是同一个，也没有执行302跳转，这样做的目的是为了防止一般的sqlmap注入，因为sqlmap在注入过程中，无法在查询提交页面上获取查询的结果，没有了反馈，也就没办法进一步注入。</p>
+<h3 id="SQL-Injection-Blind"><a href="#SQL-Injection-Blind" class="headerlink" title="SQL Injection (Blind)"></a>SQL Injection (Blind)</h3><h4 id="low级别-2"><a href="#low级别-2" class="headerlink" title="low级别"></a>low级别</h4><p>只会显示exists和MISSING，其中exists代表查询正确，MISSING代表查询错误</p>
+<p><img src="https://s2.ax1x.com/2019/12/03/QQCEFJ.png" alt="QQCEFJ.png"></p>
+<p>开始尝试数据库名长度，使用语句<code>1&#39; and length(database())=1#</code>，发现不成功一直到4回显exists，表明数据库名长度为4</p>
+<p><img src="https://s2.ax1x.com/2019/12/03/QQPg4H.png" alt="QQPg4H.png"></p>
+<p>开始猜测数据库名，<code>1&#39; and ascii(substr(database(),1,1))&gt;97#</code>和<code>1&#39; and ascii(substr(database(),1,1))&lt;123#</code>判断第一个字母是否在a-z中间，返回都是exists</p>
+<p><img src="https://s2.ax1x.com/2019/12/03/QQPjvq.png" alt="QQPjvq.png"></p>
+<p>接着用二分法证实得第一个字母为d。同理求出完整数据库名为 dvwa</p>
+<p>之后开始猜有几个表，猜解表的长度，猜解表的名称</p>
+<p>猜测表个数<code>1&#39; and (select count(table_name) from information_schema.tables where table_schema=&#39;dvwa&#39;)=2#</code>，为2。</p>
+<p><img src="https://s2.ax1x.com/2019/12/03/QQiJMt.png" alt="QQiJMt.png"></p>
+<p>猜第一个表名，从第一位开始猜，二分法，可用以下语句尝试，最后得到表1完整名称是guestbook</p>
+<p><code>1&#39; and ascii(substr((select table_name from information_schema.tables where table_schema=&#39;dvwa&#39; limit 0,1),1))=103#</code></p>
+<p>猜第二个表名，用以下语句尝试，得到表2的名称是users</p>
+<p><code>1&#39; and ascii(substr((select table_name from information_schema.tables where table_schema=&#39;dvwa&#39; limit 1,1),1))=117#</code></p>
+<p>以后按照以上类似方法就可得到字段值，不再累述</p>
+<h3 id="medium级别-2"><a href="#medium级别-2" class="headerlink" title="medium级别"></a>medium级别</h3><p><img src="https://s2.ax1x.com/2019/12/03/QQE1Tf.png" alt="QQE1Tf.png"></p>
+<p>查看源码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>( <span class="keyword">isset</span>( $_POST[ <span class="string">'Submit'</span> ]  ) ) &#123;</span><br><span class="line">    <span class="comment">// Get input</span></span><br><span class="line">    $id = $_POST[ <span class="string">'id'</span> ];</span><br><span class="line">    $id = ((<span class="keyword">isset</span>($GLOBALS[<span class="string">"___mysqli_ston"</span>]) &amp;&amp; is_object($GLOBALS[<span class="string">"___mysqli_ston"</span>])) ? mysqli_real_escape_string($GLOBALS[<span class="string">"___mysqli_ston"</span>],  $id ) : ((trigger_error(<span class="string">"[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work."</span>, E_USER_ERROR)) ? <span class="string">""</span> : <span class="string">""</span>));</span><br><span class="line">    <span class="comment">// Check database</span></span><br><span class="line">    $getid  = <span class="string">"SELECT first_name, last_name FROM users WHERE user_id = $id;"</span>;</span><br><span class="line">    $result = mysqli_query($GLOBALS[<span class="string">"___mysqli_ston"</span>],  $getid ); <span class="comment">// Removed 'or die' to suppress mysql errors</span></span><br><span class="line">    <span class="comment">// Get results</span></span><br><span class="line">    $num = @mysqli_num_rows( $result ); <span class="comment">// The '@' character suppresses errors</span></span><br><span class="line">    <span class="keyword">if</span>( $num &gt; <span class="number">0</span> ) &#123;</span><br><span class="line">        <span class="comment">// Feedback for end user</span></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'&lt;pre&gt;User ID exists in the database.&lt;/pre&gt;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// Feedback for end user</span></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'&lt;pre&gt;User ID is MISSING from the database.&lt;/pre&gt;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//mysql_close();</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>相比low级别添加了<code>mysqli_real_escape_string()</code>，过滤了一些单引号等字符，并使用post方法发送数据。但此题没有涉及字符型注入，所以直接构造语句</p>
+<p><code>1 and length(database())=4#</code></p>
+<p>盲注方法参照low级别，不再累述</p>
+<h4 id="high级别-2"><a href="#high级别-2" class="headerlink" title="high级别"></a>high级别</h4><p><img src="https://s2.ax1x.com/2019/12/03/QQVX24.png" alt="QQVX24.png"></p>
+<p>查看源代码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>( <span class="keyword">isset</span>( $_COOKIE[ <span class="string">'id'</span> ] ) ) &#123;</span><br><span class="line">    <span class="comment">// Get input</span></span><br><span class="line">    $id = $_COOKIE[ <span class="string">'id'</span> ];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Check database</span></span><br><span class="line">    $getid  = <span class="string">"SELECT first_name, last_name FROM users WHERE user_id = '$id' LIMIT 1;"</span>;</span><br><span class="line">    $result = mysqli_query($GLOBALS[<span class="string">"___mysqli_ston"</span>],  $getid ); <span class="comment">// Removed 'or die' to suppress mysql errors</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Get results</span></span><br><span class="line">    $num = @mysqli_num_rows( $result ); <span class="comment">// The '@' character suppresses errors</span></span><br><span class="line">    <span class="keyword">if</span>( $num &gt; <span class="number">0</span> ) &#123;</span><br><span class="line">        <span class="comment">// Feedback for end user</span></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'&lt;pre&gt;User ID exists in the database.&lt;/pre&gt;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// Might sleep a random amount</span></span><br><span class="line">        <span class="keyword">if</span>( rand( <span class="number">0</span>, <span class="number">5</span> ) == <span class="number">3</span> ) &#123;</span><br><span class="line">            sleep( rand( <span class="number">2</span>, <span class="number">4</span> ) );</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// User wasn't found, so the page wasn't!</span></span><br><span class="line">        header( $_SERVER[ <span class="string">'SERVER_PROTOCOL'</span> ] . <span class="string">' 404 Not Found'</span> );</span><br><span class="line">        <span class="comment">// Feedback for end user</span></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'&lt;pre&gt;User ID is MISSING from the database.&lt;/pre&gt;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ((is_null($___mysqli_res = mysqli_close($GLOBALS[<span class="string">"___mysqli_ston"</span>]))) ? <span class="keyword">false</span> : $___mysqli_res);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>High级别的代码利用cookie传递参数id，当SQL查询结果为空时，会执行函数sleep(seconds)，目的是为了扰乱基于时间的盲注。同时在 SQL查询语句中添加了LIMIT 1，希望以此控制只输出一个结果。由于时间盲注的准确性受到影响，所以只利用基于布尔的盲注</p>
+<p><code>抓包将cookie中参数id改为1&#39; and length(database())=4 #，显示存在</code></p>
+<h3 id="XSS（Reflected）"><a href="#XSS（Reflected）" class="headerlink" title="XSS（Reflected）"></a>XSS（Reflected）</h3><h4 id="Low级别"><a href="#Low级别" class="headerlink" title="Low级别"></a>Low级别</h4><p><img src="https://s2.ax1x.com/2019/12/09/QdOxwn.png" alt="QdOxwn.png"></p>
+<p>直接引用了name参数，并没有任何的过滤和检查，存在明显的XSS漏洞，输入<code>&lt;script&gt;alert(/xss/)&lt;/script&gt;</code>，成功弹框：</p>
+<p><img src="https://i.loli.net/2019/12/09/LPAXSafjuWCTqlK.png" alt="image.png"></p>
+<h4 id="Medium级别"><a href="#Medium级别" class="headerlink" title="Medium级别"></a>Medium级别</h4><p><img src="https://i.loli.net/2019/12/09/iSgKGcIHMwzAYeu.png" alt="image.png"></p>
+<p>对输入进行了过滤，使用str_replace函数将输入中的<code>&lt;script&gt;</code>删除输入<code>&lt;sc&lt;script&gt;ript&gt;alert(/xss/)&lt;/script&gt;</code>，成功弹框：</p>
+<p><img src="https://i.loli.net/2019/12/09/LPAXSafjuWCTqlK.png" alt="image.png"></p>
+<h4 id="High级别"><a href="#High级别" class="headerlink" title="High级别"></a>High级别</h4><p><img src="https://i.loli.net/2019/12/09/U6SQV1OoLYbFuGx.png" alt="image.png"></p>
+<p>preg_replace() 函数用于正则表达式的搜索和替换，这使得双写绕过、大小写混淆绕过（正则表达式中i表示不区分大小写）不再有效，可以通过img、body等标签的事件或者iframe等标签的src注入恶意的js代码。</p>
+<p>输入<code>&lt;img src=1 onerror=alert(/xss/)&gt;</code>，成功弹框：</p>
+<p><img src="https://i.loli.net/2019/12/09/LPAXSafjuWCTqlK.png" alt="image.png"></p>
+<h3 id="XSS（Stored）"><a href="#XSS（Stored）" class="headerlink" title="XSS（Stored）"></a>XSS（Stored）</h3><h4 id="Low级别-1"><a href="#Low级别-1" class="headerlink" title="Low级别"></a>Low级别</h4><p><img src="https://i.loli.net/2019/12/09/fBI6OXJDlbukiFA.png" alt="image.png"></p>
+<p>对输入并没有做XSS方面的过滤与检查，且存储在数据库中，因此这里存在明显的存储型XSS漏洞。message一栏输入<code>&lt;script&gt;alert(/xss/)&lt;/script&gt;</code>，成功弹框：</p>
+<p><img src="https://i.loli.net/2019/12/09/LPAXSafjuWCTqlK.png" alt="image.png"></p>
+<h4 id="Medium级别-1"><a href="#Medium级别-1" class="headerlink" title="Medium级别"></a>Medium级别</h4><p><img src="https://i.loli.net/2019/12/09/MgtfzTHRmNqjuGy.png" alt="image.png"></p>
+<p>由于对message参数使用了htmlspecialchars函数进行编码，因此无法再通过message参数注入XSS代码，但是对于name参数，只是简单过滤了<code>&lt;script&gt;</code>字符串，仍然存在存储型的XSS。</p>
+<p>抓包改name参数为<code>&lt;sc&lt;script&gt;ript&gt;alert(/xss/)&lt;/script&gt;</code>，成功弹窗</p>
+<p><img src="https://i.loli.net/2019/12/09/LPAXSafjuWCTqlK.png" alt="image.png"></p>
+<h4 id="High级别-1"><a href="#High级别-1" class="headerlink" title="High级别"></a>High级别</h4><p><img src="https://i.loli.net/2019/12/09/EfIJ4uLP1rKwhkM.png" alt="image.png"></p>
+<p>使用正则表达式过滤了<code>&lt;script&gt;</code>标签，但是却忽略了img、iframe等其它危险的标签，因此name参数依旧存在存储型XSS</p>
+<p>抓包改name参数为<code>&lt;img src=1 onerror=alert(/xss/)&gt;</code>，成功</p>
+<p><img src="https://i.loli.net/2019/12/09/LPAXSafjuWCTqlK.png" alt="image.png"></p>
+
+        
+            <div class="donate-container">
+    <div class="donate-button">
+        <button id="donate-button">请我吃生蚝</button>
+    </div>
+    <div class="donate-img-container hide" id="donate-img-container">
+        <img id="donate-img" src="" data-src="/img/donate.jpg">
+        <p> 感谢鼓励 </p>
+    </div>
+</div>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+        <li>
+            <a target="_blank" href="http://weibo.com/Lil_hooJC">
+                            <span class="fa-stack fa-lg">
+                                  <i class="iconfont icon-weibo"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/LeeHun9">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://3nd.xyz">3ND</a></span>
+        <span>/</span>
+        
+        <span><a href="https://comydream.github.io">ComyDream</a></span>
+        <span>/</span>
+        
+        <span><a href="#">旺铺招租</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

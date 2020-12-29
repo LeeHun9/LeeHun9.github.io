@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="贵人的博客">
+    <meta name="keyword" content="CUMT">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        buuctf Youngter-drive - LeeHung的博客 | LeeHung&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> sometimes create， sometimes work </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>JCH</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> sometimes create， sometimes work </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        buuctf Youngter-drive
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-11-08 22:56:46</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#buuctf" title="buuctf">buuctf</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>查壳upx壳，直接拖入kali <code>upx -d</code>脱壳，尝试运行无果，拖入ida F5</p>
+<p><a href="https://imgchr.com/i/MZbZO1" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/11/08/MZbZO1.png" alt="MZbZO1.png"></a></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sub_411BD0</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">printf</span>(</span><br><span class="line">    <span class="string">"1111111111111111111111111111111111111111111111111111111111111111111111111111111\n"</span></span><br><span class="line">    <span class="string">"*******************************************************************************\n"</span></span><br><span class="line">    <span class="string">"**************             ****************************************************\n"</span></span><br><span class="line">    <span class="string">"**************   ********   *********************                 *************\n"</span></span><br><span class="line">    <span class="string">"**************   *********  *********************   ***************************\n"</span></span><br><span class="line">    <span class="string">"**************   *********  *********************   ***************************\n"</span></span><br><span class="line">    <span class="string">"**************   *********  *********************   ***************************\n"</span></span><br><span class="line">    <span class="string">"**************   *******   **********************   ***************************\n"</span></span><br><span class="line">    <span class="string">"**************   ****   *************************   ***************************\n"</span></span><br><span class="line">    <span class="string">"**************   *    ***************************                **************\n"</span></span><br><span class="line">    <span class="string">"**************   ***    *************************   ***************************\n"</span></span><br><span class="line">    <span class="string">"**************   ******   ***********************   ***************************\n"</span></span><br><span class="line">    <span class="string">"**************   ********   *********************   ***************************\n"</span></span><br><span class="line">    <span class="string">"**************   **********   *******************   ***************************\n"</span></span><br><span class="line">    <span class="string">"**************   ***********    *****************                 *************\n"</span></span><br><span class="line">    <span class="string">"*******************************************************************************\n"</span></span><br><span class="line">    <span class="string">"1111111111111111111111111111111111111111111111111111111111111111111111111111111\n"</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"input flag:\n"</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">scanf</span>(<span class="string">"%36s"</span>, &amp;Source);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>sub_411BD0</code>函数是把输入的 flag 存到全局缓冲区 <code>Source</code> 里面，而且最多只存 36 个字符</p>
+<p>由API可知这道题涉及到多线程，<code>CreateThread</code> API 会创建新线程，<code>CreateMutex</code> 创建一个互斥变量，用于防止多线程中出现资源争用，此变量存于全局句柄<code>::hObject</code>中。创建了两线程<code>StartAddress</code>、<code>sub_41119F</code>，跟进查看，两者代码相似，区别在与<code>StartAddress</code>中的一句<code>sub_41112C(&amp;Source, dword_418008);</code>。两者交替执行，直至<code>dword_418008 &gt; -1</code>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> __stdcall <span class="title">StartAddress_0</span><span class="params">(<span class="keyword">int</span> a1)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    WaitForSingleObject(hObject, <span class="number">0xFFFFFFFF</span>);</span><br><span class="line">    <span class="keyword">if</span> ( dword_418008 &gt; <span class="number">-1</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      sub_41112C(&amp;Source, dword_418008);</span><br><span class="line">      --dword_418008;</span><br><span class="line">      Sleep(<span class="number">0x64</span>u);</span><br><span class="line">    &#125;</span><br><span class="line">    ReleaseMutex(hObject);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> __stdcall <span class="title">sub_411B10</span><span class="params">(<span class="keyword">int</span> a1)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    WaitForSingleObject(hObject, <span class="number">0xFFFFFFFF</span>);</span><br><span class="line">    <span class="keyword">if</span> ( dword_418008 &gt; <span class="number">-1</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      Sleep(<span class="number">0x64</span>u);</span><br><span class="line">      --dword_418008;</span><br><span class="line">    &#125;</span><br><span class="line">    ReleaseMutex(hObject);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>跟入<code>sub_41112C</code>却警告<code>positive sp value has been found</code>，百度得知是栈平衡缺失所导致的问题（函数调用前的sp值与调用结束的sp值不相同），可手动调整sp值解决。</p>
+<p><a href="https://imgchr.com/i/MZLlMd" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/11/08/MZLlMd.png" alt="MZLlMd.png"></a></p>
+<p>在 选项 -&gt; 常规中勾选堆栈指针，即可在地址旁显示sp的值</p>
+<p><a href="https://imgchr.com/i/MZLoe1" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/11/08/MZLoe1.png" alt="MZLoe1.png"></a></p>
+<p>调到警告处，可发现sp值确实发生了偏差，在sp值为0时，又运行了<code>pop edp</code>这条语句导致栈不平衡</p>
+<p><a href="https://imgchr.com/i/MZOFfS" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/11/08/MZOFfS.png" alt="MZOFfS.png"></a></p>
+<p>在<code>00411A03</code>使用快捷键<code>Alt+k</code>，将新旧sp差值改为0x0，修改完成后即可F5得到伪代码</p>
+<p><img src="/.cn//Users\12424\AppData\Roaming\Typora\typora-user-images\1573222975119.png" alt="1573222975119"></p>
+<p>此函数就是加密函数，参数<code>a1</code>为缓冲区Source地址，<code>a2</code>为常量<code>dword_418008</code>，值为29，线程每执行一次减一，两线程公用。<code>sub_411940</code>判断了字符是不是字母再变换，大写字母变换成 <code>off_418000[0][*(_BYTE *)(a2 + a1) - 38]</code>，小写字母变换成 <code>off_418000[0][*(_BYTE *)(a2 + a1) - 96]</code>， <code>off_418000[0]</code> 是一个字符串，内容是 <code>QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm</code>。注意是两线程交替执行，所以<strong>只会有一半的字符改变</strong>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">char</span> *__cdecl <span class="title">sub_411940</span><span class="params">(<span class="keyword">int</span> a1, <span class="keyword">int</span> a2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> *result; <span class="comment">// eax</span></span><br><span class="line">  <span class="keyword">char</span> v3; <span class="comment">// [esp+D3h] [ebp-5h]</span></span><br><span class="line"></span><br><span class="line">  v3 = *(_BYTE *)(a2 + a1);</span><br><span class="line">  <span class="keyword">if</span> ( (v3 &lt; <span class="number">97</span> || v3 &gt; <span class="number">122</span>) &amp;&amp; (v3 &lt; <span class="number">65</span> || v3 &gt; <span class="number">90</span>) )</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">  <span class="keyword">if</span> ( v3 &lt; <span class="number">97</span> || v3 &gt; <span class="number">122</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    result = off_418000[<span class="number">0</span>];</span><br><span class="line">    *(_BYTE *)(a2 + a1) = off_418000[<span class="number">0</span>][*(<span class="keyword">char</span> *)(a2 + a1) - <span class="number">38</span>];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    result = off_418000[<span class="number">0</span>];</span><br><span class="line">    *(_BYTE *)(a2 + a1) = off_418000[<span class="number">0</span>][*(<span class="keyword">char</span> *)(a2 + a1) - <span class="number">96</span>];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>看到<code>sub_411190()</code>,此函数用经变换过后的<code>Source</code>与<code>off_418004[]</code>逐位对比，<code>off_418004[]</code>内容为<code>TOiZiZtOrYaToUwPnToBsOaOapsyS</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sub_411880</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> i; <span class="comment">// [esp+D0h] [ebp-8h]</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; <span class="number">29</span>; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> ( Source[i] != off_418004[i] )</span><br><span class="line">      <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">printf</span>(<span class="string">"\nflag&#123;%s&#125;\n\n"</span>, Dest);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结合以上分析给出以下脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">off_418000 = <span class="string">"QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm"</span></span><br><span class="line"></span><br><span class="line">off_418004 = <span class="string">"TOiZiZtOrYaToUwPnToBsOaOapsyS"</span></span><br><span class="line"></span><br><span class="line">flag=<span class="string">''</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(off_418004)):</span><br><span class="line">    <span class="keyword">if</span> i %<span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">        flag += off_418004[i]</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    <span class="keyword">for</span> j,k <span class="keyword">in</span> enumerate(off_418000):</span><br><span class="line">        <span class="keyword">if</span> off_418004[i] == k:</span><br><span class="line">            <span class="keyword">if</span> chr(j+<span class="number">38</span>).isupper():</span><br><span class="line">                flag += chr(j+<span class="number">38</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                flag += chr(j+<span class="number">96</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> (flag)</span><br></pre></td></tr></table></figure>
+<p>但得出的flag提交发现不正确，百度知道还需添加一个字符<code>E</code>才能通过。之后发现变换后的字符串末尾应该有结束符，所以输入的 flag 应该比变换后的字符串多一个字符，因为多出来的那个字符经过变换会变成结束符。</p>
+
+        
+            <div class="donate-container">
+    <div class="donate-button">
+        <button id="donate-button">请我吃生蚝</button>
+    </div>
+    <div class="donate-img-container hide" id="donate-img-container">
+        <img id="donate-img" src="" data-src="/img/donate.jpg">
+        <p> 感谢鼓励 </p>
+    </div>
+</div>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+        <li>
+            <a target="_blank" href="http://weibo.com/Lil_hooJC">
+                            <span class="fa-stack fa-lg">
+                                  <i class="iconfont icon-weibo"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/LeeHun9">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://3nd.xyz">3ND</a></span>
+        <span>/</span>
+        
+        <span><a href="https://comydream.github.io">ComyDream</a></span>
+        <span>/</span>
+        
+        <span><a href="#">旺铺招租</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

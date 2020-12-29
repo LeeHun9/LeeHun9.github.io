@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="贵人的博客">
+    <meta name="keyword" content="CUMT">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        buuctf re crackrtf - LeeHung的博客 | LeeHung&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> sometimes create， sometimes work </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>JCH</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> sometimes create， sometimes work </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        buuctf re crackrtf
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-11-02 11:41:13</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#buuctf" title="buuctf">buuctf</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>ida打开 F5</p>
+<p><img src="https://s2.ax1x.com/2019/11/02/Kqitud.png" alt="Kqitud.png"></p>
+<p>程序分为两部分输入，第一次输入后，将输入的字符串通过<code>atoi()</code>转换成整型，之后<code>strcat()</code>函数与<code>@DBApp</code>连接代入<code>sub_40100A</code>函数，跟进此函数</p>
+<p><img src="https://s2.ax1x.com/2019/11/02/KqFpxe.png" alt="KqFpxe.png"></p>
+<p>推测此函数为hash加密函数，通过对CryCreateHash函数的了解，查询其中一参数ALG_ID 0x8004，得到此函数为sha1算法</p>
+<p><img src="https://s2.ax1x.com/2019/11/02/KqFmRS.png" alt="KqFmRS.png"></p>
+<p>可利用python的hashlib对第一段输入进行爆破求解，结果为 123321</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line">flag2 = <span class="string">'@DBApp'</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100000</span>,<span class="number">999999</span>):</span><br><span class="line">	h2 = hashlib.sha1(str(i)+flag2)</span><br><span class="line">	flags = h2.hexdigest()</span><br><span class="line">	<span class="keyword">if</span>(<span class="string">"6E32D0943418C2C33385BC35A1470250DD8923A9"</span>.lower() == flags):</span><br><span class="line">		print(str(i))</span><br></pre></td></tr></table></figure>
+<p>将结果输入程序，通过验证，进入第二次输入</p>
+<p>将输入与之前12位字符连接，代入<code>sub_401019</code>，经查询此函数为MD5算法，由于没有足够的信息，对其爆破难度大，放弃此方法。发现下文还有一判断函数<code>sub_40100F</code>，跟进</p>
+<p><img src="https://s2.ax1x.com/2019/11/02/KqFXLj.png" alt="KqFXLj.png"></p>
+<p>API函数<code>FindResourceA</code>查找文件中包含名为AAA的文件，通过<code>sub_401005</code>把AAA的文件中取出字符和输入的字符串进行异或得到一个.rtf文件，通过<code>ResourceHacker</code>这个软件查看包含文件AAA</p>
+<p><img src="https://s2.ax1x.com/2019/11/02/KqkB6g.png" alt="KqkB6g.png"></p>
+<p>因为需要得到的只有前6/18位字符，所以可通过rtf文件头的格式对前6位字符进行还原</p>
+<p>随便创建一个rtf文件，用winhex打开，即可得到文件头前6位“{\\rtf1”，注意 \ 还需要一个 \ 进行转义</p>
+<p><img src="https://s2.ax1x.com/2019/11/02/KqAMEn.png" alt="KqAMEn.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">s = [<span class="number">0x05</span>,<span class="number">0x7D</span>,<span class="number">0x41</span>,<span class="number">0x15</span>,<span class="number">0x26</span>,<span class="number">0x01</span>] </span><br><span class="line">a = <span class="string">'&#123;\\rtf1'</span></span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(a)):</span><br><span class="line">    flag += chr(ord(a[i])^s[i])</span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+<p>得到前6位字符为<code>~!3a@0</code>，输入程序，程序运行结束即可在当前目录下生成dbapp.rtf文件，打开得到flag</p>
+
+        
+            <div class="donate-container">
+    <div class="donate-button">
+        <button id="donate-button">请我吃生蚝</button>
+    </div>
+    <div class="donate-img-container hide" id="donate-img-container">
+        <img id="donate-img" src="" data-src="/img/donate.jpg">
+        <p> 感谢鼓励 </p>
+    </div>
+</div>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+        <li>
+            <a target="_blank" href="http://weibo.com/Lil_hooJC">
+                            <span class="fa-stack fa-lg">
+                                  <i class="iconfont icon-weibo"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/LeeHun9">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://3nd.xyz">3ND</a></span>
+        <span>/</span>
+        
+        <span><a href="https://comydream.github.io">ComyDream</a></span>
+        <span>/</span>
+        
+        <span><a href="#">旺铺招租</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="贵人的博客">
+    <meta name="keyword" content="CUMT">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        攻防世界 RE进阶区 WriteUps - LeeHung的博客 | LeeHung&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> sometimes create， sometimes work </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>JCH</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-dmd-50"><span class="toc-text">0x01 dmd-50</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-Shuffle"><span class="toc-text">0x02 Shuffle</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-re-for-50-plz-50"><span class="toc-text">0x03 re-for-50-plz-50</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-crackme"><span class="toc-text">0x04 crackme</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x05-re2-cpp-is-awesome"><span class="toc-text">0x05 re2-cpp-is-awesome</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x06-Key"><span class="toc-text">0x06 Key</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> sometimes create， sometimes work </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        攻防世界 RE进阶区 WriteUps
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-09-11 17:14:49</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#Writeups" title="Writeups">Writeups</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>本文持续更新</p>
+<h2 id="0x01-dmd-50"><a href="#0x01-dmd-50" class="headerlink" title="0x01 dmd-50"></a>0x01 dmd-50</h2><p>下载附件发现为ELF文件，在Linux中运行</p>
+<p><img src="https://s2.ax1x.com/2019/09/11/ndz8Wd.png" alt="ndz8Wd.png"></p>
+<p>需要输入key，猜测为flag，拖入64位ida中查看源码，F5反汇编查看main函数C伪码</p>
+<p><img src="https://s2.ax1x.com/2019/09/11/ndzwTS.png" alt="ndzwTS.png"></p>
+<p>if不成立的话则输出The Key is valid ! :）</p>
+<p><img src="https://s2.ax1x.com/2019/09/11/ndzDYQ.png" alt="ndzDYQ.png"></p>
+<p>主函数发现md5函数，双击跟进查看</p>
+<p><img src="https://s2.ax1x.com/2019/09/11/ndz6ln.png" alt="ndz6ln.png"></p>
+<p>md5函数中，对字符串v40进行md5加密并返回</p>
+<p><a href="https://imgchr.com/i/ndzcyq" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/09/11/ndzcyq.png" alt="ndzcyq.png"></a></p>
+<p>提取if语句中的值进行md5解密</p>
+<p><img src="https://s2.ax1x.com/2019/09/11/ndzWwT.png" alt="ndzWwT.png"></p>
+<p>在Linux中输入解密结果grape</p>
+<p><img src="https://s2.ax1x.com/2019/09/11/ndz5Y4.png" alt="ndz5Y4.png"></p>
+<p>仍是无法通过，查看发现解密网站对字符串进行了md5(md5($pass))解密。重新载入对提取串进行一次md5解密得到 b781cbb29054db12f88f08c6e161c199，输入Linux中得到正确结果</p>
+<p><img src="https://s2.ax1x.com/2019/09/11/ndzbOx.png" alt="ndzbOx.png"></p>
+<p>flag： b781cbb29054db12f88f08c6e161c199</p>
+<h2 id="0x02-Shuffle"><a href="#0x02-Shuffle" class="headerlink" title="0x02 Shuffle"></a>0x02 Shuffle</h2><p>根据题目提示和在Linux中的运行结果，猜测程序对flag进行随机化打乱</p>
+<p><img src="https://s2.ax1x.com/2019/09/11/ndzXTO.png" alt="ndzXTO.png"></p>
+<p><img src="https://s2.ax1x.com/2019/09/11/ndzxte.png" alt="ndzxte.png"></p>
+<p>载入IDA查看源码，发现在程序输出前存在rand函数</p>
+<p><img src="https://s2.ax1x.com/2019/09/11/nwSk0f.png" alt="nwSk0f.png"></p>
+<p>提取rand前的数据转换成ascii码</p>
+<p><img src="https://s2.ax1x.com/2019/09/11/nwSA78.png" alt="nwSA78.png"></p>
+<p><img src="https://s2.ax1x.com/2019/09/11/nwSZtg.png" alt="nwSZtg.png"></p>
+<p>即可得到flag</p>
+<h2 id="0x03-re-for-50-plz-50"><a href="#0x03-re-for-50-plz-50" class="headerlink" title="0x03 re-for-50-plz-50"></a>0x03 re-for-50-plz-50</h2><p>Linux中无法运行，直接载入ida32，发现代码为为<strong>MIPS指令集</strong>，ida无法直接反出伪代码</p>
+<p><img src="https://s2.ax1x.com/2019/09/11/nwSln0.png" alt="nwSln0.png"></p>
+<p>简单了解了一下<a href="https://www.cnblogs.com/thoupin/p/4018455.html" target="_blank" rel="noopener">MIPS指令集</a></p>
+<p><img src="https://s2.ax1x.com/2019/09/11/nwS37T.png" alt="nwS37T.png"></p>
+<p>猜测异或算法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">"cbtcqLUBChERV[[Nh@_X^D]X_YPV[CJ"</span></span><br><span class="line">a_list = list(a)						<span class="comment">#将字符串a拆分为列表可通过下标访问</span></span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> a_list:</span><br><span class="line">    flag += chr(ord(i) ^ <span class="number">0x37</span>)</span><br><span class="line"></span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+<p>得到flag： TUCTF{but_really_whoisjohngalt}</p>
+<p>后续通过得知，可通过安装ida插件<strong>Retdec</strong>对MIPS指令集进行反汇编得出伪码</p>
+<h2 id="0x04-crackme"><a href="#0x04-crackme" class="headerlink" title="0x04 crackme"></a>0x04 crackme</h2><p>文件为exe文件，通过题目名推测考察脱壳技术，拖入PEID中查壳</p>
+<p><img src="https://s2.ax1x.com/2019/09/11/nwSdj1.png" alt="nwSdj1.png"></p>
+<p>发现为北斗壳，没有什么脱壳经验便百度了一下OD手动脱壳的方法，原文连接如下</p>
+<ul>
+<li><a href="https://blog.csdn.net/u011672712/article/details/52091989" target="_blank" rel="noopener">https://blog.csdn.net/u011672712/article/details/52091989</a></li>
+</ul>
+<p>载入OD<img src="https://s2.ax1x.com/2019/09/11/nwSBB6.png" alt="nwSBB6.png"></p>
+<p>F8运行到第一个call指令，此时ESP和EIP都是红色，下硬件访问断点，然后Shift+F9，运行到ESP落脚点，然后继续F8运行</p>
+<p><img src="https://s2.ax1x.com/2019/09/11/nwSyND.png" alt="nwSyND.png"></p>
+<p><img src="https://s2.ax1x.com/2019/09/11/nwS5Hf.png" alt="nwS5Hf.png"></p>
+<p>之后便来到了程序真正入口点，选择这条汇编右键脱壳</p>
+<p><img src="https://s2.ax1x.com/2019/09/11/nwS74g.png" alt="nwS74g.png"></p>
+<p><img src="https://s2.ax1x.com/2019/09/11/nwpZb6.png" alt="nwpZb6.png"></p>
+<p>即可得到脱壳后文件，可载入ida查看伪码</p>
+<p><img src="https://s2.ax1x.com/2019/09/11/nwpMPe.png" alt="nwpMPe.png"></p>
+<p>红框部分便为加密算法</p>
+<p><img src="https://s2.ax1x.com/2019/09/11/nwpl2d.png" alt="nwpl2d.png"></p>
+<p>Payload:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">0x12</span>,<span class="number">0x4</span>,<span class="number">0x8</span>,<span class="number">0x14</span>,<span class="number">0x24</span>,<span class="number">0x5C</span>,<span class="number">0x4A</span>,<span class="number">0x3D</span>,<span class="number">0x56</span>,<span class="number">0x0A</span>,<span class="number">0x10</span>,<span class="number">0x67</span>,<span class="number">0x0</span>,<span class="number">0x41</span>,<span class="number">0x0</span>,<span class="number">0x1</span>,<span class="number">0x46</span>,<span class="number">0x5A</span>,<span class="number">0x44</span>,<span class="number">0x42</span>,<span class="number">0x6E</span>,<span class="number">0x0C</span>,<span class="number">0x44</span>,<span class="number">0x72</span>,<span class="number">0x0C</span>,<span class="number">0x0D</span>,<span class="number">0x40</span>,<span class="number">0x3E</span>,<span class="number">0x4B</span>,<span class="number">0x5F</span>,<span class="number">0x2</span>,<span class="number">0x1</span>,<span class="number">0x4C</span>,<span class="number">0x5E</span>,<span class="number">0x5B</span>,<span class="number">0x17</span>,<span class="number">0x6E</span>,<span class="number">0x0C</span>,<span class="number">0x16</span>,<span class="number">0x68</span>,<span class="number">0x5B</span>,<span class="number">0x12</span>]</span><br><span class="line">b = <span class="string">"this_is_not_flag"</span></span><br><span class="line">b_list = list(b)</span><br><span class="line">i = <span class="number">0</span></span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> i &lt; <span class="number">42</span>:</span><br><span class="line">    j = i % <span class="number">16</span></span><br><span class="line">    flag += chr(a[i] ^ ord(b_list[j]))</span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+<p>得flag：flag{59b8ed8f-af22-11e7-bb4a-3cf862d1ee75}</p>
+<h2 id="0x05-re2-cpp-is-awesome"><a href="#0x05-re2-cpp-is-awesome" class="headerlink" title="0x05 re2-cpp-is-awesome"></a>0x05 re2-cpp-is-awesome</h2><p>ELF文件Linux下运行<img src="https://s2.ax1x.com/2019/09/11/nwp8KI.png" alt="nwp8KI.png"></p>
+<p>推测运行命令后输入正确flag，载入ida<img src="https://s2.ax1x.com/2019/09/11/nwpGrt.png" alt="nwpGrt.png"></p>
+<p>对应运行结果，运行命令后未接参数会提示输入flag</p>
+<p><img src="https://s2.ax1x.com/2019/09/11/nwpUIS.png" alt="nwpUIS.png"></p>
+<p>跟进sub_400B56函数</p>
+<p><img src="https://s2.ax1x.com/2019/09/11/nwpwGQ.png" alt="nwpwGQ.png"></p>
+<p>出现输入失败时的字符串，推测红框内为加密算法，提取相应数据</p>
+<p><img src="/.cn//Users\12424\AppData\Roaming\Typora\typora-user-images\1566634949439.png" alt="1566634949439"></p>
+<p><img src="https://s2.ax1x.com/2019/09/11/nwp02j.png" alt="nwp02j.png"></p>
+<p>Payload：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">index = [<span class="number">0x24</span>,<span class="number">0x00</span>,<span class="number">0x05</span>,<span class="number">0x36</span>,<span class="number">0x65</span>,<span class="number">0x07</span>,<span class="number">0x27</span>,<span class="number">0x26</span>,<span class="number">0x2D</span>,<span class="number">0x01</span>,<span class="number">0x03</span>,<span class="number">0x00</span>,<span class="number">0x0D</span>,<span class="number">0x56</span>,<span class="number">0x01</span>,<span class="number">0x03</span>,<span class="number">0x65</span>,<span class="number">0x03</span>,<span class="number">0x2D</span>,<span class="number">0x16</span>,<span class="number">0x02</span>,<span class="number">0x15</span>,<span class="number">0x03</span>,<span class="number">0x65</span>,<span class="number">0x00</span>,<span class="number">0x29</span>,<span class="number">0x44</span>,<span class="number">0x44</span>,<span class="number">0x01</span>,<span class="number">0x44</span>,<span class="number">0x2B</span>,]</span><br><span class="line">a = <span class="string">"L3t_ME_T3ll_Y0u_S0m3th1ng_1mp0rtant_A_&#123;FL4G&#125;_W0nt_b3_3X4ctly_th4t_345y_t0_c4ptur3_H0wev3r_1T_w1ll_b3_C00l_1F_Y0u_g0t_1t"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> index:</span><br><span class="line">    print(a[i], end=<span class="string">''</span>)</span><br></pre></td></tr></table></figure>
+<p>flag: ALEXCTF{W3_L0v3_C_W1th_CL45535}</p>
+<h2 id="0x06-Key"><a href="#0x06-Key" class="headerlink" title="0x06 Key"></a>0x06 Key</h2><p>.exe文件，拖入PEID，无壳</p>
+<p><img src="https://s2.ax1x.com/2019/09/11/nwpyq0.png" alt="nwpyq0.png"></p>
+<p>直接打开.exe文件一闪而过，用od运行出现</p>
+<p><img src="https://s2.ax1x.com/2019/09/11/nwpcZV.png" alt="nwpcZV.png"></p>
+<p>载入ida32查看，发现相关字符串出现</p>
+<p><img src="https://s2.ax1x.com/2019/09/11/nwpgaT.png" alt="nwpgaT.png"></p>
+<p>跟进if语句上面的sub_321620()函数，发现一串奇怪的路径</p>
+<p><img src="https://s2.ax1x.com/2019/09/11/nwpfG4.png" alt="nwpfG4.png"></p>
+<p>创建此路径，并输入asd123456保存，再次运行</p>
+<p><img src="https://s2.ax1x.com/2019/09/11/nwpos1.png" alt="nwpos1.png"></p>
+<p>推测程序从此文件读取输入进行字符串匹配</p>
+<p>OD断点到main函数位置，F7跟入，到关键比较的位置下断点</p>
+<p><img src="https://s2.ax1x.com/2019/09/11/nwpHZ6.png" alt="nwpHZ6.png"></p>
+<p>可以发现对比串：idg_cni~bjbfi|gsxb，将其输入flag.txt文件中再次运行程序，得到正确输出判断为flag</p>
+<p><img src="https://s2.ax1x.com/2019/09/11/nwpOiD.png" alt="nwpOiD.png"></p>
+<p>提交成功flag ：idg_cni~bjbfi|gsxb</p>
+
+        
+            <div class="donate-container">
+    <div class="donate-button">
+        <button id="donate-button">请我吃生蚝</button>
+    </div>
+    <div class="donate-img-container hide" id="donate-img-container">
+        <img id="donate-img" src="" data-src="/img/donate.jpg">
+        <p> 感谢鼓励 </p>
+    </div>
+</div>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+        <li>
+            <a target="_blank" href="http://weibo.com/Lil_hooJC">
+                            <span class="fa-stack fa-lg">
+                                  <i class="iconfont icon-weibo"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/LeeHun9">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://3nd.xyz">3ND</a></span>
+        <span>/</span>
+        
+        <span><a href="https://comydream.github.io">ComyDream</a></span>
+        <span>/</span>
+        
+        <span><a href="#">旺铺招租</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

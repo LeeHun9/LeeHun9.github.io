@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="贵人的博客">
+    <meta name="keyword" content="CUMT">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        密码学复习 - LeeHung的博客 | LeeHung&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> sometimes create， sometimes work </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>JCH</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第一章：密码体制"><span class="toc-text">第一章：密码体制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#密码体制分类"><span class="toc-text">密码体制分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#密码分析"><span class="toc-text">密码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#🌟根据密码分析者对明文、密文等数据资源的掌握程度，可以将密码分析攻击分为以下几种"><span class="toc-text">🌟根据密码分析者对明文、密文等数据资源的掌握程度，可以将密码分析攻击分为以下几种</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第二章：古典密码"><span class="toc-text">第二章：古典密码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#经典密码体制分类："><span class="toc-text">经典密码体制分类：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#🌟Playfair密码"><span class="toc-text">🌟Playfair密码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#🌟维吉尼亚密码"><span class="toc-text">🌟维吉尼亚密码</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第三章：序列密码"><span class="toc-text">第三章：序列密码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#🌟线性反馈移位寄存器"><span class="toc-text">🌟线性反馈移位寄存器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#🌟m-序列密码的破译"><span class="toc-text">🌟m-序列密码的破译</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第四章：分组密码"><span class="toc-text">第四章：分组密码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#🌟数据加密标准DES"><span class="toc-text">🌟数据加密标准DES</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#加密函数F"><span class="toc-text">加密函数F</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#🌟DES轮运算对和性证明"><span class="toc-text">🌟DES轮运算对和性证明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DES的安全性"><span class="toc-text">DES的安全性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多重DES分析"><span class="toc-text">多重DES分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#🌟高级加密标准AES"><span class="toc-text">🌟高级加密标准AES</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#AES结构"><span class="toc-text">AES结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IDEA和SMS4"><span class="toc-text">IDEA和SMS4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#🌟分组密码工作模式"><span class="toc-text">🌟分组密码工作模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第五章：哈希函数"><span class="toc-text">第五章：哈希函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MD5"><span class="toc-text">MD5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SHA1"><span class="toc-text">SHA1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#🌟数据填充"><span class="toc-text">🌟数据填充</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第六章：公钥密码"><span class="toc-text">第六章：公钥密码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#🌟RSA"><span class="toc-text">🌟RSA</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#🌟RSA算法描述："><span class="toc-text">🌟RSA算法描述：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#🌟RSA的攻击"><span class="toc-text">🌟RSA的攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#同模攻击："><span class="toc-text">同模攻击：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#低加密指数攻击："><span class="toc-text">低加密指数攻击：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#🌟ElGamal"><span class="toc-text">🌟ElGamal</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#🌟ElGamal算法描述："><span class="toc-text">🌟ElGamal算法描述：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第七章：数字签名"><span class="toc-text">第七章：数字签名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#🌟RSA数字签名方案"><span class="toc-text">🌟RSA数字签名方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#签名算法如下："><span class="toc-text">签名算法如下：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安全性"><span class="toc-text">安全性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#🌟ElGamal数字签名方案"><span class="toc-text">🌟ElGamal数字签名方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#签名算法如下：-1"><span class="toc-text">签名算法如下：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Schnorr签名体制"><span class="toc-text">Schnorr签名体制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#签名算法如下：-2"><span class="toc-text">签名算法如下：</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> sometimes create， sometimes work </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        密码学复习
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-01-02 16:04:30</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#密码学" title="密码学">密码学</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h2 id="第一章：密码体制"><a href="#第一章：密码体制" class="headerlink" title="第一章：密码体制"></a>第一章：密码体制</h2><p>密码体质的设计原则：密码系统的安全性不应该取决于不易改变的算法，应该取决于可随时改变的密钥</p>
+<p>五元组：M（明文）、C（密文）、K（密钥）、E（加密算法）、D（解密算法）</p>
+<h3 id="密码体制分类"><a href="#密码体制分类" class="headerlink" title="密码体制分类"></a>密码体制分类</h3><ul>
+<li>🌟对称密码<ul>
+<li>序列密码（流密码）：RC4、A5等</li>
+<li>分组密码：DES、3DES、AES、IDEA</li>
+</ul>
+</li>
+<li>🌟公钥密码：RSA、ECC、Rabin、Elgamal</li>
+</ul>
+<p>对称密码体制优点：</p>
+<ul>
+<li>速度快</li>
+<li>密钥较短</li>
+<li>密文往往与明文长度相同</li>
+</ul>
+<p>对称密码体制缺点</p>
+<ul>
+<li>密钥分发需要安全通道</li>
+<li>密钥量大，难管理</li>
+<li>难于解决不可否认问题</li>
+</ul>
+<p>公钥密码体制优点：</p>
+<ul>
+<li>密钥分发相对简易</li>
+<li>密钥简单管理</li>
+<li>可以实现数字签名</li>
+</ul>
+<p>公钥密码体制缺点：</p>
+<ul>
+<li>加解密速度慢</li>
+<li>密钥较长</li>
+<li>密文长度往往大于明文长度</li>
+</ul>
+<h3 id="密码分析"><a href="#密码分析" class="headerlink" title="密码分析"></a>密码分析</h3><p>被动攻击与主动攻击：</p>
+<ul>
+<li>被冻攻击：对一个保密系统采用截获密文进行分析，如监视、偷听等</li>
+<li>主动攻击：非法入侵者主动干扰系统，采用删除、更改、增添、重放等方法向系统加入假消息</li>
+</ul>
+<p>破译和攻击密码的主要方法：</p>
+<ul>
+<li>穷举攻击法（爆破）<ul>
+<li>变体：字典攻击</li>
+</ul>
+</li>
+<li>统计分析法：根据明文、密文和密钥的统计规律来破译密码<ul>
+<li>适用于对称密码体制</li>
+</ul>
+</li>
+<li>数学分析攻击法：针对加解密算法的数学基础和某些密码学特征，通过数学求解的方法来破译密码<ul>
+<li>适用于公钥密码体制</li>
+</ul>
+</li>
+</ul>
+<h4 id="🌟根据密码分析者对明文、密文等数据资源的掌握程度，可以将密码分析攻击分为以下几种"><a href="#🌟根据密码分析者对明文、密文等数据资源的掌握程度，可以将密码分析攻击分为以下几种" class="headerlink" title="🌟根据密码分析者对明文、密文等数据资源的掌握程度，可以将密码分析攻击分为以下几种"></a>🌟根据密码分析者对明文、密文等数据资源的掌握程度，可以将密码分析攻击分为以下几种</h4><ul>
+<li>唯密文攻击（被动）：仅能根据截获的密文进行分析，以得出明文或密钥（如穷举和统计分析）</li>
+<li>已知明文攻击（被动）：除了有截获的密文外，还知道一些已知的“<strong>明文-密文对</strong>”，来破译密码</li>
+<li>选择明文攻击（主动）：除得到一些”明文-密文对”外，还可以<strong>选择被加密的明文，并获得相应的密文</strong><ul>
+<li>目标：推出用来加密的密钥或者某种算法</li>
+<li>变体：自适应选择明文攻击</li>
+</ul>
+</li>
+<li>选择密文攻击（主动）：可以<strong>选择一些密文，并得到相应的明文</strong><ul>
+<li>目标是推出密钥</li>
+<li>多用于攻击公钥密码体制</li>
+<li>变体：自适应选择密文攻击</li>
+</ul>
+</li>
+</ul>
+<p>攻击的复杂性取决于</p>
+<ul>
+<li>数据复杂性：攻击所需要的输入数据量</li>
+<li>处理复杂性：完成攻击所需要花费的时间</li>
+<li>存储需求：所需要的数据存储空间大小</li>
+</ul>
+<p><strong>攻击的复杂性取决于以上三个因素的最小复杂度</strong></p>
+<p>安全的密码体制特性</p>
+<ul>
+<li><strong>密文恢复明文</strong>是困难的，即使知道明文空间</li>
+<li>从密文获得明文<strong>部分信息</strong>是困难的</li>
+<li>从密文<strong>探测出简单有用的事实</strong>也是困难的</li>
+</ul>
+<p>评价密码体制安全性的途径：</p>
+<ul>
+<li>无条件安全性（理论安全性）：分析者有无限计算能力，密码体制也不能被攻破，那么就是无条件安全</li>
+<li>计算安全性：攻破一个密码体制最好算法用现在或将来可得到的资源都不能在足够长的时间内破译，该密码体制被认为计算上安全</li>
+<li>可证明安全性：可证明安全性只是说明密码体制的安全性与一个问题相关，也成归约安全性</li>
+</ul>
+<h2 id="第二章：古典密码"><a href="#第二章：古典密码" class="headerlink" title="第二章：古典密码"></a>第二章：古典密码</h2><h3 id="经典密码体制分类："><a href="#经典密码体制分类：" class="headerlink" title="经典密码体制分类："></a>经典密码体制分类：</h3><ul>
+<li>替换密码/代换密码<ul>
+<li>单表替换密码：用一个符号代替另外一个符号，一一对应<ul>
+<li>🌟移位代换密码：E<sub>k</sub>(i) ＝ i＋k(mod q) ＝ j        D<sub>k</sub>(j) ＝ j－k (mod q)＝i <ul>
+<li>凯撒密码</li>
+</ul>
+</li>
+<li>乘数密码：E<sub>k</sub>(i) ＝i ∗ k mod q＝j    D<sub>k</sub>(j)＝j ∗ k^(-1)   mod q＝i    </li>
+<li>🌟仿射密码：以上两个的组合 C＝ k<sub>1</sub>∗m＋k<sub>2</sub> mod 26    m＝ (C-k<sub>2</sub>)∗k<sub>1</sub><sup>-1</sup> mod 26</li>
+</ul>
+</li>
+<li>多表替换面：多个替换包</li>
+</ul>
+</li>
+<li>置换密码/换位密码：对符号重新排序</li>
+</ul>
+<h4 id="🌟Playfair密码"><a href="#🌟Playfair密码" class="headerlink" title="🌟Playfair密码"></a>🌟Playfair密码</h4><p>思路：双字母转换</p>
+<p>密钥：5×5矩阵</p>
+<ul>
+<li>比如关键词为 FIVESTARS，将关键词中<strong>重复字母去掉</strong>，填充矩阵起始部分，之后将26字母中未出现的字母按顺序填充</li>
+<li>I 和 J 作为一个字母看待</li>
+<li>密钥空间为 25</li>
+</ul>
+<p>对每一对明文m1, m2加密如下：</p>
+<ul>
+<li>若m1和m2<strong>同行</strong>，则密文c1和c2分别紧靠m1，m2<strong>右端</strong>的字母，其中第一列看做最后一列的右方</li>
+<li>若m1和m2<strong>同列</strong>，则密文c1和c2分别是紧靠m1，m2<strong>下方</strong>的字母，其中第一行看做最后一行的下方</li>
+<li>若m1和m2<strong>不同行也不同列</strong>，则c1和c2是m1，m2确定的<strong>矩形的其他两角</strong>的字母，并c1和m1，c2和m2同行</li>
+<li>若出现重复字母，即m1=m2，则在其中插入字母Q</li>
+<li>如明文字母是单数，将Q放在明文的末端</li>
+</ul>
+<p><img src="https://s2.ax1x.com/2019/12/26/lALtgg.png" alt="lALtgg.png"></p>
+<p><img src="https://s2.ax1x.com/2019/12/26/lALRKJ.png" alt="lALRKJ.png"></p>
+<h4 id="🌟维吉尼亚密码"><a href="#🌟维吉尼亚密码" class="headerlink" title="🌟维吉尼亚密码"></a>🌟维吉尼亚密码</h4><p>维吉尼亚方阵为 26×26表，加密过程：先找<strong>明文的列</strong>，再找<strong>密钥的行</strong></p>
+<p><img src="https://img-blog.csdn.net/20150506223204325" alt="img"></p>
+<p><img src="https://s2.ax1x.com/2019/12/26/lAjE40.png" alt="lAjE40.png"></p>
+<p>安全性能分析步骤：</p>
+<ul>
+<li>确定密钥长度d<ul>
+<li>Kasiski测试法</li>
+<li>重合指数法</li>
+</ul>
+</li>
+<li>确定具体的密钥字<ul>
+<li>重合互指法</li>
+</ul>
+</li>
+</ul>
+<h2 id="第三章：序列密码"><a href="#第三章：序列密码" class="headerlink" title="第三章：序列密码"></a>第三章：序列密码</h2><p>基本概念：用一个随机序列（密钥流）与明文序列按位叠加产生密文；用同一随机序列与密文序列叠加来恢复明文。</p>
+<p><img src="https://s2.ax1x.com/2019/12/26/lESRWq.png" alt="lESRWq.png"></p>
+<p>种子密钥通过密钥流发生器得到的密钥流</p>
+<p><img src="https://s2.ax1x.com/2019/12/26/lEpPkd.png" alt="lEpPkd.png"></p>
+<p>特点：</p>
+<ul>
+<li>加解密只是简单的模二加法运算（异或）</li>
+<li>密码安全强度依赖密钥流的安全性</li>
+</ul>
+<p>序列密码分类：</p>
+<ul>
+<li>同步序列密码：密钥序列的产生独立于明文消息和密文消息<ul>
+<li>无错误传输：一个错误只影响一个符号</li>
+<li>同步：保持精确，且密钥作用位置相同才能正确解密</li>
+</ul>
+</li>
+<li>🌟自同步序列密码：密钥序列是密钥及固定大学的以为密文的函数（密钥由以往密钥及密文生成）<ul>
+<li>有限错误传播</li>
+<li>自同步</li>
+<li>消除明文统计特征</li>
+</ul>
+</li>
+</ul>
+<p>密钥流生成器大都基于<strong>移位寄存器FSR</strong></p>
+<ul>
+<li>基于移位寄存器的密钥流序列成为<strong>移位寄存器序列</strong></li>
+<li>通常由<strong>线性移位寄存器LFSR</strong>和一个<strong>非线性组合函数（布尔函数）</strong>组成一个密钥流发生器</li>
+</ul>
+<p><img src="https://s2.ax1x.com/2019/12/26/lE9bxx.png" alt="lE9bxx.png"></p>
+<h3 id="🌟线性反馈移位寄存器"><a href="#🌟线性反馈移位寄存器" class="headerlink" title="🌟线性反馈移位寄存器"></a>🌟线性反馈移位寄存器</h3><p>特点：</p>
+<ul>
+<li>非常适合硬件实现</li>
+<li>能产生大的周期序列</li>
+<li>能产生统计性好的序列</li>
+<li>能够应用代数方法分析</li>
+</ul>
+<p><img src="https://s2.ax1x.com/2019/12/26/lECAL8.png" alt="lECAL8.png"></p>
+<p>定理：n级LFSR产生的序列有最大周期 2<sup>n</sup>-1的必要条件是<strong>其特征多项式为不可约的</strong></p>
+<h3 id="🌟m-序列密码的破译"><a href="#🌟m-序列密码的破译" class="headerlink" title="🌟m-序列密码的破译"></a>🌟m-序列密码的破译</h3><p>m-序列（周期为 2<sup>n</sup>-1）如果攻击者知道了 <strong>2n位明密文对</strong> ，则可确定反馈多项式的系数，从而确定LFSR接下来状态，得到余下的密钥序列</p>
+<p><img src="https://s2.ax1x.com/2019/12/26/lEPbDK.png" alt="lEPbDK.png"></p>
+<p><img src="https://s2.ax1x.com/2019/12/26/lEPOED.png" alt="lEPOED.png"></p>
+<p><img src="https://s2.ax1x.com/2019/12/26/lEPxCd.png" alt="lEPxCd.png"></p>
+<p>伪随机性测试</p>
+<ul>
+<li>扑克牌测试</li>
+<li>游程测试</li>
+<li>接收20000个二进制位，检验1和0的核数是否大致相等</li>
+</ul>
+<p>常见基于LFSR的密钥序列发生器</p>
+<ul>
+<li>Geffefasq</li>
+<li>钟控发生器</li>
+<li>交错停走式发生器</li>
+<li>门限发生器</li>
+</ul>
+<h2 id="第四章：分组密码"><a href="#第四章：分组密码" class="headerlink" title="第四章：分组密码"></a>第四章：分组密码</h2><p>特点：速度快、安全性较高、易于标准化、便于软硬件实现</p>
+<p>分组密码设计要求：</p>
+<ul>
+<li>分组长度足够大</li>
+<li>密钥量足够大</li>
+<li>密码变换够复杂</li>
+<li>加密和解密运算简单</li>
+<li>无数据扩展和压缩</li>
+</ul>
+<p>设计思想：扩散和混淆，目的抵抗对密码系统的统计分析</p>
+<ul>
+<li>扩散：密钥或明文每一比特变化影响密文许多比特变化（雪崩效应）</li>
+<li>混淆：密钥和明文及密文之前依赖关系尽可能复杂，防止统计分析法</li>
+</ul>
+<h2 id="🌟数据加密标准DES"><a href="#🌟数据加密标准DES" class="headerlink" title="🌟数据加密标准DES"></a>🌟数据加密标准DES</h2><blockquote>
+<p>算法详解在课程设计中已详细展开，不再累述，这里主要讲述关于考试方面的主要内容</p>
+</blockquote>
+<p>明文分组和密文均为 <strong>64bit</strong> ，有效密钥为 <strong>56bit</strong>（另外8比特用于奇偶校验，用于检查密钥 K 在产生和分配及存储过程中可能发生的错误）。由初始置换、16轮迭代、逆初始置换组成</p>
+<ul>
+<li><p>初始置换和逆初始置换：通过置换表置换，没有安全意义，可忽视</p>
+</li>
+<li><p>16轮迭代：每轮迭代，64位的中间结果分为左右两部分，且作为独立32位数据进行处理。每轮迭代的输入时上轮的结果 L<sub>i-1</sub> 和 R<sub>i-1</sub>。</p>
+<p><img src="https://s2.ax1x.com/2020/01/02/lYOmGt.png" alt="lYOmGt.png"></p>
+<p><strong>加解密过程：</strong></p>
+</li>
+</ul>
+<p><img src="https://s2.ax1x.com/2019/12/27/lZeMlD.png" alt="lZeMlD.png"></p>
+<h4 id="加密函数F"><a href="#加密函数F" class="headerlink" title="加密函数F"></a>加密函数F</h4><p><img src="https://s2.ax1x.com/2019/12/27/lZefcF.png" alt="lZefcF.png"></p>
+<ul>
+<li>E扩展置换：32bit 扩展为 48bit，每输入分组的4位作为6位输出分组的中间4位，第1位和第6位分别由相邻两个4位分组的最外面两位扩散进入本分组</li>
+<li>与子密钥异或：将48位输出与子密钥 K<sub>i</sub> 进行异或操作</li>
+<li>🌟<strong>压缩替换 S-盒</strong>：<ul>
+<li>由8个S-盒构成，每个S-盒都是6比特输入，4比特输出</li>
+<li>s<sub>i</sub> (h<sub>1</sub>h<sub>2</sub>h<sub>3</sub>h<sub>4</sub>h<sub>5</sub>h<sub>6</sub>) 的值是对应表 s<sub>i</sub> 中 (h<sub>1</sub>h<sub>6</sub>) 行和 (h<sub>2</sub>h<sub>3</sub>h<sub>4</sub>h<sub>5</sub>) 列上的值</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://s2.ax1x.com/2019/12/27/lZmlCV.png" alt="lZmlCV.png"></p>
+<ul>
+<li>S-盒设计准则：<ul>
+<li>有良好的非线性性（输出的每个比特与全部输入比特相关）</li>
+<li>每一行包括所有16种4位二进制</li>
+<li>两个输入相差1比特时，输出相差2比特等</li>
+</ul>
+</li>
+<li>P-置换：P-置换对8个S-盒的输出进行变换（对表查询变换）</li>
+</ul>
+<h3 id="🌟DES轮运算对和性证明"><a href="#🌟DES轮运算对和性证明" class="headerlink" title="🌟DES轮运算对和性证明"></a>🌟DES轮运算对和性证明</h3><ul>
+<li>定义 T 是把64位数据的左右两半交换位置</li>
+</ul>
+<p>$$<br>T(L,R)=(R,L)<br>$$</p>
+<p>​        因为<br>$$<br>T^2(L,R)=(L,R)=I<br>$$<br>​        其中 I 为恒等变化，于是<br>$$<br>T = T^{-1}<br>$$<br>​        所以 T 变化是对合运算</p>
+<ul>
+<li>记 DES 第 i 轮中的主要运算为</li>
+</ul>
+<p>$$<br>F_i(L_{i-1},R_{i-1})=(L_{i-1}\oplus f(R_{i-1},K_i),R_{i-1})\<br>F_i^2=F_i(L_{i-1}\oplus f(R_{i-1},K_i),R_{i-1})\<br>=(L_{i-1}\oplus f(R_{i-1},K_i)\oplus f(R_{i-1},K_i),R_{i-1})\<br>=(L_{i-1},R_{i-1})\<br>=I<br>$$</p>
+<p>​        所以<br>$$<br>F_i=F_i^{-1}<br>$$<br>​        所以 F<sub>i</sub> 变换也是对合变化</p>
+<ul>
+<li>结合以上两步，便可构成 DES 的轮运算<br>$$<br>H_i=F_iT<br>$$<br>因为<br>$$<br>(F_iT)(TF_i)=(F_i(TT)F_i)=F_iF_i=I<br>$$<br>所以<br>$$<br>(F_iT)^{-1}=(TF_i)\<br>(F_iT)=(TF_i)^{-1}<br>$$</li>
+</ul>
+<h3 id="DES的安全性"><a href="#DES的安全性" class="headerlink" title="DES的安全性"></a>DES的安全性</h3><p>主要争论为：</p>
+<ul>
+<li>S-盒的设计准则、迭代次数、密钥长度等设计准则</li>
+<li>存在<strong>弱密钥和半弱密钥</strong><ul>
+<li>弱密钥：初始密钥 K 使得种子秘钥两部分的每一部分的所有位置全为0或1，则经子密钥产生器产生的各个子密钥都相同。这样的密钥共有4个，分别是0000000 0000000、0000000 FFFFFFF、FFFFFFF 0000000、FFFFFFF FFFFFFF <ul>
+<li>E<sub>k</sub> (E<sub>k</sub> (m)) = m 和 D<sub>k</sub> (D<sub>k</sub> (m)) = m</li>
+</ul>
+</li>
+<li>半弱密钥：把明文加密成相同的密文，即存在两个不同的密钥，使得加密同一明文的到的结果相同。</li>
+<li>弱密钥占比非常小，对安全性威胁不大</li>
+</ul>
+</li>
+<li>56位密钥<strong>无法抵抗穷举攻击</strong></li>
+<li>代数结构存在<strong>互补对称性</strong>：互补性会使DES在选择明文攻击下所需要的工作量减半，仅需要测试 2<sup>55</sup> 个密钥。</li>
+</ul>
+<p>$$<br>\begin{cases}<br>c_{1} = E_{k}(m) \<br>c_{2} = E_{k}(\overline{m})<br>\end{cases}<br>$$</p>
+<p>由互补性得到<br>$$<br>\overline{c_{2}} = E_{\overline{k}}(m)<br>$$<br>在穷举密钥 k 时，若输出密文是 c，则加密密钥就是所应用的密钥；若输出密文是 c 的补，则加密密钥就是所用密钥 k 的补</p>
+<h3 id="多重DES分析"><a href="#多重DES分析" class="headerlink" title="多重DES分析"></a>多重DES分析</h3><ul>
+<li><strong>双重DES</strong>：无能抵抗中途相遇攻击</li>
+</ul>
+<p>$$<br>加密：C = E_{K_{2}}(E_{k_{1}}(P)) \<br>解密：P = D_{K_{1}}(D_{k_{2}}(C)) \<br>由上可推出\<br>X = E_{k_{1}}(P) = D_{k_{2}}(C)\<br>X 为中间值<br>$$</p>
+<p>给定明密文对 (P, C) ，将 P 按所有可能密钥 K<sub>1</sub> 加密，得到结果排列与表 T 中；将 C 用所有可能密钥 K<sub>2</sub> 解密，每解密一次就将解密结果与 T 中的值比较。<strong>若有相等，就用刚才测试的两个密钥对 P 加密，若结果为 C 则认定这两个密钥时正确的密钥</strong>。</p>
+<ul>
+<li><strong>三重DES</strong>：有四种方式，分别是 EEE3、EDE3、EEE2、EDE2，其中的数值表示密钥数量</li>
+</ul>
+<h2 id="🌟高级加密标准AES"><a href="#🌟高级加密标准AES" class="headerlink" title="🌟高级加密标准AES"></a>🌟高级加密标准AES</h2><p>本课程中的AES中运算按<strong>字节</strong>（8位二进制）定义</p>
+<ul>
+<li>一个字节看成优先于上次数小于 8 的多项式</li>
+</ul>
+<p>多项式加法：</p>
+<p><img src="https://s2.ax1x.com/2019/12/27/lZw8xg.png" alt="lZw8xg.png"></p>
+<p>🌟<strong>多项式乘法：</strong>有限域 GF(2<sup>8</sup>) 中两个元素的乘法为<strong>模</strong> 2 元域 GF(2) 上的<strong>一个 8 次不可约多项式的多项式</strong>乘法。对于 AES，该8次不可约多项式为<br>$$<br>m(x)=x^{8}+x^{4}+x^{3}+x+1<br>$$<br>用十六进制表示为<strong>{9B}</strong></p>
+<p><img src="https://s2.ax1x.com/2019/12/27/lZwvJf.png" alt="lZwvJf.png"></p>
+<p><img src="https://s2.ax1x.com/2019/12/27/lZ0Fwn.png" alt="lZ0Fwn.png"></p>
+<p>🌟<strong>X乘法</strong>（乘2情况）：</p>
+<ul>
+<li>最高位是 0：直接左移 1 位</li>
+<li>最高位是1：左移 1 位后和 <code>00011011</code> 异或</li>
+</ul>
+<p>$$<br>x*B(x)=\begin{cases}(b_{6}b_{5}b_{4}b_{3}b_{2}b_{1}b_{0}0) &amp;\text{b7=0} \(b_{6}b_{5}b_{4}b_{3}b_{2}b_{1}b_{0}0)\oplus(00011011)&amp;\text{b7=1}\end{cases}<br>$$</p>
+<p><img src="https://s2.ax1x.com/2019/12/27/lZBwgU.png" alt="lZBwgU.png"></p>
+<p><strong>乘 3 乘法：</strong></p>
+<p>3 = (0000 0011)<sub>2</sub> 可以拆分为 (0000 0001)<sub>2</sub> 和 (0000 0010)<sub>2</sub> ，再将两个乘积异或：<br>$$<br>(0000 0011)(a_7a_6a_5a_4a_3a_2a_1a_0)\<br>=[(00000010)\oplus(00000001)]<em>(a_7a_6a_5a_4a_3a_2a_1a_0)\<br>=[(00000010)</em>(a_7a_6a_5a_4a_3a_2a_1a_0)]\oplus(a_7a_6a_5a_4a_3a_2a_1a_0)<br>$$</p>
+<h3 id="AES结构"><a href="#AES结构" class="headerlink" title="AES结构"></a>AES结构</h3><ul>
+<li><p>明文按字节分成列组（共16字节）</p>
+</li>
+<li><p>128位密钥被扩展成<strong>44个字</strong>组成的序列 W[ i ]</p>
+</li>
+<li><p>AES每轮有四个阶段</p>
+<ul>
+<li>字节代换：S-盒和逆S-盒，简单查表</li>
+<li>行移位：简单左循环移位操作，状态矩阵中，第 i 行循环左移 i 字节；逆操作则右移</li>
+<li>🌟<strong>列混合</strong>：对状态矩阵逐列变换，每列视为有限域 GF(2<sup>8</sup>)上一多项式。列多项式乘以一个<strong>固定多项式 c(x)</strong>，对应四字节向量为（03 01 01 02），模多项式为（x<sup>4</sup> + 1）</li>
+</ul>
+<p><a href="https://imgchr.com/i/luyui4" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/12/29/luyui4.md.png" alt="luyui4.md.png"></a></p>
+<p><img src="https://s2.ax1x.com/2020/01/01/lJV39S.png" alt="lJV39S.png"></p>
+<ul>
+<li>轮密钥加：轮密钥与状态按比特逐位异或</li>
+</ul>
+<p><img src="https://s2.ax1x.com/2019/12/29/lugWfe.png" alt="lugWfe.png"></p>
+</li>
+<li><p>每个阶段可逆，解密的一轮就是加密的逆执行</p>
+</li>
+<li><p>加解密的最后一阶段（<strong>第10轮</strong>）只有三个阶段（<strong>没有列混合</strong>）</p>
+</li>
+</ul>
+<p><strong>密钥扩展</strong></p>
+<p>将初始 128 位密钥，输入一个 4x4 矩阵，4 列依次为 w[ 0 ]、w[ 1 ]、w[ 2 ]、w[ 3 ]，接着对 w 数组扩充到 40 个新列，总共构成 44 列，采用以下递归方式构成<br>$$<br>w[i] =\left{<br>\begin{array}{}<br>     w[i-4]\oplus w[i-1] &amp; \text{i不是4的倍数}\<br>     w[i-4]\oplus T(w[i-1]) &amp; \text{i是4的倍数}<br>\end{array}<br>\right.<br>$$<br>T 是一个复杂函数，有字循环，字代替和轮常量异或三个组成部分，其中引用了S-盒。</p>
+<h3 id="IDEA和SMS4"><a href="#IDEA和SMS4" class="headerlink" title="IDEA和SMS4"></a>IDEA和SMS4</h3><ul>
+<li>IDEA分组大小为64位，密钥为 128 位；它的种子密钥为 128 位。在加密中，由8轮和随后的一个输出变换组成。共用 52 组 16 位的子密钥，子密钥主要通过初始密钥移位得到。</li>
+<li>SMS4，分组长度 128 比特，密钥长度 128 比特，加解密采用32轮非线性迭代，加解密轮密钥顺序相反。</li>
+</ul>
+<h3 id="🌟分组密码工作模式"><a href="#🌟分组密码工作模式" class="headerlink" title="🌟分组密码工作模式"></a>🌟分组密码工作模式</h3><p><strong>电码本模式（ECB）</strong></p>
+<p>相同明文分组加密成相同的密文分组，明文分成 64 的分组进行加密，不足 64 位时进行填充</p>
+<p><img src="https://s2.ax1x.com/2019/12/29/lKMeDP.png" alt="lKMeDP.png"></p>
+<p>特点</p>
+<ul>
+<li>简易，可并行计算，速度快</li>
+<li>相同密钥作用下，相同明文加密产生相同密文，暴露明文特征</li>
+<li>密文块缺乏相关，易受替换、重复等攻击</li>
+</ul>
+<p><strong>密码分组链接模式（CBC）</strong></p>
+<p>加密输入是当前明文分组和前一密文分组的异或，形成一条链。密文组不仅与当前明文组有关，且通过反馈以前的明文组有关</p>
+<p><img src="https://s2.ax1x.com/2019/12/29/lKMrvR.png" alt="lKMrvR.png"></p>
+<p><img src="https://s2.ax1x.com/2019/12/29/lKM6Dx.png" alt="lKM6Dx.png"></p>
+<p>🌟CBC的传播错误：</p>
+<ul>
+<li><strong>明文有一分组有错</strong>，会使以后的密文组都收到影响，但经过解密，除原来有误的一组外，其后各组明文都正确恢复</li>
+<li>传送过程中<strong>某组密文出错时</strong>，则该组恢复的明文和下一组恢复数据出错，再后面的组不受影响</li>
+</ul>
+<p><strong>密码反馈模式（CFB）</strong></p>
+<p>输入是 64 比特的移位寄存器，初值为初始向量 IV，输出最左边 j 比特与明文第一个单元 P<sub>1</sub> 进行异或，产生密文的第一个单元 C<sub>1</sub> 。然后将移位寄存器左移 j 位，并将 C<sub>1</sub> 送入移位寄存器的最右边 j 位，直至所有单元被加密</p>
+<p><img src="https://s2.ax1x.com/2019/12/29/lKGYr9.png" alt="lKGYr9.png"></p>
+<p><img src="https://s2.ax1x.com/2019/12/29/lKJezD.png" alt="lKJezD.png"></p>
+<p>优点：自同步能力强，可处理任意长度消息</p>
+<p>缺点：</p>
+<ul>
+<li><strong>明文某一组中有错</strong>，使以后的密文组都受影响，但经解密后，除原有误的一组外，其后各组都正确地恢复</li>
+<li><strong>密文里的一位错误</strong>会引起明文的一个单独错误，此错误进入移位寄存器，导致密文成为无用信息，直到该错误从移位寄存器中移出</li>
+</ul>
+<p><strong>输出反馈模式（OFB）：</strong></p>
+<p>反馈模式结构与CFB结构类似，不同在于</p>
+<ul>
+<li>OFB模式将加密算法的输出反馈到移位寄存器</li>
+</ul>
+<p><img src="https://s2.ax1x.com/2019/12/30/lMyh6A.png" alt="lMyh6A.png"></p>
+<p><img src="https://s2.ax1x.com/2019/12/30/lMyHk8.png" alt="lMyHk8.png"></p>
+<p>特点：</p>
+<p>可加密任意长度数据，没有错误传播，适用于加密冗余度较大的数据，但对密文的篡改难以检测</p>
+<p><strong>计数器模式（CTR）：</strong><br>$$<br>加密：c_i = m_i \oplus E_k(CTR+i) (i = 1,2,…,n) \<br>解密：m_i = c_i \oplus E_k(CTR+i) (i=1,2,…,n)<br>$$<br>CTR表示计数器初值</p>
+<p><img src="https://s2.ax1x.com/2019/12/30/lM6KAK.png" alt="lM6KAK.png"></p>
+<p>特点：</p>
+<ul>
+<li>随机访问特性：可随机对任一个密文分组解密，且与其他密文无关</li>
+<li>高效率：能并行处理</li>
+<li>可处理任意长度数据，仅涉及加密运算，不用实现解密算法</li>
+</ul>
+<h2 id="第五章：哈希函数"><a href="#第五章：哈希函数" class="headerlink" title="第五章：哈希函数"></a>第五章：哈希函数</h2><p>哈希函数：将任意长的消息 M 变换为较短的、固定长度的值 H(M) 的不可逆的单选密码体制，其中 H(M) 称为消息摘要，又称数字指纹</p>
+<p>基本特征：</p>
+<ul>
+<li>算法公开，无需密钥</li>
+<li>数据压缩</li>
+<li>易于计算</li>
+<li>🌟<strong>单向性</strong>（抗原像性）：给定消息的散列值 h(m) ，要得到消息 m 在计算上不可行</li>
+</ul>
+<p><strong>Hash 函数安全性要求：</strong></p>
+<ul>
+<li>抗弱碰撞性：给定消息 m ，寻找与 m 不同的消息 m’ ，使得 h(m) = h(m’) 在计算上不可行</li>
+<li>抗强碰撞性：寻找两个不同消息 m 和 m’，使得 h(m) = h(m’) 在计算上不可行</li>
+</ul>
+<h3 id="MD5"><a href="#MD5" class="headerlink" title="MD5"></a>MD5</h3><p>分组长度为 512 比特，最终输出 128 位（即 16 字节，32 个十六进制位）的消息摘要。</p>
+<p>过程为 4 轮，每轮 16 步，共 64 步。</p>
+<h3 id="SHA1"><a href="#SHA1" class="headerlink" title="SHA1"></a>SHA1</h3><p>最终输出 160 位（即 20 字节，40 个十六进制位）的消息摘要。（因此比 MD5 抗穷举能力更强）</p>
+<p>过程为 4 轮，每轮 20 步，共 80 步。</p>
+<h3 id="🌟数据填充"><a href="#🌟数据填充" class="headerlink" title="🌟数据填充"></a>🌟数据填充</h3><ul>
+<li>填充一个 “1” 和若干个 “0” 使消息长度<strong>模 512 与 448 同余</strong>。</li>
+<li>将<strong>原始消息长度以 64 比特表示</strong>附加在填充结果后面，使得消息长度恰好为 512 比特整数倍</li>
+<li>512 比特按 32 比特分为 16 组</li>
+<li>若原消息长度刚好满足这个条件，则再填充 512 位（1 个 1 和 511 个 0）。</li>
+</ul>
+<blockquote>
+<p>例题：给定一个三个 8 位 ASCII 字符组成的消息 “abc” ，总长度为 l = 24 位</p>
+</blockquote>
+<p><img src="https://s2.ax1x.com/2019/12/30/lMIqQf.png" alt="lMIqQf.png"></p>
+<h2 id="第六章：公钥密码"><a href="#第六章：公钥密码" class="headerlink" title="第六章：公钥密码"></a>第六章：公钥密码</h2><p>单向陷门函数 f ：</p>
+<ul>
+<li>给出 f 定义域中的任意元素 x，计算 f(x) 是容易的</li>
+<li>给出 y = f(x) 中的 y，计算 x：<ul>
+<li>若知道 f 结合进去的信息（<strong>陷门，也称密钥</strong>），则 x 容易计算</li>
+<li>若不知道该陷门信息，则 x 难以计算</li>
+</ul>
+</li>
+</ul>
+<p>公钥密码应满足：</p>
+<ul>
+<li>解密算法 D 与加密算法 E 互逆，对于所有明文都有</li>
+</ul>
+<p>$$<br>D(E(M,K_e),K_d) = M<br>$$</p>
+<ul>
+<li>由 K<sub>e</sub> 求出 K<sub>d</sub> 在计算上不可行</li>
+<li>算法 E 和 D 都是高效的</li>
+</ul>
+<p>优点：</p>
+<ul>
+<li>密钥分发简单</li>
+<li>需保密的密钥量少</li>
+<li>可满足互不相识的人之间私人对话的保密性</li>
+<li>可实现数字签名和认证功能</li>
+</ul>
+<p>相对于对称密码的不足</p>
+<ul>
+<li>密码算法较慢</li>
+<li>提供更多信息对算法进行攻击</li>
+<li>数据扩展</li>
+<li>建立在特定的数学难题上，这种困难性只是一种设想</li>
+</ul>
+<h2 id="🌟RSA"><a href="#🌟RSA" class="headerlink" title="🌟RSA"></a>🌟RSA</h2><h3 id="🌟RSA算法描述："><a href="#🌟RSA算法描述：" class="headerlink" title="🌟RSA算法描述："></a>🌟<strong>RSA算法描述</strong>：</h3><ul>
+<li>密钥生成<ul>
+<li>选择两个大素数 p 和 q，（p ≠ q，需保密）</li>
+<li>计算 n = p x q，φ(n) = (p-1) × (q-1)</li>
+<li>选择整数 e 使 (φ(n), e) = 1, 1 &lt; e &lt; φ(n)</li>
+<li>计算 d，使得 d = e<sup>-1</sup> mod φ(n)</li>
+<li>得到：<strong>公钥为 {e，n}</strong>；<strong>私钥为 {d}</strong></li>
+</ul>
+</li>
+<li>加密（用e，n）：明文 M &lt; n，密文 C = M<sup>e</sup> (mod n)</li>
+<li>解密（用d，n）：密文 C，明文 M = C<sup>d</sup> (mod n)</li>
+</ul>
+<p>计算时，求 d 时，使用欧几里得扩展算法列表运算</p>
+<p><strong>正确性验证(欧拉定理)：</strong><br>$$<br>C^d \mod n=(M^e)^d \mod n\=M^{ed} \mod n\=M\mod n<br>$$</p>
+<h3 id="🌟RSA的攻击"><a href="#🌟RSA的攻击" class="headerlink" title="🌟RSA的攻击"></a><strong>🌟RSA的攻击</strong></h3><h4 id="同模攻击："><a href="#同模攻击：" class="headerlink" title="同模攻击："></a>同模攻击：</h4><p>假设 m 是明文，两用户的公钥分别是 e<sub>1</sub> 和 e<sub>2</sub> ，且 ( e<sub>1</sub> ,e<sub>2</sub> ) = 1，共同模数 N ，两密文为<br>$$<br>c_1 \equiv m^{e_1}\mod N\<br>c_2 \equiv m^{e_2}\mod N<br>$$<br>攻击者知道 N, e<sub>1</sub> , e<sub>2</sub>, c<sub>1</sub> 和 c<sub>2</sub>，可如下恢复明文 m</p>
+<p> ( e<sub>1</sub> ,e<sub>2</sub> ) = 1，由欧几里得算法可找出 r, s 满足 re<sub>1</sub> + se<sub>2</sub> = 1。假定 r 是负数，那么<br>$$<br>(c_1^{-1})^{-r}c_2^s=m^{re_1+se_2}\equiv m\mod N<br>$$<br>无需密钥 d，就可得到明文 m</p>
+<p><strong>防御：</strong>使用 RSA 公钥密码的通信中，不同用户的密钥不能有相同的模值</p>
+<h4 id="低加密指数攻击："><a href="#低加密指数攻击：" class="headerlink" title="低加密指数攻击："></a>低加密指数攻击：</h4><p>小的公钥可加快加密速度，但过小公钥易受攻击</p>
+<p>三个用户都使用 3 作为公钥，对同一明文 m 加密<br>$$<br>c_1\equiv m^e \mod n_1\<br>c_2\equiv m^e \mod n_2\<br>c_3\equiv m^e \mod n_3<br>$$<br>运用中国剩余定理，在 e = 3 时，可以得到<br>$$<br>c_x\equiv m^3\mod n_1n_2n_3<br>$$<br>所以<br>$$<br>m=\sqrt[3]{c_x}<br>$$<br><strong>防御：</strong>对短消息，用随机数填充以保证<br>$$<br>m^e\mod n\neq m^e<br>$$<br>从而杜绝低加密指数攻击</p>
+<h2 id="🌟ElGamal"><a href="#🌟ElGamal" class="headerlink" title="🌟ElGamal"></a>🌟ElGamal</h2><h3 id="🌟ElGamal算法描述："><a href="#🌟ElGamal算法描述：" class="headerlink" title="🌟ElGamal算法描述："></a><strong>🌟ElGamal算法描述：</strong></h3><ul>
+<li><p>密钥的生成</p>
+<ul>
+<li>选取大素数 p、g ∈ Z<sub>p</sub><sup>*</sup> 是一个生成元，p、g 作为系统参数所有用户共享</li>
+<li>每个用户 U 都随机挑选整数 x，2 ≤ x ≤ p-2，计算</li>
+</ul>
+<p>$$<br>y=g^x\mod p<br>$$</p>
+<ul>
+<li><strong>y 作为用户 U 的公钥，x 作为用户 U 的私钥</strong></li>
+</ul>
+</li>
+<li><p>加密</p>
+<ul>
+<li><p>用户 A 把明文编码为一个 0 ~ p-1 之间的整数 m</p>
+</li>
+<li><p>A 挑选一个秘密随机数 r （2 ≤ r ≤ p-2）<br>$$<br>c_1=g^r\mod p \<br>c_2 = m*y^r\mod p<br>$$</p>
+</li>
+<li><p>A 把二元组（c1, c2）作为密文传送给用户 B。</p>
+</li>
+</ul>
+</li>
+<li><p>解密</p>
+<ul>
+<li>B 收到密文二元组后，做解密计算<br>$$<br>m=c_2*(c_1^x)^{-1}\mod p<br>$$</li>
+</ul>
+</li>
+</ul>
+<p><strong>算法正确性验证：</strong><br>$$<br>c_2(c_1^x)^{-1}\mod p=(y^rm)(g^{rx})^{-1} \mod p \<br>=(g^{xr}m)g^{-rx}\mod p \<br>=m\mod p<br>$$</p>
+<blockquote>
+<p>ps: 安全性分析 8 考</p>
+</blockquote>
+<h2 id="第七章：数字签名"><a href="#第七章：数字签名" class="headerlink" title="第七章：数字签名"></a>第七章：数字签名</h2><p>数字签名的目的：保证信息的完整性和真实性</p>
+<p>完善的签名方案应满足的条件：</p>
+<ul>
+<li>不可否认性</li>
+<li>不可伪造性</li>
+<li>公正的仲裁</li>
+</ul>
+<h2 id="🌟RSA数字签名方案"><a href="#🌟RSA数字签名方案" class="headerlink" title="🌟RSA数字签名方案"></a>🌟RSA数字签名方案</h2><h3 id="签名算法如下："><a href="#签名算法如下：" class="headerlink" title="签名算法如下："></a>签名算法如下：</h3><ul>
+<li><p>生成密钥（与加密系统一样）</p>
+</li>
+<li><p>签名过程 (d, n)：</p>
+<p>用户 A 对消息 M ∈ Z<sub>n</sub> 进行签名，计算<br>$$<br>S = Sig(H(M)) = H(M)^d \mod n<br>$$<br>并将 S 附在消息 M 后，发送</p>
+</li>
+<li><p>验证过程 (e, n)：</p>
+<p>给定 (M, S) ，Ver(M, S)为真，则下式成立<br>$$<br>H(M) = S^e \mod n<br>$$</p>
+</li>
+<li><p>正确性</p>
+<p>因为<br>$$<br>s\equiv h(m)^d\mod n\<br>de \equiv 1\mod \varphi(n)\<br>\varphi(n)=(p-1)(q-1)<br>$$<br>所以<br>$$<br>s^e\equiv h(m)^{ed}\equiv h(m)^{k\varphi(n)+1}\equiv h(m)h(m)^{k\varphi(n)}\<br>\equiv h(m)[h(m)^{\varphi(n)}]^k\equiv h(m)\mod n<br>$$</p>
+</li>
+</ul>
+<h3 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h3><p><strong>如果不加 Hash 函数，直接对消息进行签名</strong></p>
+<p><strong>一般攻击：</strong></p>
+<p>攻击者任选一个数据 Y，用 A 的公钥计算 X = Y<sup>e</sup> mod n，便可以用 Y 伪造 A 对消息 X 的签名<br>$$<br>Y = X^d \mod n<br>$$<br><strong>利用已有签名进行攻击:</strong></p>
+<p>如果消息 M<sub>1</sub>、M<sub>2</sub> 的签名分别是  S<sub>1</sub>、S<sub>2</sub>，则任何指导 M<sub>1</sub>、M<sub>2</sub>  ，S<sub>1</sub>、S<sub>2</sub> 的人可以伪造对消息 M<sub>1</sub>、M<sub>2</sub> 的签名  S<sub>1</sub>、S<sub>2</sub>，因为<br>$$<br>Sig(M_1,M_2) = Sig(M_1)Sig(M_2)<br>$$<br><strong>利用签名获得明文:</strong></p>
+<p>截获 C＝M<sup>e</sup> mod n，选择随机数 r，计算<br>$$<br>x = r^e \mod n\<br>y = xC\mod n<br>$$<br>设法让发送者对 y 签名，获得<br>$$<br>S = y^d\mod n<br>$$<br>攻击者计算<br>$$<br>r^{-1}S\mod n=r^{-1}y^d\mod n\<br>=r^{-1}x^dC^d\mod n=C^d\mod n=M<br>$$</p>
+<p>其中 H(M) 的另外一个作用就是可以<strong>加快签名速度</strong>。</p>
+<h2 id="🌟ElGamal数字签名方案"><a href="#🌟ElGamal数字签名方案" class="headerlink" title="🌟ElGamal数字签名方案"></a>🌟ElGamal数字签名方案</h2><h3 id="签名算法如下：-1"><a href="#签名算法如下：-1" class="headerlink" title="签名算法如下："></a>签名算法如下：</h3><ul>
+<li><p>系统初始化：选择大素数 p，选择生成元  g ∈ Z<sub>p</sub><sup>*</sup> 和随机数 x ∈ <sub>R</sub>Z<sub>p</sub>。</p>
+<p>公钥 (p, g, y)，私钥为 x (1 ≤ x ≤ p-1)，其中<br>$$<br>y=g^x\mod p<br>$$</p>
+</li>
+<li><p>签名过程：给定消息 M，签名者如下计算</p>
+<ul>
+<li><p>选择随机数 k ∈ Z<sub>p</sub><sup>*</sup>，且 k 与 (p-1) 互素</p>
+</li>
+<li><p>计算 M 的哈希值 H(M) ，计算<br>$$<br>r = g^k\mod p\<br>s=(H(M)-xr)k^{-1}(\mod p-1)<br>$$</p>
+</li>
+<li><p>将 (r, s) 作为签名，与 M 一起发送给接收方</p>
+</li>
+</ul>
+</li>
+<li><p>签名验证</p>
+<ul>
+<li><p>计算消息 M 哈希值 H(M)</p>
+</li>
+<li><p>验证公式<br>$$<br>y^rr^s=g^{H(M)}\mod p<br>$$<br>成立则认为 (r, s)为有效签名，否则认为签名是伪造的</p>
+</li>
+</ul>
+</li>
+<li><p>正确性<br>$$<br>ks\equiv h(m)-xr\mod (p-1)\<br>g^{ks}\equiv g^{h(m)-xr}\mod p\<br>g^{ks}g^{xr}\equiv g^{h(m)}\mod p\<br>y^rr^s=g^{H(m)}\mod p<br>$$</p>
+</li>
+</ul>
+<p>安全性：</p>
+<ul>
+<li><p>非确定性数字签名算法，同一消息 M 的签名依赖于随机数 k</p>
+</li>
+<li><p>安全性基于有限域上计算离散对数的困难性（DLP）</p>
+<p>实际中常用本原元 α 生成一个阶为素数的子群，所有元素都是本原元，不存在子群，从而抵抗这种攻击。</p>
+</li>
+<li><p>随机数 k 不能泄露（已知 k 可以计算 x ）</p>
+</li>
+<li><p>随机数 k 不能被重复使用（泄露 x ）</p>
+<p>设 k 用来对两个不同消息签名，则 r 相同。签名分别为 (r, s<sub>1</sub>), (r, s<sub>2</sub>)。因为<br>$$<br>s_1\equiv [h(m_1)-xr]k^{-1}\mod (p-1)\<br>s_2\equiv [h(m_2)-xr]k^{-1}\mod (p-1)\<br>(s_1-s_2)k\equiv [h(m_1)-h(m_2)]\mod (p-1)<br>$$<br>因为消息 m<sub>1</sub>，m<sub>2</sub> 不同，他们所以签名不同的概率很大，则<br>$$<br>k\equiv <a href="s_1-s_2">h(m_1)-h(m_2)</a>^{-1}\mod (p-1)<br>$$<br>之后可以将 k 代入上面两式来计算私钥<br>$$<br>x\equiv \frac{h(m_1)-s_1k}{r}\mod p-1<br>$$</p>
+</li>
+<li><p>哈希函数的应用</p>
+<p>如果未使用 Hash 函数则易受到攻击。攻击者选取任一整数对 (u, v)，满足<br>$$<br> gcd(v, p-1)=1<br>$$<br>计算<br>$$<br>r\equiv g^uy^v\mod p\<br>s\equiv -rv^{-1}\mod (p-1)\<br>m\equiv su\mod p<br>$$<br>则消息 m 及其签名 (r, s) 可以被验证者接受，即攻击者成功进行存在性伪造。因为<br>$$<br>y^rr^s\equiv y^r(g^ug^v)^s\equiv y^{r+w}g^{us}\equiv g^m\mod p<br>$$<br>又因为<br>$$<br>g^m\equiv g^{su}\mod p<br>$$<br>也就是说，签名 (r, s) 使等式<br>$$<br>y^rr^s=g^{m}\mod p<br>$$<br>成立</p>
+<p>所以使用 Hash 函数能够有效提高 ElGamal 数字签名方案安全性。</p>
+</li>
+</ul>
+<h2 id="Schnorr签名体制"><a href="#Schnorr签名体制" class="headerlink" title="Schnorr签名体制"></a>Schnorr签名体制</h2><h3 id="签名算法如下：-2"><a href="#签名算法如下：-2" class="headerlink" title="签名算法如下："></a>签名算法如下：</h3><ul>
+<li><p>系统初始化：p、q 大素数，选择生成元 g ∈ Z<sub>p</sub><sup>*</sup> ，且<br>$$<br>g^q\equiv 1\mod q\ne 1<br>$$<br>选择随机数 1 &lt; x &lt; q，计算<br>$$<br>y\equiv g^x\mod p<br>$$<br>公钥为（p, q, g, y），私钥为（ x ）</p>
+</li>
+<li><p>签名算法</p>
+<p>签名者选取随机数 k，1 ≤ k ≤ q-1，计算<br>$$<br>r\equiv g^k\mod p\<br>e= h(m,r)\<br>s\equiv (xe+k)\mod q<br>$$<br>计算得签名 (e, s)，其中 h 为安全的 Hash 函数</p>
+</li>
+<li><p>验证算法</p>
+<p>收到消息 m 和签名 (e, s)，计算<br>$$<br>r_1\equiv g^sy^{-e}\mod p<br>$$<br>验证<br>$$<br>e=h(m,r_1)<br>$$<br>等式成立则签名有效；否则无效</p>
+</li>
+<li><p>正确性</p>
+<p>因为<br>$$<br>r\equiv g^k\mod p\<br>e= h(m,r)\<br>s\equiv (xe+k)\mod q<br>$$<br>所以<br>$$<br>r_1\equiv g^sy^{-e}\equiv g^sg^{-xe}\equiv g^{s-xe}\<br>\equiv g^{xe+k-xe}\equiv g^k\equiv r\mod p<br>$$<br>因此<br>$$<br>h(m, r_1)=h(m,r)=e<br>$$</p>
+</li>
+</ul>
+<p>安全性：</p>
+<p>Schnorr数字签名方案中 g 为 Z<sub>p</sub><sup>*</sup> 的 q 阶子群的生成元，较 Elgamal 签名方案的生成元阶为 p-1。所以从穷尽搜索签名者密钥的角度，Elgamal 签名安全性更高。除此之外，安全性与 Elgamal 签名方案相同。</p>
+<blockquote>
+<p>试卷题型</p>
+<blockquote>
+<p>计算题（60分） </p>
+<p>6道或8道</p>
+</blockquote>
+<blockquote>
+<p>分析题（20分）</p>
+<p>4个小题</p>
+</blockquote>
+<blockquote>
+<p>综合题（20分）</p>
+<p>3个小题或2个小题</p>
+</blockquote>
+</blockquote>
+
+        
+            <div class="donate-container">
+    <div class="donate-button">
+        <button id="donate-button">请我吃生蚝</button>
+    </div>
+    <div class="donate-img-container hide" id="donate-img-container">
+        <img id="donate-img" src="" data-src="/img/donate.jpg">
+        <p> 感谢鼓励 </p>
+    </div>
+</div>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+        <li>
+            <a target="_blank" href="http://weibo.com/Lil_hooJC">
+                            <span class="fa-stack fa-lg">
+                                  <i class="iconfont icon-weibo"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/LeeHun9">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://3nd.xyz">3ND</a></span>
+        <span>/</span>
+        
+        <span><a href="https://comydream.github.io">ComyDream</a></span>
+        <span>/</span>
+        
+        <span><a href="#">旺铺招租</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>
