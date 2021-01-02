@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="贵人的博客">
+    <meta name="keyword" content="CUMT">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        加密与解密 - LeeHung的博客 | LeeHung&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> sometimes create， sometimes work </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>JCH</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0x01-basic-knowledge"><span class="toc-text">0x01 basic knowledge</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#what？"><span class="toc-text">what？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-逆向分析技术"><span class="toc-text">1.1 逆向分析技术</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-文本字符"><span class="toc-text">1.2 文本字符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-ASCII-与-Unicode"><span class="toc-text">1.2.1 ASCII 与 Unicode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2-字节存储顺序"><span class="toc-text">1.2.2 字节存储顺序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-Windows"><span class="toc-text">1.3 Windows</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-1-API"><span class="toc-text">1.3.1 API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-2-WOW64"><span class="toc-text">1.3.2 WOW64</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-3-Windows-消息机制"><span class="toc-text">1.3.3 Windows 消息机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-4-虚拟内存"><span class="toc-text">1.3.4 虚拟内存</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x02-动态分析技术"><span class="toc-text">0x02 动态分析技术</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1OD-调试器"><span class="toc-text">2.1OD 调试器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-3-基本操作"><span class="toc-text">2.1.3 基本操作</span></a></li></ol></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> sometimes create， sometimes work </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        加密与解密
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2021-01-02 19:43:45</span></span>
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h1 id="0x01-basic-knowledge"><a href="#0x01-basic-knowledge" class="headerlink" title="0x01 basic knowledge"></a>0x01 basic knowledge</h1><h2 id="what？"><a href="#what？" class="headerlink" title="what？"></a>what？</h2><h3 id="1-1-逆向分析技术"><a href="#1-1-逆向分析技术" class="headerlink" title="1.1 逆向分析技术"></a>1.1 逆向分析技术</h3><ol>
+<li>通过软件使用说明和操作格式</li>
+<li>静态分析</li>
+<li>动态分析<ul>
+<li>粗跟踪：大块跟踪，遇到 CALL、REP、LOOP等一般不跟入。了解Win32 API 根据情况合适选择断点。</li>
+<li>细跟踪关键部分：粗跟踪获取核心模块和程序段，再进行具体跟踪。</li>
+</ul>
+</li>
+</ol>
+<h2 id="1-2-文本字符"><a href="#1-2-文本字符" class="headerlink" title="1.2 文本字符"></a>1.2 文本字符</h2><h3 id="1-2-1-ASCII-与-Unicode"><a href="#1-2-1-ASCII-与-Unicode" class="headerlink" title="1.2.1 ASCII 与 Unicode"></a>1.2.1 ASCII 与 Unicode</h3><p>​    Ascii 是7位编码标准，00h~7Fh，26个小写字母和26个大写字母、10个数字、32个符号、33个控制代码及空格，共128个代码。厂商扩充128附加字符，但其中部分不统一。如 ANSI、Symbol、OEM 等字符集，<strong>ANSI 是系统预设的标准文字存储格式。</strong></p>
+<p>​    Unicode 是 ASCII 字符编码扩展，在 win 中用两Byte进行编码，称为宽字符集widechars。Unicode 是双字节编码机制的字符集，0~65535 双字节无符号整数对每个字符进行编码。Unicode 所有字符都是16位，7位的 ASCII 码被扩充为16位。</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#ascii</span><br><span class="line"><span class="number">70</span>h <span class="number">65</span>h <span class="number">64</span>h</span><br><span class="line">#Unicode</span><br><span class="line"><span class="number">0070</span>h <span class="number">0065</span>h <span class="number">0064</span>h</span><br></pre></td></tr></table></figure>
+<p>​    Intel 处理器在内存中将一个字存入存储器要占用相继的2字节，按 Little-endian （低字节）方式存入，高位字节存入高地址。</p>
+<p><a href="https://imgchr.com/i/rq6Mw9" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2020/12/30/rq6Mw9.png" alt="rq6Mw9.png"></a></p>
+<h3 id="1-2-2-字节存储顺序"><a href="#1-2-2-字节存储顺序" class="headerlink" title="1.2.2 字节存储顺序"></a>1.2.2 字节存储顺序</h3><ul>
+<li>Big-endian：高位字节存入低地址，低地址存入高地址。</li>
+<li>Little-endian：低位字节存入低地址，高位地址存入高地址。</li>
+</ul>
+<p>例如：12345678h 写入以 1000h 开始的内存中</p>
+<p><a href="https://imgchr.com/i/rq6dwd" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2020/12/30/rq6dwd.png" alt="rq6dwd.png"></a></p>
+<p><a href="https://imgchr.com/i/rq6BFI" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2020/12/30/rq6BFI.png" alt="rq6BFI.png"></a></p>
+<p>一般 x86 系列 CPU 都是 Little-endian 字节序，PowerPC 通常是 Big-endian 字节序。网络协议也采用 Big-endian 方式传输数据，所以称为网络字节序。</p>
+<h2 id="1-3-Windows"><a href="#1-3-Windows" class="headerlink" title="1.3 Windows"></a>1.3 Windows</h2><h3 id="1-3-1-API"><a href="#1-3-1-API" class="headerlink" title="1.3.1 API"></a>1.3.1 API</h3><p>Application Programming Interface（应用程序编程接口）。提供窗口管理、图形设备接口、内存管理等服务功能，以函数库形式组织在一起，形成 Windows 应用程序编程接口，Win API。Win API 子系统负责讲 API 调用转换成 Windows 操作系统的系统服务调用。API 下面是 Windows 操作系统核心，上面是 Windows 应用程序。</p>
+<p><a href="https://imgchr.com/i/rqfio4" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2020/12/30/rqfio4.png" alt="rqfio4.png"></a></p>
+<p>​    16位 Windows 的 API 称作“Win16”，用于32、64位 Windows 的 API 称作“Win32”，其中64位 API 的名称和基本功能没变，只是用64位代码实现。Win API 是基于 C 语言接口，但可由不同语言编写的程序调用。</p>
+<p>​    32位系统调用 Win16 函数要经过转换层转换位 Win32 函数，反之相同。</p>
+<p>​    Windows 运作核心是 DLL，16位 win 中位于 \WINDOWS\SYSTEM；32位 win 中位于 \SYSTEM 和 \SYSTEM32 中。早期只需在三个 DLL 中实现 Win 主要部分：</p>
+<ul>
+<li>Kernel（Kernel32.DLL）：操作系统核心功能服务，进程与线程控制、内存管理、文件访问等。</li>
+<li>User（USER32.DLL）：处理用户接口，包括键鼠输入、串口和菜单管理等。</li>
+<li>GDI（GDI32.DLL）：图像设备接口，允许程序在屏幕和打印机上显示文本和图形。</li>
+</ul>
+<hr>
+<p>​    向 Windows 函数传一个 ANSI 字符串，会先将 ANSI 字符串转换成 Unicode 字符串，再传给操作系统；若希望函数返回 ANSI 字符串，系统会先将 Unicode 字符串转换成 ANSI 字符串，然后再返回程序。</p>
+<p>​    Win32 API 函数字符集中，<strong>A</strong> 表示 ANSI，<strong>W</strong> 表示 Widechars(Unicode)。前者是常使用的单字节方式；后者是宽字节方式，以便处理双字节字符。每个以字符串位参数的 Win32 函数在操作系统中都有这两种方式的版本。</p>
+<h3 id="1-3-2-WOW64"><a href="#1-3-2-WOW64" class="headerlink" title="1.3.2 WOW64"></a>1.3.2 WOW64</h3><p>​    Windows-on-Windows64-bit 是64位 Windows 上的子系统，可使 32 位应用程序在不修改的情况下运行在64位操作系统上。64位系统文件放在 System32 文件夹中，还增加了 \Windows\SysWOW64 文件夹来存储32位系统文件。</p>
+<p>​    加载32位程序时，WOW64 建立32位 ntdll.dll 要求的启动环境，切换 CPU 模式至32位，开始执行32位加载器。<strong>WOW64 会对32位 ntdll.dll 的调用重定向 ntdll.dll(64位)</strong>，而不是发出原生32位系统调用指令。WOW64 转换到原生64位模式，获取系统调用有关参数，发出对应原生64位系统调用。</p>
+<h3 id="1-3-3-Windows-消息机制"><a href="#1-3-3-Windows-消息机制" class="headerlink" title="1.3.3 Windows 消息机制"></a>1.3.3 Windows 消息机制</h3><p>​    Windows 是一个消息驱动式系统。Windows 消息提供通信手段，应用程序想要实现的功能由消息触发，通过对消息的响应和处理来完成。</p>
+<ul>
+<li>系统消息队列</li>
+<li>应用程序 消息队列</li>
+</ul>
+<p>​    所有输入设备由 Windows 监控。事件发生时，WIndows先将输入的消息放入系统消息队列，再将输入的消息复制到相应的应用程序队列中，应用程序中的消息循环在它的消息队列中检索每个消息并发送给对应的窗口函数。无论事件急缓，总按先后排队（一些系统消息除外），可能导致外部实时事件得不到及时处理。</p>
+<h3 id="1-3-4-虚拟内存"><a href="#1-3-4-虚拟内存" class="headerlink" title="1.3.4 虚拟内存"></a>1.3.4 虚拟内存</h3><p>​    32位系统地址空间为 4GB 以内，00000000h~FFFFFFFFh，代码和数据都放在同意地址空间中，不区分代码段和数据段。</p>
+<p>​    虚拟内存 virtual memory 通过映射 map 的方法使可用虚拟地址 virtual address 达到 4GB，每个应用程序都可以获得 2GB 的虚拟地址，剩下 2GB 系统自用。</p>
+<p>​    应用程序不会直接访问物理地址，虚拟内存管理器通过虚拟地址的访问请求来控制所有物理地址访问。每个应用程序都有独立的 4GB 寻址空间，彼此隔离。DLL 程序没有私有空间，总时背映射到其他应用程序地址空间中，作为其他应用程序的一部分运行，DLL 不与其他程序处于同一地址空间，应用程序就无法调用它。</p>
+<h1 id="0x02-动态分析技术"><a href="#0x02-动态分析技术" class="headerlink" title="0x02 动态分析技术"></a>0x02 动态分析技术</h1><h2 id="2-1OD-调试器"><a href="#2-1OD-调试器" class="headerlink" title="2.1OD 调试器"></a>2.1OD 调试器</h2><h3 id="2-1-3-基本操作"><a href="#2-1-3-基本操作" class="headerlink" title="2.1.3 基本操作"></a>2.1.3 基本操作</h3><p><a href="https://imgchr.com/i/rOPUpj" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2020/12/30/rOPUpj.png" alt="rOPUpj.png"></a></p>
+
+        
+            <div class="donate-container">
+    <div class="donate-button">
+        <button id="donate-button">请我吃生蚝</button>
+    </div>
+    <div class="donate-img-container hide" id="donate-img-container">
+        <img id="donate-img" src="" data-src="/img/donate.jpg">
+        <p> 感谢鼓励 </p>
+    </div>
+</div>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+        <li>
+            <a target="_blank" href="http://weibo.com/Lil_hooJC">
+                            <span class="fa-stack fa-lg">
+                                  <i class="iconfont icon-weibo"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/LeeHun9">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://3nd.xyz">3ND</a></span>
+        <span>/</span>
+        
+        <span><a href="https://comydream.github.io">ComyDream</a></span>
+        <span>/</span>
+        
+        <span><a href="#">旺铺招租</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>
