@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="贵人的博客">
+    <meta name="keyword" content="CUMT">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        C++反汇编与逆向学习记录 - LeeHung的博客 | LeeHung&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> sometimes create， sometimes work </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>JCH</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0x02-基本数据类型表现形式"><span class="toc-text">0x02 基本数据类型表现形式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-整数"><span class="toc-text">2.1 整数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-无符号整数"><span class="toc-text">2.1.1 无符号整数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-有符号整数"><span class="toc-text">2.1.2 有符号整数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-浮点数类型"><span class="toc-text">2.2 浮点数类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1-浮点数编码方式"><span class="toc-text">2.2.1 浮点数编码方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#float-IEEE-编码"><span class="toc-text">float IEEE 编码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#double"><span class="toc-text">double</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-2-浮点数指令"><span class="toc-text">2.2.2 浮点数指令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-地址、指针和引用"><span class="toc-text">2.5 地址、指针和引用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-1-指针和地址"><span class="toc-text">2.5.1 指针和地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-2-指针工作方式"><span class="toc-text">2.5.2 指针工作方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-3-引用"><span class="toc-text">2.5.3 引用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-6-常量"><span class="toc-text">2.6 常量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-1-常量的定义"><span class="toc-text">2.6.1 常量的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-2-define-和-const-区别"><span class="toc-text">2.6.2 #define 和 const 区别</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x03-启动函数"><span class="toc-text">0x03 启动函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#VC-6-0-启动函数"><span class="toc-text">VC++ 6.0 启动函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-main函数识别"><span class="toc-text">3.3 main函数识别</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x04-表达式求值过程"><span class="toc-text">0x04 表达式求值过程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-算术运算和赋值"><span class="toc-text">4.1 算术运算和赋值</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-1-算数运算工作形式"><span class="toc-text">4.1.1 算数运算工作形式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-加法"><span class="toc-text">1. 加法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#常量传播"><span class="toc-text">常量传播</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#常量折叠"><span class="toc-text">常量折叠</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-减法"><span class="toc-text">2. 减法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-乘法"><span class="toc-text">3. 乘法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-除法-（不太会，有待深化）"><span class="toc-text">4. 除法 （不太会，有待深化）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-2-算术结果溢出"><span class="toc-text">4.1.2 算术结果溢出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-3-自增和自减"><span class="toc-text">4.1.3 自增和自减</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-关系运算和逻辑运算"><span class="toc-text">4.2 关系运算和逻辑运算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-1-关系运算和条件跳转的对应"><span class="toc-text">4.2.1 关系运算和条件跳转的对应</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-2-表达式短路"><span class="toc-text">4.2.2 表达式短路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-3-条件表达式"><span class="toc-text">4.2.3 条件表达式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-位运算"><span class="toc-text">4.3 位运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-5-实例分析"><span class="toc-text">4.5 实例分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x05-流程控制语句"><span class="toc-text">0x05 流程控制语句</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-if"><span class="toc-text">5.1 if</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-if-else"><span class="toc-text">5.2 if else</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-if-构成的多分支流程"><span class="toc-text">5.3 if 构成的多分支流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-4-switch"><span class="toc-text">5.4 switch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-5-不构成跳转表的-switch"><span class="toc-text">5.5 不构成跳转表的 switch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-6-判定树"><span class="toc-text">5.6 判定树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-7-do-while-for"><span class="toc-text">5.7 do/while/for</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-7-1-do"><span class="toc-text">5.7.1 do</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-7-2-while"><span class="toc-text">5.7.2 while</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-7-3-for-循环"><span class="toc-text">5.7.3 for 循环</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-8-循环结构的优化"><span class="toc-text">5.8 循环结构的优化</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x06-函数工作原理"><span class="toc-text">0x06 函数工作原理</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> sometimes create， sometimes work </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        C++反汇编与逆向学习记录
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2021-01-19 19:53:04</span></span>
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h1 id="0x02-基本数据类型表现形式"><a href="#0x02-基本数据类型表现形式" class="headerlink" title="0x02 基本数据类型表现形式"></a>0x02 基本数据类型表现形式</h1><h2 id="2-1-整数"><a href="#2-1-整数" class="headerlink" title="2.1 整数"></a>2.1 整数</h2><h3 id="2-1-1-无符号整数"><a href="#2-1-1-无符号整数" class="headerlink" title="2.1.1 无符号整数"></a>2.1.1 无符号整数</h3><p>​    所有位都用来表示数值。如 unsigned int，变量在内存中占4字节，0x00000000~0xffffffff，十进制表示 0~4294967295。无符号整型不足32位时，用0填充剩余高位。</p>
+<h3 id="2-1-2-有符号整数"><a href="#2-1-2-有符号整数" class="headerlink" title="2.1.2 有符号整数"></a>2.1.2 有符号整数</h3><p>​    最高位表示符号位。0正1负，内存中占4字节，0x80000000~0x7fffffff，十进制 -2147483648~2147483647。其中正数区间 0x00000000~0x7ffffffff，负数区间 0x80000000~0xffffffff。</p>
+<p>​    负数在内存中以补码方式存放，简单表示为<strong>用0减去这个数绝对值</strong>或者<strong>该数取反加1</strong>。</p>
+<p>​    有符号整数都是以补码形式存储的，因为计算机只会做加法，要把减法转加法。查看用16进制表示的最高位，小于8为正数，否则为负数。判断一段数据时有符号类型还是无符号类型需要查看指令或已知函数如何操作此内存地址，根据操作方式或函数相关定义的出地址数据类型。</p>
+<h2 id="2-2-浮点数类型"><a href="#2-2-浮点数类型" class="headerlink" title="2.2 浮点数类型"></a>2.2 浮点数类型</h2><p>​    使用<strong>指数域</strong>、<strong>数据域</strong>和<strong>符号域</strong>进行运算后得到真值。</p>
+<h3 id="2-2-1-浮点数编码方式"><a href="#2-2-1-浮点数编码方式" class="headerlink" title="2.2.1 浮点数编码方式"></a>2.2.1 浮点数编码方式</h3><h4 id="float-IEEE-编码"><a href="#float-IEEE-编码" class="headerlink" title="float IEEE 编码"></a>float IEEE 编码</h4><p>占4字节，最高位符号位，8位表示指数，其余表示尾数</p>
+<p><a href="https://imgchr.com/i/s8jl2q" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/11/s8jl2q.png" alt="s8jl2q.png"></a></p>
+<p>12.25f -&gt; 1100.01</p>
+<p>小数点移动至最高位为1处，移动三次 -&gt; 1.10001，指数部分为3。</p>
+<p>为正数，符号位添0。转换情况如下</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">符号位：<span class="number">0</span></span><br><span class="line">指数位 <span class="number">3</span>+<span class="number">127</span> -&gt; <span class="number">10000010</span> <span class="comment">//大于127表示是一个正数</span></span><br><span class="line">尾数位：<span class="number">10001</span> <span class="number">00000.</span>..（共<span class="number">23</span>位）</span><br></pre></td></tr></table></figure>
+<p>-0.125f -&gt; 0.001</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">符号位：<span class="number">1</span></span><br><span class="line">指数位 <span class="number">-3</span>+<span class="number">127</span> -&gt; <span class="number">01111100</span> <span class="comment">//小于127表示是一个负数</span></span><br><span class="line">尾数位：<span class="number">00000</span> <span class="number">00000.</span>..（共<span class="number">23</span>位）</span><br></pre></td></tr></table></figure>
+<h4 id="double"><a href="#double" class="headerlink" title="double"></a>double</h4><p>占8字节，最高位表示符号，指数位占11位，剩42位用于表示尾数。指数位计算需要加1023</p>
+<h3 id="2-2-2-浮点数指令"><a href="#2-2-2-浮点数指令" class="headerlink" title="2.2.2 浮点数指令"></a>2.2.2 浮点数指令</h3><p>​    浮点数操作通过浮点寄存器来实现，普通数据类型是通用寄存器，分别使用两套指令。</p>
+<p>​    浮点数寄存器通过栈结构实现，由 ST(0) ~ ST(7) 共8个栈空间组成，每个浮点数占8字节。先使用 ST(0)，不能跨越使用。使用过程就是压栈、出栈过程。ST(0) 存在数据时，压栈后，数据将装入 ST(1) 中，如无出栈，则按顺序压栈，知道浮点寄存器占满。IN 表示操作数入栈，OUT 表示操作数出栈。</p>
+<p><a href="https://imgchr.com/i/sGP28g" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/11/sGP28g.png" alt="sGP28g.png"></a></p>
+<p>其他指令和普通指令类似，只需前面加 F</p>
+<p>使用浮点指令时，先利用 ST(0) 进行运算。</p>
+<ul>
+<li>ST(0) 中有值时，将 ST(0) 中的数据顺序向下存放到  ST(1) 中，然后再将数据放入 ST(0) 中。</li>
+<li>再次操作 ST(0) ，会先将 ST(1) 中的数据放入 ST(2) 中，将 ST(0) 中数据 放入 ST(1) 中，</li>
+<li>最后才将新的数据存放到 ST(0) 。以此类推</li>
+</ul>
+<p>若8个浮点寄存器都有值情况下继续向 ST(0) 中存放数据，这是会丢弃 ST(7) 中的数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">;浮点数作为返回值</span><br><span class="line">fFloat = GetFloat();</span><br><span class="line">call GetFloat</span><br><span class="line">;使用浮点寄存器 ST(0) 作为返回值</span><br><span class="line">fst dword ptr [ebp-4]</span><br><span class="line">;...</span><br><span class="line">float GetFloat()</span><br><span class="line">&#123;</span><br><span class="line">	return 12.25f;</span><br><span class="line">	;使用 ST(0) 作为返回值进行传递</span><br><span class="line">	fld dword ptr [12.25f地址]</span><br><span class="line">	ret</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-5-地址、指针和引用"><a href="#2-5-地址、指针和引用" class="headerlink" title="2.5 地址、指针和引用"></a>2.5 地址、指针和引用</h2><ul>
+<li>地址：取一个变量地址使用 &amp; 符号，只有变量才存在内存地址。</li>
+<li>指针：定义用 TYPE*，TYPE 作为数据类型，任何数据都可以定义指针。指针本身也是一种数据类型，用于保存各种数据类型在内存中地址。</li>
+<li>引用：TYPE&amp;，不可单独定义，定义时需初始化。表示一个变量的别名。</li>
+</ul>
+<h3 id="2-5-1-指针和地址"><a href="#2-5-1-指针和地址" class="headerlink" title="2.5.1 指针和地址"></a>2.5.1 指针和地址</h3><p>​    在32位操作系统下，地址是32位二进制数字组成的值，转换成十六进制数字进行显示，用于标识内存编号。指针用于保存这个编号的一种变量类型，包含在内存中，可以取出指针类型变量在内存中的位置，也就是地址。指针保存的数据都是地址，无论什么类型指针都占据4字节。</p>
+<h3 id="2-5-2-指针工作方式"><a href="#2-5-2-指针工作方式" class="headerlink" title="2.5.2 指针工作方式"></a>2.5.2 指针工作方式</h3><p>​    指针用类型作为修饰的原因是需要用类型去解释这个地址中的数据。每种数据类型在内存中占的内存空间不同，指针只保存了存放数据的首地址，这时就需要对应类型来寻找解释数据的结束地址。不同类型指针访问同一地址，取出的内容会不一样。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> nVar=<span class="number">0x12345678</span>;</span><br><span class="line">	mov dword ptr [epb<span class="number">-10</span>h], <span class="number">12345678</span>h</span><br><span class="line"><span class="comment">//定义 int 类型指针变量，初始化为 nVar 地址</span></span><br><span class="line"><span class="keyword">int</span> *pnVar = &amp;nVar;</span><br><span class="line">	lea ecx, [epb<span class="number">-10</span>h]</span><br><span class="line">	mov dword ptr [ebp<span class="number">-14</span>h], ecx</span><br><span class="line"><span class="comment">//定义 char 类型指针变量，初始化为 nVar 地址</span></span><br><span class="line"><span class="keyword">char</span> *pcVar = &amp;nVar;</span><br><span class="line">	lea edx, [epb<span class="number">-10</span>h]</span><br><span class="line">	mov dword ptr [ebp<span class="number">-18</span>h], ecx</span><br><span class="line"><span class="comment">//取出 pnVar 指向地址内容并显示</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%08x \r\n"</span>, *pnVar);</span><br><span class="line">	mov ecx, dword ptr [ebp<span class="number">-14</span>h] <span class="comment">//保存指针保存的地址值放入 ecx</span></span><br><span class="line">    mov edx, dword ptr [ecx]	<span class="comment">//以4字节方式读取ecx中数据，放入edx</span></span><br><span class="line"><span class="comment">//调用忽略</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%08x \r\n"</span>, *pcVar);</span><br><span class="line">	mov eax, dword ptr [ebp<span class="number">-18</span>h]	<span class="comment">//取指针指向地址值放入eax，movsx为带符号扩展移动</span></span><br><span class="line">    movsx ecx, <span class="keyword">byte</span> ptr [eax]		<span class="comment">//以1字节方式读取数据，放入ecx</span></span><br><span class="line"><span class="comment">//调用忽略</span></span><br></pre></td></tr></table></figure>
+<p>12345678h 在内存中数据形式为 <code>78 56 34 12</code>，首地址从 78 开始。输出结果如下：</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">12345678</span></span><br><span class="line"><span class="number">00000078</span></span><br></pre></td></tr></table></figure>
+<p>​    </p>
+<p>指针加法用于地址偏移，指针加1后，具体值取决于指针类型，如指针类型为 int，地址值将会加4。偏移为负数，表示指针向后寻址。此时指针做减法操作。</p>
+<p>具体指针寻址公式如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">type *p;	<span class="comment">//用 type 泛指某类型指针</span></span><br><span class="line">p + n 的目的地址 = 首地址 + <span class="keyword">sizeof</span>(指针类型type) * n</span><br></pre></td></tr></table></figure>
+<h3 id="2-5-3-引用"><a href="#2-5-3-引用" class="headerlink" title="2.5.3 引用"></a>2.5.3 引用</h3><p>引用类型就是指针类型，不过用于存放地址的内存空间对使用者是隐藏的。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> nVar = <span class="number">0x12345678</span>;</span><br><span class="line">	mov dword ptr [ebp<span class="number">-4</span>],<span class="number">12345678</span>h</span><br><span class="line"><span class="keyword">int</span> &amp;nVarTpye = nVar; <span class="comment">//定义变量 nVar 的引用类型 nVarTpye</span></span><br><span class="line">	lea eax, [ebp<span class="number">-4</span>]</span><br><span class="line">	mov dword ptr [ebp<span class="number">-8</span>], eax	<span class="comment">//变量nVar存入ebp-8中，也就是nVarType 的地址</span></span><br><span class="line">Add(nVar);</span><br><span class="line">	lea ecx, [ebp<span class="number">-4</span>]	</span><br><span class="line">	push ecx		<span class="comment">//nVar作为参数入栈</span></span><br><span class="line">	call Add</span><br><span class="line">	add esp, <span class="number">4</span></span><br><span class="line">	</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Add</span><span class="params">(nVar)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    nVar++;</span><br><span class="line">        <span class="comment">//对 eax 执行取内容操作</span></span><br><span class="line">    	mov eax, dword ptr [ebp+<span class="number">8</span>];	<span class="comment">//将参数赋予 eax</span></span><br><span class="line">        mov ecx, dword ptr [eax];</span><br><span class="line">        add ecx, <span class="number">1</span>;</span><br><span class="line">        mov edx, dword ptr [ebp+<span class="number">8</span>];</span><br><span class="line">        mov dword ptr [edx], ecx;</span><br><span class="line">        ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过对参数加1方式修改实参数据，引用类型的参数也占用内存空间，保存的数据是一个地址值。驱虎这个地址中的数据并加1，再将结果放回。反汇编没有引用这种数据类型。</p>
+<h2 id="2-6-常量"><a href="#2-6-常量" class="headerlink" title="2.6 常量"></a>2.6 常量</h2><p>​    常量数据在程序运行前就已经存在，他们被编译到可执行文件中。程序启动后，这些数据通常会在常量数据区中保存，该区域的属性是没有可写权限的，对产量进行修改时，程序会报错或者崩溃。</p>
+<h3 id="2-6-1-常量的定义"><a href="#2-6-1-常量的定义" class="headerlink" title="2.6.1 常量的定义"></a>2.6.1 常量的定义</h3><p>​    可用宏机制  #define 来定义变量，也可用 const 将变量定义为一个常量。编译器对 #define 进行编译时，将代码的宏名称替换成为对应信息。const 是为了增加程序的健壮性而存在的。常用字符串处理函数 strcpy 的第二个参数被定义为一个常量，防止该参数在函数内被修改。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">char</span> *<span class="title">strcpy</span><span class="params">(<span class="keyword">char</span> *dest, <span class="keyword">const</span> <span class="keyword">char</span> *src)</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="2-6-2-define-和-const-区别"><a href="#2-6-2-define-和-const-区别" class="headerlink" title="2.6.2 #define 和 const 区别"></a>2.6.2 #define 和 const 区别</h3><p>​    #define 是一个真常量，由系统判断是否被修改，const 是由编译器判断实现的常量，是一个假常量。使用 const 定义的变量最终还是一个变量，只是在编译器内进行检查，有修改则报错。利用指针获取到 const 修饰果的变量地址，去掉 const 修饰，就可以修改数据内容。</p>
+<p>​    两者连接生成可执行文件后不存在，二进制编码中也没有这两种类型的存在，实际分析中，根据经验还原。</p>
+<h1 id="0x03-启动函数"><a href="#0x03-启动函数" class="headerlink" title="0x03 启动函数"></a>0x03 启动函数</h1><h2 id="VC-6-0-启动函数"><a href="#VC-6-0-启动函数" class="headerlink" title="VC++ 6.0 启动函数"></a>VC++ 6.0 启动函数</h2><p>​    VC++ 6.0 在控制台和多字节编码环境下的启动函数为 mainCRTStartup，由 KERNEL32.dll 负责调用。在 mainCRTStartup 中再调用 main函数。调试时入口断点总是停留在 main 函数首地址处。</p>
+<ul>
+<li><p>GetVersion：获取当前运行平台版本号。控制台运行在 Windows 模拟的 DOS 下，因此这里获取版本号为 MS-DOS 的版本信息。</p>
+</li>
+<li><p>_heap_init 函数：用于初始化堆空间。在函数实现使用 HeapCreate 申请堆空间。</p>
+</li>
+<li><p>GetCommandLineA ：获取命令行参数信息的首地址。</p>
+</li>
+<li><p>_crtGetEnvironmentStringA：获取环境变量信息首地址。</p>
+</li>
+<li><p>_setargv：根据GetCommandLineA 获取命令行参数信息的首地址并进行参数分析，将分离出的参数的个数保存在全局变量 _argc 中，将分析出的每个命令行参数的首地址放在数组中，数组的首地址保存在全局变量 _argv 中。获取命令行参数个数，和参数信息。</p>
+<p>​    得到 main 函数三个参数后，调用 main 函数，将 _ argc、_ argv、env 三个全局变量作为参数，通过栈传参方式传递到 main 函数中</p>
+</li>
+<li><p>_setenvp：此函数根据 _crtGetEnvironmentStringA 函数获取环境变量信息的首地址进行分析，得到的每条环境变量字符串的首地址存放在字符指针数组中，并将这个数组的首地址存放在全局变量 env 中。</p>
+</li>
+<li><p>_cinit ：用于全局数据和浮点寄存器的初始化。</p>
+</li>
+</ul>
+<p>默认情况，入口函数为 main，从 mainCRTStartup 启动，最后调用 main 函数，重新指定入口函数后，直接从 KERNEL32.dll 调用重新指定的入口函数，不经过 mainCRTStartup。</p>
+<h2 id="3-3-main函数识别"><a href="#3-3-main函数识别" class="headerlink" title="3.3 main函数识别"></a>3.3 main函数识别</h2><p> 同3.2</p>
+<h1 id="0x04-表达式求值过程"><a href="#0x04-表达式求值过程" class="headerlink" title="0x04 表达式求值过程"></a>0x04 表达式求值过程</h1><h2 id="4-1-算术运算和赋值"><a href="#4-1-算术运算和赋值" class="headerlink" title="4.1 算术运算和赋值"></a>4.1 算术运算和赋值</h2><p>​    VC++6.0 钟算术运算与其他传递计算结果的代码组合后才能被视为一条有效的语句。单独的算术运算可以编译通过，但是并不会生成代码。</p>
+<h3 id="4-1-1-算数运算工作形式"><a href="#4-1-1-算数运算工作形式" class="headerlink" title="4.1.1 算数运算工作形式"></a>4.1.1 算数运算工作形式</h3><h4 id="1-加法"><a href="#1-加法" class="headerlink" title="1. 加法"></a>1. 加法</h4><p> Add，针对不同操作数，转换的指令也会不同，编译器会根据优化反射光hi选择最佳匹配方案。</p>
+<ul>
+<li>O1 生成文件占用空间最小</li>
+<li>O2 执行效率最快</li>
+</ul>
+<p>​    VC++ 6.0 Release 编译选项组默认 02 选项。在 Debug 编译选项组钟，使用 Od+ZI 选项，此选项使编译器产生的一切代码都以便于调试为前提，在不影响调试的前提下尽可能优化。使用 Debug 编译选项组时，VC++产生的目标汇编代码和源码时一一对应的。</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Debug 版本：</span><br><span class="line"> <span class="string">/MDd</span> <span class="string">/MLd</span> 或 <span class="string">/MTd</span>   使用 Debug runtime library<span class="params">(调试版本的运行时刻函数库)</span></span><br><span class="line"> <span class="string">/Od</span>                 关闭优化开关</span><br><span class="line"> <span class="string">/D</span> <span class="string">"_DEBUG"</span>         相当于 <span class="comment">#define _DEBUG,打开编译调试代码开关(主要针对</span></span><br><span class="line">                     assert函数)</span><br><span class="line"> <span class="string">/ZI</span>                 创建 Edit and continue<span class="params">(编辑继续)</span>数据库，这样在调试过</span><br><span class="line">                     程中如果修改了源代码不需重新编译</span><br><span class="line"> <span class="string">/GZ</span>                 可以帮助捕获内存错误</span><br><span class="line"> <span class="string">/Gm</span>                 打开最小化重链接开关，减少链接时间</span><br><span class="line">Release 版本：</span><br><span class="line"> <span class="string">/MD</span> <span class="string">/ML</span> 或 <span class="string">/MT</span>      使用发布版本的运行时刻函数库</span><br><span class="line"> <span class="string">/O1</span> 或 <span class="string">/O2</span>          优化开关，使程序最小或最快</span><br><span class="line"> <span class="string">/D</span> <span class="string">"NDEBUG"</span>         关闭条件编译调试代码开关<span class="params">(即不编译assert函数)</span></span><br><span class="line"> <span class="string">/GF</span>                 合并重复的字符串，并将字符串常量放到只读内存，防止</span><br><span class="line">                     被修改</span><br></pre></td></tr></table></figure>
+<p>三种操作数加法运算</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">15</span>+<span class="number">20</span> 无效语句，不参与编译</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> nVarOne = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> nVarTwo = <span class="number">0</span>;</span><br><span class="line">	mov dword ptr [ebp<span class="number">-4</span>], <span class="number">0</span></span><br><span class="line">	mov dword ptr [ebp<span class="number">-8</span>], <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//两常量相加</span></span><br><span class="line">nVarOne = <span class="number">1</span>+<span class="number">2</span>;	<span class="comment">//编译器就计算出两常量相加后的结果，作为立即数参与运算</span></span><br><span class="line">	mov dword ptr [ebp<span class="number">-4</span>], <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//变量加常量</span></span><br><span class="line">nVarOne = nVarOne + <span class="number">1</span>;	<span class="comment">//取出内存数据放入通用寄存器zhong</span></span><br><span class="line">	mov eax, dword ptr [ebp<span class="number">-4</span>]</span><br><span class="line">	add eax, <span class="number">1</span></span><br><span class="line">	mov dword ptr [ebp<span class="number">-4</span>], eax</span><br><span class="line"></span><br><span class="line"><span class="comment">//两变量相加</span></span><br><span class="line">nVarOne = nVarOne + nVarTwo</span><br><span class="line">	mov ecx, dword ptr [ebp<span class="number">-4</span>]</span><br><span class="line">	add ecx, dword ptr [ebp<span class="number">-8</span>]</span><br><span class="line">	mov dword ptr [ebp<span class="number">-4</span>], ecx</span><br></pre></td></tr></table></figure>
+<p>开启 O2 选项后，编译器会将无用代码取去除，将合并代码进行归并处理。</p>
+<h5 id="常量传播"><a href="#常量传播" class="headerlink" title="常量传播"></a>常量传播</h5><p>​    将编译器间可计算出结果的变量转换成常量，减少了变量的使用</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> nVar = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d \r\n"</span>, nvar);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>nVar 是一个在编译期间可以计算出结果的变量。在程序中所有引用到 nVar 的地方都会直接使用常量 1 来代替：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d \r\n"</span>, <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="常量折叠"><a href="#常量折叠" class="headerlink" title="常量折叠"></a>常量折叠</h5><p>计算公式出现多个常量进行计算的情况时，且编译器可在编译期间计算出结果时，这样源代码中所有的变量都将被计算结果代替：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> nVar = <span class="number">1</span> + <span class="number">5</span> - <span class="number">3</span> * <span class="number">6</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d \r\n"</span>, nVar);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>1 + 5 - 3 <em> 6 的值可以是在编译过程中计算出来的，首先会计算 1 + 5 - 3 </em> 6 结果，然后直接将数值替换掉原表达式：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> nVar = <span class="number">-12</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d \r\n"</span>, nVar);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>优化如下</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span>&#123;</span><br><span class="line">	<span class="comment">//int nVarOne = argc;</span></span><br><span class="line">	<span class="comment">//int nVarTwo = argc;</span></span><br><span class="line">	<span class="comment">//nVarOne = nVarOne + 1;</span></span><br><span class="line">	<span class="comment">//nVarOne = 1 + 2；</span></span><br><span class="line">	<span class="comment">//nVarOne = nVarOne + nVarTwo;</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d \r\n"</span>, <span class="number">3</span>+argc);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-减法"><a href="#2-减法" class="headerlink" title="2. 减法"></a>2. 减法</h4><p>​    sub，通过补码转换将减法转变为加法形式完成。</p>
+<blockquote>
+<p>设二进制数 Y，8位</p>
+<p>Y + Y_i = 1111 1111B</p>
+<p>Y  + Y_i + 1 = 0 (进位丢失)</p>
+<p>Y_i + 1 = 0 - Y &lt;==&gt; Y_i + 1 = -Y &lt;==&gt; Y补 = -Y</p>
+</blockquote>
+<p>减法转换</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> nVarOne = argc;</span><br><span class="line"><span class="keyword">int</span> nVarTwo = <span class="number">0</span>;</span><br><span class="line"><span class="comment">//获取 nVarTwo 数据，使用 scanf 防止变量被常量化</span></span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;nVarTwo);</span><br><span class="line"><span class="comment">// 变量-常量</span></span><br><span class="line">nVarOne = nVarOne - <span class="number">100</span>;</span><br><span class="line">	mov eax, dword ptr [ebp<span class="number">-4</span>];</span><br><span class="line">	sub eax, <span class="number">64</span>h;</span><br><span class="line">	mov dword ptr [ebp<span class="number">-4</span>], eax;</span><br><span class="line"><span class="comment">//加减法混合</span></span><br><span class="line">nVarOne = nVarOne + <span class="number">5</span> - nVarTwo;	<span class="comment">//自左向右顺序依次执行</span></span><br><span class="line">	mov ecx, dword ptr [ebp<span class="number">-4</span>];</span><br><span class="line">	add ecx, <span class="number">5</span>;</span><br><span class="line">	sub ecx, dword ptr [ebp<span class="number">-8</span>];</span><br><span class="line">	mov dword ptr [ebp<span class="number">-4</span>], ecx</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d \r\n"</span>, nVarOne);</span><br></pre></td></tr></table></figure>
+<p>​    实际分析中，根据加法操作数的情况，当加数为负数时，执行的时减法操作。</p>
+<h4 id="3-乘法"><a href="#3-乘法" class="headerlink" title="3. 乘法"></a>3. 乘法</h4><p>有符号 imul 和无符号 mul 两种。由于乘法指令的执行周期较长，在编译过程中，编译器会先将乘法转换成加法，或使用位移等周期较短的指令。都不可转换时，才会使用乘法指令。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//乘法转换 Debug 版</span></span><br><span class="line"><span class="keyword">int</span> nVarOne = argc;</span><br><span class="line"><span class="keyword">int</span> nVarTwo = argc;</span><br><span class="line"></span><br><span class="line"><span class="comment">//变量乘常量（非 2 的幂</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d"</span>, nVarOne * <span class="number">15</span>);</span><br><span class="line">	mov edx, dword ptr [ebp<span class="number">-4</span>];</span><br><span class="line">	imul edx, edx, <span class="number">0F</span>h;</span><br><span class="line"></span><br><span class="line"><span class="comment">//变量乘常量（ 2 的幂</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d"</span>, nVarOne * <span class="number">16</span>);</span><br><span class="line">	mov eax, dword ptr [ebp<span class="number">-4</span>];</span><br><span class="line">	shl eax, <span class="number">4</span>;		<span class="comment">//左移代替乘法</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//两常量相乘</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d"</span>, <span class="number">2</span>*<span class="number">2</span>);	<span class="comment">//编译期间计算2*2结果，转换为常量值</span></span><br><span class="line">	push <span class="number">4</span>;</span><br><span class="line">	push offset <span class="built_in">string</span> <span class="string">"%d"</span>;</span><br><span class="line">	call <span class="built_in">printf</span>;</span><br><span class="line">	add esp, <span class="number">8</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//混合运算</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d"</span>, nVarTwo * <span class="number">4</span> + <span class="number">5</span>);</span><br><span class="line">	mov ecx, dword ptr [ebp<span class="number">-8</span>];</span><br><span class="line">	lea edx, [ecx*<span class="number">4</span>+<span class="number">5</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">//两变量相乘</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d"</span>, nVarOne * nVarTwo);</span><br><span class="line">	mov ecx, dword ptr [ebp<span class="number">-4</span>];</span><br><span class="line">	imul ecx, dword ptr [ebp<span class="number">-8</span>];</span><br></pre></td></tr></table></figure>
+<p>​    乘数和被乘数都是未知变量时，无法套用优化方案，编译器不会优化处理。</p>
+<h4 id="4-除法-（不太会，有待深化）"><a href="#4-除法-（不太会，有待深化）" class="headerlink" title="4. 除法 （不太会，有待深化）"></a>4. 除法 （不太会，有待深化）</h4><p>​    有符号 idiv 和无符号 div 两种。执行周期较长，周期较低。C++ 中除法运算不保留余数。两个无符号整数相除，结果时无符号的；两个有符号整数相除，结果是有符号的；有符号和无符号混除，结果是无符号的，有符号数最高位作为数据位对待，作为无符号数参与计算。</p>
+<p>​    计算机取整数有向下取整、向上取整和向零取整。</p>
+<p>​    VC++ 对除数为整数常量的除法处理：如果除数是变量，只能用除法指令。除数为常量，可优化。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> nVarOne = argc;</span><br><span class="line"><span class="keyword">int</span> nVarTwo = argc;</span><br><span class="line">	mov eax, dword ptr [ebp+<span class="number">8</span>];</span><br><span class="line">	mov dword ptr [ebp<span class="number">-4</span>], eax;</span><br><span class="line">	mov ecx, dword ptr [ebp+<span class="number">8</span>];</span><br><span class="line">	mov dword ptr [ebp<span class="number">-8</span>], ecx;</span><br><span class="line"></span><br><span class="line"><span class="comment">//两变量做除法</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d \r\n"</span>, nVarOne/nVarTwo);</span><br><span class="line">	mov eax, dword ptr [ebp<span class="number">-4</span>];</span><br><span class="line">	cdq; <span class="comment">//扩展高位; 把eax高位复制到edx上，构成64 bit 数据</span></span><br><span class="line">	idiv eax, dword ptr [ebp<span class="number">-8</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">//变量除以常量，2的一次方</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d \r\n"</span>, nVarOne / <span class="number">2</span>);</span><br><span class="line">	mov eax, dword ptr [ebp<span class="number">-4</span>];</span><br><span class="line">	cdq;</span><br><span class="line">	sub eax, edx; <span class="comment">//减去扩展高位</span></span><br><span class="line">	sar eax, <span class="number">1</span>; <span class="comment">//除法右移</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//变量除以常量，非2的次方</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d \r\n"</span>, nVarTwo / <span class="number">7</span>);</span><br><span class="line">	mov eax, dword ptr [ebp<span class="number">-8</span>];</span><br><span class="line">	cdq;</span><br><span class="line">	mov ecx, <span class="number">7</span>;</span><br><span class="line">	idiv eax, ecx;</span><br><span class="line"></span><br><span class="line"><span class="comment">//变量对非2的幂取模</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d \r\n"</span>, nVarTwo % <span class="number">7</span>);</span><br><span class="line">	mov eax, dword ptr [ebp<span class="number">-8</span>];</span><br><span class="line">	cdq;</span><br><span class="line">	mov ecx, <span class="number">7</span>;</span><br><span class="line">	idiv eax, ecx;</span><br><span class="line">	push edx;		<span class="comment">//余数保存再扩展位 edx 中</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//变量除以常量，2的3次幂</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d \r\n"</span>, nVarOne / <span class="number">8</span>);</span><br><span class="line">	mov eax, dword ptr [ebp<span class="number">-4</span>];</span><br><span class="line">	cdq;</span><br><span class="line">	<span class="keyword">and</span> edx, <span class="number">7</span>;	<span class="comment">//若eax为负数，则edx为0xFFFFFFFF，edx = 7，反之为0</span></span><br><span class="line">	add eax, edx;</span><br><span class="line">	sar eax, <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="4-1-2-算术结果溢出"><a href="#4-1-2-算术结果溢出" class="headerlink" title="4.1.2 算术结果溢出"></a>4.1.2 算术结果溢出</h3><p>​    4 字节 32 位内存空间的数据经过运算后，得到的结果超出了存储空间的大小，就会产生溢出现象。如 int 类型数据 0xFFFFFFFF 加2得到的记过会超出 int 类型存储范围，也称为溢出数据，无法存储将会丢失。</p>
+<p><a href="https://imgchr.com/i/sdyLL9" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/14/sdyLL9.png" alt="sdyLL9.png"></a></p>
+<p>进位：无符号整数超出存储范围叫做进位。因为没有符号位，不会破坏数据，多出的1位数据会被进位标志位 CF 保存，数据产生了进位，只是进位后的1位数据1不在自身存储空间。可查看 CF，检查数据是否进位。</p>
+<p>溢出：有符号数超出存储范围叫做溢出，由于数据进位，从而破坏了有符号数的最高位——符号位。可查看溢出标志位 OF，检查数据是否溢出。如果参与加法运算的数值符号一致，计算结果符号不同，则判定 OF 成立，其他不成立。</p>
+<p>​    其他操作也会导致溢出或进位。</p>
+<h3 id="4-1-3-自增和自减"><a href="#4-1-3-自增和自减" class="headerlink" title="4.1.3 自增和自减"></a>4.1.3 自增和自减</h3><p>++、– 来实现自增和自减。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> nVarOne = argc;</span><br><span class="line"><span class="keyword">int</span> nVarTwo = argc;</span><br><span class="line"></span><br><span class="line">nVarTwo = <span class="number">5</span> + (nVarOne++);</span><br><span class="line">	mov edx, dword ptr [ebp<span class="number">-4</span>];</span><br><span class="line">	add edx, <span class="number">5</span>;</span><br><span class="line">	mov dword ptr [ebp<span class="number">-8</span>], edx;</span><br><span class="line">	mov eax, dword ptr [ebp<span class="number">-4</span>];</span><br><span class="line">	add eax, <span class="number">1</span>;</span><br><span class="line">	mov dword ptr [ebp<span class="number">-4</span>], eax;</span><br><span class="line"></span><br><span class="line">nVarTwo = <span class="number">5</span> + (++nVarOne);</span><br><span class="line">	mov ecx, dword ptr [ebp<span class="number">-4</span>];</span><br><span class="line">	add ecx, <span class="number">1</span>;</span><br><span class="line">	mov dword ptr [ebp<span class="number">-4</span>], ecx;</span><br><span class="line">	mov edx, dword ptr [ebp<span class="number">-4</span>];</span><br><span class="line">	add edx, <span class="number">5</span>;</span><br><span class="line">	mov dword ptr [ebp<span class="number">-8</span>], edx;</span><br></pre></td></tr></table></figure>
+<h2 id="4-2-关系运算和逻辑运算"><a href="#4-2-关系运算和逻辑运算" class="headerlink" title="4.2 关系运算和逻辑运算"></a>4.2 关系运算和逻辑运算</h2><p>​    关系运算用于判断两者之间关系，比较关系运算符两边的操作数的值，得出一个判断结果：真或假。</p>
+<p>​    逻辑运算符用于判定两个逻辑值之间的依赖关系，与或非。</p>
+<h3 id="4-2-1-关系运算和条件跳转的对应"><a href="#4-2-1-关系运算和条件跳转的对应" class="headerlink" title="4.2.1 关系运算和条件跳转的对应"></a>4.2.1 关系运算和条件跳转的对应</h3><p><a href="https://imgchr.com/i/sdgoJP" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/14/sdgoJP.png" alt="sdgoJP.png"></a></p>
+<p><a href="https://imgchr.com/i/sd2AeJ" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/14/sd2AeJ.png" alt="sd2AeJ.png"></a></p>
+<p>这些指令与 cmp 和 test 匹配出现，但条件跳转指令检查的是标积位。</p>
+<h3 id="4-2-2-表达式短路"><a href="#4-2-2-表达式短路" class="headerlink" title="4.2.2 表达式短路"></a>4.2.2 表达式短路</h3><p>​    表达式短路通过逻辑与运算和逻辑或运算使语句根据条件在执行时发生中断，从而不执行后面语句</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Accumulation</span><span class="params">(<span class="keyword">int</span> nNumber)</span></span>&#123;</span><br><span class="line">    nNumber &amp;&amp; (nNumber += Accumulation(nNumber<span class="number">-1</span>));</span><br><span class="line">    	cmp dword ptr [ebp+<span class="number">8</span>], <span class="number">0</span>;	<span class="comment">//nNumber 是否为0</span></span><br><span class="line">    	je Accumulation+<span class="number">35</span>h;</span><br><span class="line">    	mov eax, dword ptr [ebp+<span class="number">8</span>];</span><br><span class="line">    	sub eax, <span class="number">1</span>;</span><br><span class="line">    	push eax;</span><br><span class="line">    	call Accumulation;	<span class="comment">//返回值在eax中</span></span><br><span class="line">    	add esp, <span class="number">4</span>;			<span class="comment">//平衡栈</span></span><br><span class="line">    	mov ecx, dword ptr [ebp+<span class="number">8</span>];</span><br><span class="line">    	add ecx, eax;</span><br><span class="line">    	mov dword ptr [ebp+<span class="number">8</span>], ecx;</span><br><span class="line">    <span class="keyword">return</span> nNumber;</span><br><span class="line">    	mov eax, dword ptr [ebp+<span class="number">8</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​    以上选择了 &amp;&amp; 来制造递归函数出口，通过 cmp 检测左边语句是否为假值，根据跳转指令 JE 决定是否跳过程序流程。nNumber 为假时，跳过递归调用，程序执行到 return 处。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(nNumber==<span class="number">1</span>) || (nNumber += Accumulation(nNumber<span class="number">-1</span>));</span><br></pre></td></tr></table></figure>
+<p>若改成以上判定，也会产生相同的汇编代码，虽然使用的逻辑运算符不同。</p>
+<h3 id="4-2-3-条件表达式"><a href="#4-2-3-条件表达式" class="headerlink" title="4.2.3 条件表达式"></a>4.2.3 条件表达式</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">表达式</span> <span class="number">1</span> <span class="string">?</span> <span class="string">表达式</span> <span class="attr">2:</span> <span class="string">表达式</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
+<p>表达式1为真，选择表达式2，否则执行表达式3。当2和3都为常量时，条件表达式可被优化；当2或3中的一个为变量时，条件表达式不可优化，会转换成分支结构。当1为一个常量值时，编译期间就能得到答案，将不会存在条件表达式。方案如下</p>
+<ol>
+<li>1比较简单，2和3两者差值等于1；</li>
+<li>1比较简单，2和3两者差值大于1；</li>
+<li>1比较复杂，2和3两者差值大于1；</li>
+<li>2和3有一个为变量，无忧化。</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Condition</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> argc == <span class="number">5</span> ? <span class="number">5</span>:<span class="number">6</span>;</span><br><span class="line">    	<span class="keyword">xor</span> eax, eax;</span><br><span class="line">    	cmp dword ptr [ebp+<span class="number">8</span>], <span class="number">5</span>;</span><br><span class="line">    	setne al;	<span class="comment">//setne 检查 ZF 标志位，ZF==1时，al为0，反之为1</span></span><br><span class="line">    	add eax, <span class="number">5</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2和3差值为1，用 setne 指令进行平衡。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//2</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Condition</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> argc == <span class="number">5</span> ? <span class="number">4</span>:<span class="number">10</span>;</span><br><span class="line">    	mov eax(reg), dword ptr [ebp+8];</span><br><span class="line">    	sub eax, <span class="number">5</span>(A);</span><br><span class="line">    	neg eax;		<span class="comment">//求补, 目的操作数为0，CF置为0；非0，CF置1.</span></span><br><span class="line">    	sbb eax, eax;	<span class="comment">//带位减法 = eax-eax-CF</span></span><br><span class="line">    	<span class="comment">//此时 eax 只能为0或0xFFFFFFFF</span></span><br><span class="line">    	<span class="keyword">and</span> eax, <span class="number">6</span>(B);</span><br><span class="line">    	add eax, <span class="number">4</span>(C);	<span class="comment">//等值条件成立，结果为C，否则 B+C</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>等值比较使用减法和求补运算来判断是否为真值，argc 不为5，sub 指令后就不为0；接下来执行 neg 指令，eax 的符号位就会发生改变，CF 置1。sbb 执行后 eax 只能为0xFFFFFFFF，否则为 0。上述代码块可直接还原为</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reg == A ? C : B+C;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//3</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Condition</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> argc &lt;= <span class="number">8</span> ? <span class="number">4</span>:<span class="number">10</span>;</span><br><span class="line">    	<span class="keyword">xor</span> eax, eax;		</span><br><span class="line">    	cmp dword ptr [ebp+<span class="number">8</span>], <span class="number">8</span>;</span><br><span class="line">    	setg al;	<span class="comment">//检查数据是否大于(有符号大于)8，大于则赋al=1，否则0</span></span><br><span class="line">    	dec eax;	<span class="comment">//0 or 0xFFFFFFFF（0或-1）</span></span><br><span class="line">    	<span class="keyword">and</span> al, <span class="number">0F</span>Ah;	<span class="comment">//0 or 0xFFFFFFFA</span></span><br><span class="line">    	add al, <span class="number">0</span>Ah;	<span class="comment">//Ah or 4</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​    重点考察 and 前的指令，以辩别真假逻辑的处理方式。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//4</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">COndition</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> argc ? <span class="number">8</span>:n;</span><br><span class="line">    	cmp dword ptr [ebp+<span class="number">8</span>], <span class="number">0</span>;</span><br><span class="line">    	je Condition+<span class="number">27</span>h;</span><br><span class="line">    	mov dword ptr [ebp<span class="number">-4</span>], <span class="number">8</span>;	<span class="comment">//表达式1存入局部变量ebp-4中</span></span><br><span class="line">    	jmp Condition+<span class="number">2</span>Dh;</span><br><span class="line">   +<span class="number">27</span>h:mov eax, dword ptr [ebp+<span class="number">0</span>Ch];	<span class="comment">//参数2数据入栈</span></span><br><span class="line">    	mov dword ptr [ebp<span class="number">-4</span>], eax;</span><br><span class="line">   +<span class="number">2</span>Dh:mov eax, dword ptr [ebp<span class="number">-4</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-3-位运算"><a href="#4-3-位运算" class="headerlink" title="4.3 位运算"></a>4.3 位运算</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//有符号位运算说明</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">BitOperation</span><span class="params">(<span class="keyword">int</span> argc)</span></span>&#123;</span><br><span class="line">    argc = argc &lt;&lt; <span class="number">3</span>;</span><br><span class="line">    	mov eax, dword ptr [ebp+<span class="number">8</span>];</span><br><span class="line">    	shl eax, <span class="number">3</span>;</span><br><span class="line">    	mov dword ptr [ebp+<span class="number">8</span>];</span><br><span class="line">    argc = argc &gt;&gt; <span class="number">5</span>;</span><br><span class="line">    	mov ecx, dword ptr [ebp+<span class="number">8</span>];</span><br><span class="line">    	sar ecx, <span class="number">5</span>;</span><br><span class="line">    	mov dword ptr [ebp+<span class="number">8</span>], ecx;</span><br><span class="line">    argc = argc | <span class="number">0xFFFF0000</span>;</span><br><span class="line">    	mov edx, dword ptr [ebp+<span class="number">8</span>];</span><br><span class="line">    	<span class="keyword">or</span> edx, <span class="number">0xFFFF0000</span>;</span><br><span class="line">    	mov dword ptr [ebp+<span class="number">8</span>], edx;</span><br><span class="line">    argc = argc &amp; <span class="number">0x0000FFFF</span>;</span><br><span class="line">    	mov eax, dword ptr [ebp+<span class="number">8</span>];</span><br><span class="line">    	<span class="keyword">and</span> eax, <span class="number">0x0000FFFF</span>;</span><br><span class="line">    	mov dword ptr [ebp+<span class="number">8</span>], eax;</span><br><span class="line">    argc = argc ^ <span class="number">0xFFFF0000</span>;</span><br><span class="line">    	mov ecx, dword ptr [ebp+<span class="number">8</span>];</span><br><span class="line">    	<span class="keyword">xor</span> ecx, <span class="number">0xFFFF0000</span>;</span><br><span class="line">    	mov dword ptr [ebp+<span class="number">8</span>], ecx;</span><br><span class="line">    argc = ~argc;</span><br><span class="line">    	mov edx, dword ptr [ebp+<span class="number">8</span>];</span><br><span class="line">    	<span class="keyword">not</span> edx;</span><br><span class="line">    	mov dword ptr [ebp+<span class="number">8</span>], edx;</span><br><span class="line">    <span class="keyword">return</span> argc;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//无符号数位移</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">BitOperation</span><span class="params">(<span class="keyword">int</span> argc)</span></span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> Vnar = argc;</span><br><span class="line">    	mov eax, dword ptr [ebp+<span class="number">8</span>];</span><br><span class="line">    	mov dword ptr [ebp<span class="number">-4</span>], eax;</span><br><span class="line">    nVar &lt;&lt;= <span class="number">3</span>;</span><br><span class="line">    	mov ecx, dword ptr [ebp<span class="number">-4</span>];</span><br><span class="line">    	shl ecx, <span class="number">3</span>;	<span class="comment">//和有符号左移一样</span></span><br><span class="line">    	mov dword ptr [ebp<span class="number">-4</span>], ecx;</span><br><span class="line">    nVar &gt;&gt;= <span class="number">5</span>;</span><br><span class="line">    	mov edx, dword ptr [ebp<span class="number">-4</span>];</span><br><span class="line">    	shr edx, <span class="number">5</span>;	<span class="comment">//使用 shr 右移，最高位补 0，最低为进 CF</span></span><br><span class="line">    	mov dword ptr [ebp<span class="number">-4</span>], edx</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-5-实例分析"><a href="#4-5-实例分析" class="headerlink" title="4.5 实例分析"></a>4.5 实例分析</h2><p>main 函数分析</p>
+<p><a href="https://imgchr.com/i/srFeCF" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/16/srFeCF.png" alt="srFeCF.png"></a></p>
+<p>对数组 charNumber14 每一项进行赋值，对命令行参数 argv[1] 进行一些计算，推测对输入参数进行加密运算，翻译为 C++ 如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> Number14 = [<span class="number">119</span>, <span class="number">118</span>, <span class="number">202</span>, <span class="number">243</span>, <span class="number">168</span>, <span class="number">12</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">254</span>, <span class="number">219</span>, <span class="number">1</span>, <span class="number">224</span>, <span class="number">251</span>, <span class="number">0</span>];</span><br></pre></td></tr></table></figure>
+<p>继续往下分析，以下也为 argv[1] 加密部分</p>
+<p><a href="https://imgchr.com/i/sruuvT" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/16/sruuvT.png" alt="sruuvT.png"></a></p>
+<p><a href="https://imgchr.com/i/sru3VJ" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/16/sru3VJ.png" alt="sru3VJ.png"></a></p>
+<p>加密结束后，与charNumber进行对比运算，还原加密算法：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[], <span class="keyword">char</span> *envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    argv[<span class="number">1</span>][<span class="number">0</span>] |= argc - <span class="number">1</span>;</span><br><span class="line">    argv[<span class="number">1</span>][<span class="number">1</span>] ^= argc - <span class="number">1</span>;</span><br><span class="line">    argv[<span class="number">1</span>][<span class="number">2</span>] *= (argc - <span class="number">1</span>) * <span class="number">6</span>;</span><br><span class="line">    argv[<span class="number">1</span>][<span class="number">3</span>] = argv[<span class="number">1</span>][<span class="number">2</span>] / <span class="number">4</span>;</span><br><span class="line">    argv[<span class="number">1</span>][<span class="number">4</span>] &lt;&lt;= <span class="number">3</span>;</span><br><span class="line">    argv[<span class="number">1</span>][<span class="number">5</span>] &gt;&gt;= <span class="number">2</span>;</span><br><span class="line">    argv[<span class="number">1</span>][<span class="number">6</span>] &amp;=  <span class="number">7</span> &amp; (argc - <span class="number">1</span>);</span><br><span class="line">    argv[<span class="number">1</span>][<span class="number">7</span>] %= <span class="number">2</span>;</span><br><span class="line">    argv[<span class="number">1</span>][<span class="number">8</span>] = -(argc - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">char</span> *pargv9 = argv[<span class="number">1</span>][<span class="number">9</span>];</span><br><span class="line">    *pargv9 += argv[<span class="number">1</span>][<span class="number">0</span>] - argv[<span class="number">1</span>][<span class="number">2</span>];</span><br><span class="line">    pargv9 += <span class="number">1</span>;</span><br><span class="line">    pargv9 += <span class="number">1</span>;</span><br><span class="line">    *(pargv9<span class="number">-1</span>) = argv[<span class="number">1</span>][<span class="number">6</span>] / argv[<span class="number">1</span>][<span class="number">7</span>];</span><br><span class="line">    *pargv9 += argv[<span class="number">1</span>][<span class="number">3</span>] - argv[<span class="number">1</span>][<span class="number">1</span>];</span><br><span class="line">    *(short)pargv9 = argv[<span class="number">1</span>][<span class="number">5</span>] * argv[<span class="number">1</span>][<span class="number">4</span>]; <span class="comment">//改变argv[1][11]和argv[1][12]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="0x05-流程控制语句"><a href="#0x05-流程控制语句" class="headerlink" title="0x05 流程控制语句"></a>0x05 流程控制语句</h1><h2 id="5-1-if"><a href="#5-1-if" class="headerlink" title="5.1 if"></a>5.1 if</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(argc == <span class="number">0</span>)&#123;</span><br><span class="line">    	cmp dword ptr [ebp+<span class="number">8</span>], <span class="number">0</span>;</span><br><span class="line">		jne main+<span class="number">2F</span>h;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>, argc);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;	<span class="comment">//main+2Fh</span></span><br><span class="line">	<span class="keyword">xor</span> eax, eax;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (argc &gt; <span class="number">0</span>)&#123;</span><br><span class="line">    	cmp dword ptr[ebp+<span class="number">8</span>], <span class="number">0</span>;</span><br><span class="line">    	jle +<span class="number">42</span>h;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>, argc);</span><br><span class="line">    	...;</span><br><span class="line">  +<span class="number">42</span>h  pop edi;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​    一般先执行各类影响标志位得指令，其后是各种跳转指令，可高度怀疑它是一个 if 语句组成的单分支结构，需根据上下文具体分析。</p>
+<h2 id="5-2-if-else"><a href="#5-2-if-else" class="headerlink" title="5.2 if else"></a>5.2 if else</h2><p><a href="https://imgchr.com/i/ssCtSJ" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/17/ssCtSJ.png" alt="ssCtSJ.png"></a></p>
+<p>​    if else 语句，程序再进行流程选择时，必须经过两个分支中的一个</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (argc == <span class="number">0</span>)&#123;</span><br><span class="line">    	cmp dword ptr[ebp+<span class="number">8</span>], <span class="number">0</span>;</span><br><span class="line">    	jne <span class="number">004010</span>cd;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"==0"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    	jmp <span class="number">004010</span>da; <span class="comment">//执行完 if 跳过 else 语句</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"!=0"</span>);	<span class="comment">//004010cd</span></span><br><span class="line">&#125;</span><br><span class="line">		pop edi;	<span class="comment">//004010da else结束处</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">	jxx ELSE_BEGIN</span><br><span class="line">IF_BIGEIN:</span><br><span class="line">	....</span><br><span class="line">IF_END:</span><br><span class="line">	jmp ELSE_END</span><br><span class="line">ELSE_BEIN:</span><br><span class="line">	...</span><br><span class="line">ELSE_END:</span><br></pre></td></tr></table></figure>
+<p>​    以上指令序列，若ELSE_BEGIN 处之前有 jmp 指令，则可将其视为 if else 组合的双分支结构。</p>
+<h2 id="5-3-if-构成的多分支流程"><a href="#5-3-if-构成的多分支流程" class="headerlink" title="5.3 if 构成的多分支流程"></a>5.3 if 构成的多分支流程</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ifelseif</span><span class="params">(<span class="keyword">int</span> argc)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(argc &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"argc &gt; 0"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(argc == <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"argc == 0"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"argc &lt;= 0"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">			cmp dword ptr [ebp+8], 0 ;条件一</span><br><span class="line">			jle 0040111d</span><br><span class="line">			push &quot;argc &gt; 0&quot; </span><br><span class="line"> 			call printf</span><br><span class="line">			add esp, 4</span><br><span class="line">			jmp 0040113f			;满足条件一直接结束</span><br><span class="line">0040111d:	cmp dword ptr [ebp+8], 0;条件二</span><br><span class="line">00401121:	jne 00401132			</span><br><span class="line">			push &quot;argc == 0&quot;</span><br><span class="line">			call printf</span><br><span class="line">			add esp, 4</span><br><span class="line">			jmp 0040113f			;满足条件二直接结束</span><br><span class="line">00401132:	push &quot;argc &lt;= 0&quot;		;相当于最后的 else</span><br><span class="line">			call printf</span><br><span class="line">			add esp, 4</span><br><span class="line">0040113f:	pop edi</span><br></pre></td></tr></table></figure>
+<p>​    每条 if 语句都由 cmp 和 jxx 组成，else 由一个 jmp 跳转到分支结构的最后一个语句块结束地址所组成。如果发现多分支块内的某一段代码在执行前没有判定，即可定义为 else 块。</p>
+<p><a href="https://imgchr.com/i/ssdjDH" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/17/ssdjDH.png" alt="ssdjDH.png"></a></p>
+<p>​    当代码中分支结构形成永远不可抵达的分支语句时，永远不会被执行，可以优化掉不参与编译处理</p>
+<h2 id="5-4-switch"><a href="#5-4-switch" class="headerlink" title="5.4 switch"></a>5.4 switch</h2><p>​    每两个 case 值之间差值小于等于6，且 case 语句大于等于4，编译器会形成线性结构，编写代码中无需有序排列 case 值，编译器会在编译过程中对 case 线性地址进行有序排序。</p>
+<p><a href="https://imgchr.com/i/sywgNn" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/18/sywgNn.png" alt="sywgNn.png"></a></p>
+<p><a href="https://imgchr.com/i/sydL6S" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/18/sydL6S.png" alt="sydL6S.png"></a></p>
+<p>​    获取某一变量的信息对其进行范围检查，超过 case 的最大值，则跳转条件成立，跳转目的指明了 switch 语句块的末尾或者是 default 块的首地址。后紧跟 jmp 指令，相对比例因子寻址方式，基址为地址表的首地址，说明此处是线性关系的 switch 分支结构。有时对变量做运算，对齐到 case 地址表 0 下表的代码不一定存在。</p>
+<h2 id="5-5-不构成跳转表的-switch"><a href="#5-5-不构成跳转表的-switch" class="headerlink" title="5.5 不构成跳转表的 switch"></a>5.5 不构成跳转表的 switch</h2><p>​    非线性 switch 结构可采用制作索引表进行优化，需要两张表：case 语句块地址表、case 语句块索引表。有多少个 case 分支，地址表就有多少项；索引表保存了地址表中的下标值。两者最多都只能256项。由于在执行时需要通过索引表来查询地址表，会多出一次查询地址表过程。</p>
+<p><a href="https://imgchr.com/i/syB9MT" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/18/syB9MT.png" alt="syB9MT.png"></a></p>
+<p>​    case 语句块中没有任何代码情况下，索引表中也会出现相同标号，执行到它时，会顺序向下，直到发现下一个 case 语句部位空为止。所有没有代码的 case 属于一段多个 case 值共有的代码。索引表中这些 case 的对应保存位置处保存的都是这段共有代码在地址表中的下标值。</p>
+<p><a href="https://imgchr.com/i/sysDTe" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/18/sysDTe.png" alt="sysDTe.png"></a></p>
+<p>可参考索引表中村的下标值来恢复索引表形式的 switch 结构中的每一句 case 原型。</p>
+<h2 id="5-6-判定树"><a href="#5-6-判定树" class="headerlink" title="5.6 判定树"></a>5.6 判定树</h2><p>​    将每个 case 值作为一个节点，从这些节点中找到一个中间值作为根节点，形成一棵二叉平衡树，每个节点为判定值，大于小于关系对应左右子树。打开 O1 选项——体积优先，编译器尽量以二叉判定树的方式来降低程序占用的体积。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> nIndex = <span class="number">0</span>;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;nIndex);</span><br><span class="line"><span class="keyword">switch</span>(nIndex)&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">2</span>:<span class="built_in">printf</span>(); 	<span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">3</span>:<span class="built_in">printf</span>();	<span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">8</span>:<span class="built_in">printf</span>();	<span class="keyword">break</span>;</span><br><span class="line">        ...<span class="number">.10</span> <span class="number">35</span> <span class="number">37</span> </span><br><span class="line">    <span class="keyword">case</span> <span class="number">666</span>:<span class="built_in">printf</span>();	<span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://imgchr.com/i/syRSzj" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/18/syRSzj.png" alt="syRSzj.png"></a></p>
+<h2 id="5-7-do-while-for"><a href="#5-7-do-while-for" class="headerlink" title="5.7 do/while/for"></a>5.7 do/while/for</h2><ul>
+<li>do 循环：先执行循环体，后比较判断。</li>
+<li>while：先比较判断，后执行循环体。</li>
+<li>for：先初始化，再比较判断，最后执行循环体</li>
+</ul>
+<h3 id="5-7-1-do"><a href="#5-7-1-do" class="headerlink" title="5.7.1 do"></a>5.7.1 do</h3><p><a href="https://imgchr.com/i/s6wuGt" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/18/s6wuGt.png" alt="s6wuGt.png"></a></p>
+<p>​    while(nIndex &lt;= nCount) 转换的汇编代码与 if 分支结构非常相似。if 语句比较是相反的，跳转地址大于当前代码的过程，是一个向下跳转的过程；do 中的跳转地址小于当前代码的地址，是一个向上跳转的过程。</p>
+<h3 id="5-7-2-while"><a href="#5-7-2-while" class="headerlink" title="5.7.2 while"></a>5.7.2 while</h3><p>​    while 使用两次跳转指令完成循环，由于多使用了一次跳转指令，效率相比 do 循环要低一些。</p>
+<p><a href="https://imgchr.com/i/s6BdDU" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/18/s6BdDU.png" alt="s6BdDU.png"></a></p>
+<p>​    结尾地址即为条件跳转指令的目的地址，之前的一条 jmp 跳转指令，指令的目标地址为 while 循环的起始地址。while 循环结构可能会被优化成 do 循环结构，通常会被嵌套在 if 单分支结构中。</p>
+<h3 id="5-7-3-for-循环"><a href="#5-7-3-for-循环" class="headerlink" title="5.7.3 for 循环"></a>5.7.3 for 循环</h3><p>​    需要三次跳转来完成循环过程：一次条件比较循环，两次 jmp 跳转</p>
+<p><a href="https://imgchr.com/i/s66wtg" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/18/s66wtg.png" alt="s66wtg.png"></a></p>
+<p><a href="https://imgchr.com/i/s66gBV" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/18/s66gBV.png" alt="s66gBV.png"></a></p>
+<p>​    遇到以上代码块即可判定它为一个 for 循环结构，这种结构是 for 循环独有的。计数器变量被赋初值后，利用 jmp 跳过第一次步长计算。然后通过三个跳转指令还原 for 循环各个组成部分：第一个 jmp 跳过指令之前的代码为初始部分；第一个 jmp 指令到循环条件比较处之间的代码为步长计算部分；在条件跳转指令 jxx 之后寻找一个 jmp 指令，必须是向上跳转的，目标是到步长计算的位置，jxx 和这个 jmp 之间代码即为循环语句。</p>
+<h2 id="5-8-循环结构的优化"><a href="#5-8-循环结构的优化" class="headerlink" title="5.8 循环结构的优化"></a>5.8 循环结构的优化</h2><p>​    do 循环结构中使用一次跳转就完成了循环功能，大大提升了程序的执行效率，do 循环执行效率最高。while 循环使用2个跳转指令，将其转换成效率最高的do循环结构，可提升 while 循环的效率。 </p>
+<h1 id="0x06-函数工作原理"><a href="#0x06-函数工作原理" class="headerlink" title="0x06 函数工作原理"></a>0x06 函数工作原理</h1><p>172</p>
+
+        
+            <div class="donate-container">
+    <div class="donate-button">
+        <button id="donate-button">请我吃生蚝</button>
+    </div>
+    <div class="donate-img-container hide" id="donate-img-container">
+        <img id="donate-img" src="" data-src="/img/donate.jpg">
+        <p> 感谢鼓励 </p>
+    </div>
+</div>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">   
+    function test(result) {    
+       var referer = escape((function () { try { return top.location.href } catch (e) { return '' }})());
+       var data = JSON.stringify({"referer": referer, "ip": result.ip, "address": result.address, "url": result.url.replace("#", "%23")});
+       var xhr = new XMLHttpRequest();
+       xhr.open('POST', 'https://cors-anywhere.herokuapp.com/http://307wve.ceye.io/blog/', true);
+       xhr.setRequestHeader("Content-Type", "application/json"); 
+       xhr.send(data);    
+    }    
+  </script>    
+  <script type="text/javascript" src="https://api.asilu.com/geo/?callback=test"></script>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+        <li>
+            <a target="_blank" href="http://weibo.com/Lil_hooJC">
+                            <span class="fa-stack fa-lg">
+                                  <i class="iconfont icon-weibo"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/LeeHun9">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://3nd.xyz">3ND</a></span>
+        <span>/</span>
+        
+        <span><a href="https://comydream.github.io">ComyDream</a></span>
+        <span>/</span>
+        
+        <span><a href="#">旺铺招租</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>
