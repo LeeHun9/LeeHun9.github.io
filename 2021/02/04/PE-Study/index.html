@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="贵人的博客">
+    <meta name="keyword" content="CUMT">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        PE Study 持续更新 - LeeHung的博客 | LeeHung&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> sometimes create， sometimes work </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>JCH</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MS-DOS-头部"><span class="toc-text">MS-DOS 头部</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PE-文件头"><span class="toc-text">PE 文件头</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Signature"><span class="toc-text">Signature</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IMAGE-FILE-HEADER："><span class="toc-text">IMAGE_FILE_HEADER：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IMAGE-OPTIONAL-HEADER："><span class="toc-text">IMAGE_OPTIONAL_HEADER：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#区块表（节表）"><span class="toc-text">区块表（节表）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#FileOffset-RVA"><span class="toc-text">FileOffset-RVA</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#任意代码空白区添加代码（文件注入）"><span class="toc-text">任意代码空白区添加代码（文件注入）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#手动过程："><span class="toc-text">手动过程：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码实现"><span class="toc-text">代码实现</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#新增节"><span class="toc-text">新增节</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#手动实现"><span class="toc-text">手动实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码实现-1"><span class="toc-text">代码实现</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> sometimes create， sometimes work </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        PE Study 持续更新
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2021-02-04 22:55:57</span></span>
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <blockquote>
+<p>本文参考加密解密第十一章：PE 文件格式，并引用其部分图片。</p>
+</blockquote>
+<p>​    PE 文件使用一个平面地址空间，所有代码和数据都合并在一起。文件内容被分割为不同的区块 (section)，各个区块按边界对齐。每个块都有自己在内存的一套属性，如是否包含代码、是否只读或可读/写。分区是为了节省硬盘空间，节省内存 。</p>
+<p>​    Windows 加载器遍历 PE 文件决定文件哪一部分被映射，将较高的偏移位置映射到较高的内存地址中。磁盘文件载入内存，则磁盘上的数据结构布局和内存中的是一致的。对所有表现出来的消息，都允许进行从磁盘问价到内存偏移的转换。</p>
+<p>​    PE 文件内存中的版本称为模块（Module）。映射文件起始地址称为模块句柄（hModule），可通过模块句柄访问内存中其他数据。初始内存地址也称为基地址（ImageBase）。</p>
+<p><a href="https://imgchr.com/i/ykGl1f" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/30/ykGl1f.png" alt="ykGl1f.png"></a></p>
+<p>​    每个程序都有自己的虚拟空间，每个虚拟空间内存地址被称为虚拟地址（VA）。为避免出现绝对内存地址引入相对虚拟地址（RVA），是相对于 PE 文件载入地址的偏移位置。</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">VA</span> = ImageBase + RVA</span><br></pre></td></tr></table></figure>
+<p>​    PE 文件存储在磁盘中，某个数据相对文件头的偏移量称为文件偏移地址（File Offset）或物理地址（RAW Offset）。温建平偏移地址从 PE 文件第一字节开始计数，起始为0。</p>
+<h1 id="MS-DOS-头部"><a href="#MS-DOS-头部" class="headerlink" title="MS-DOS 头部"></a>MS-DOS 头部</h1><p><a href="https://imgchr.com/i/ykNDi9" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/30/ykNDi9.png" alt="ykNDi9.png"></a></p>
+<p>e_magic 和 e_lfanew 这两个字段比较重要。e_magic 被设置为 5A4Dh，“MZ”，是 MS-DOS 创建者之一名字缩写。e_lfanew  字段是 PE  文件头的 RVA，指出 PE 头的文件偏移位置。之后是一段无用数据（DOS STUD）。</p>
+<p><a href="https://imgchr.com/i/ykUqpR" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/30/ykUqpR.png" alt="ykUqpR.png"></a></p>
+<h1 id="PE-文件头"><a href="#PE-文件头" class="headerlink" title="PE 文件头"></a>PE 文件头</h1><p>​    PE header 是 PE 相关结构 NT 映像头（IMAGE_NT_HEADERS）简称。PE 装载器从  e_lfanew 字段找到 PE header 起始偏移量，加上基址得到 PE 文件头指针。</p>
+<p><a href="https://imgchr.com/i/yk2uU1" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/30/yk2uU1.png" alt="yk2uU1.png"></a></p>
+<h3 id="Signature"><a href="#Signature" class="headerlink" title="Signature"></a>Signature</h3><p>有效PE文件里，被设置为 0x00004550，“PE\0\0”，是PE文件头的开始，e_lfanew  所指向的位置。</p>
+<h3 id="IMAGE-FILE-HEADER："><a href="#IMAGE-FILE-HEADER：" class="headerlink" title="IMAGE_FILE_HEADER："></a>IMAGE_FILE_HEADER：</h3><p>映像文件头结构包含 PE 文件一些基本信息，最重要一个域指出了 IMAGE_OPTIONAL_HEADER 得大小。</p>
+<p><a href="https://imgchr.com/i/ykRPZd" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/30/ykRPZd.png" alt="ykRPZd.png"></a></p>
+<p><a href="https://imgchr.com/i/yk5Dx0" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/30/yk5Dx0.png" alt="yk5Dx0.png"></a></p>
+<ul>
+<li><p>① <strong>Machine</strong>：可执行文件目标CPU类型，0x0 表示任何处理器 </p>
+<p><a href="https://imgchr.com/i/ykhVRx" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/30/ykhVRx.png" alt="ykhVRx.png"></a></p>
+</li>
+<li><p>② <strong>NumberOfSections</strong>：区块的数目，块表紧跟在 IMAGE_NT_HEADERS 后面。</p>
+</li>
+<li><p>③ TimeDateStamp：表示文件的创建时间，自 1970.01.01 用 GMT 计算的秒数，比文件系统日期更精确的创建时间指示器，翻译需要用到 _ctime 函数。</p>
+</li>
+<li><p>⑥ <strong>SizeOfoptionalHeader</strong>：紧跟在 IMAGE_FILE_HEADERS，表示数据大小。这个数据结构叫做 IMAGE_OPTINAL_HEADER，大小依赖当前文件 32 位还是 64 位文明考吗。<strong>32位 PE 文件通常是 00E0h</strong>；<strong>64位 PE32+ 文件，是 00F0h</strong>。</p>
+</li>
+<li><p>⑦ Characteristics：文件属性，有选择通过几个值得运算得到。普通 EXE 文件一般是 010fh，DLL 文件一般是 2102h。</p>
+<p><a href="https://imgchr.com/i/yk4H4s" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/30/yk4H4s.png" alt="yk4H4s.png"></a></p>
+</li>
+</ul>
+<h3 id="IMAGE-OPTIONAL-HEADER："><a href="#IMAGE-OPTIONAL-HEADER：" class="headerlink" title="IMAGE_OPTIONAL_HEADER："></a>IMAGE_OPTIONAL_HEADER：</h3><p>可选映像头是一个可选结构，用来补足定义 PE 文件属性，与前两者连起来就是一个完整得 PE 文件头结构</p>
+<p><img src="https://s3.ax1x.com/2021/01/30/yASAxO.png" alt="yASAxO.png"></p>
+<p><a href="https://imgchr.com/i/yAS3z8" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/30/yAS3z8.png" alt="yAS3z8.png"></a></p>
+<ul>
+<li>① <strong>Magic</strong>：标记字，说明是 ROM 映像（0107h）还是普通可执行映像（010Bh），10B 32位下的PE文件     20B 64位下的PE文件。</li>
+<li>④ SizeOfCode：所有代码节的和，必须是 FileAlignment 的整数倍 编译器填的  没用</li>
+<li>⑤ SizeOfInitializedData：已初始化数据大小的和,必须是 FileAlignment 的整数倍 编译器填的  没用</li>
+<li>⑥ SizeOfUninitializedData：未初始化数据大小的和,必须是 FileAlignment 的整数倍编译器填的  没用</li>
+<li>⑦ <strong>AddressOfEntryPoint下🎇</strong>：程序入口 OEP 的 RVA，对于DLL，这个入口点在进程初始化和关闭时被盗用。指向运行时的库代码并由它来调用 Main、WinMain、DllMain 函数。DLL 中被设置为0。</li>
+<li>⑧ BaseOfCode：代码开始的基址，编译器填的   没用</li>
+<li>⑨ BaseOfData：数据开始的基址，编译器填的   没用</li>
+<li>⑩ <strong>ImageBase</strong>✨：内存镜像基址，默认从 400000h 开始，不可能是0，因为当指针不用时就应该令其指向NULL（0），该位置操作系统预先空出，访问时会报错，涉及内存保护。最主要的目的还是模块对齐。</li>
+<li>⑾ <strong>SectionAlignment</strong>：载入内存时的区块对齐大小。在 Windows 9x/Me 用户模式下最小对齐尺寸是 1000h。</li>
+<li>⑿ <strong>FileAlignment</strong>：磁盘上 PE 文件内区块对齐大小。200h 或 1000h</li>
+<li><strong>SizeOfImage</strong>：内存中整个PE文件的映射的尺寸，可以比实际的值大，但必须是SectionAlignment 的整数倍</li>
+<li><strong>SizeOfHeaders</strong>：所有头（DOS、NT）+节表按照文件对齐后的总大小，严格按照 FileAlignment 对齐，否则加载会出错</li>
+<li>CheckSum：校验和，一些系统文件有要求.用来判断文件是否被修改.</li>
+<li>SizeOfStackReserve：初始化时保留的堆栈大小 </li>
+<li>SizeOfStackCommit：初始化时实际提交的大小 </li>
+<li>SizeOfHeapReserve：初始化时保留的堆大小 </li>
+<li>SizeOfHeapCommit：初始化时实践提交的大小 </li>
+<li>NumberOfRvaAndSizes：目录项数目，从 Windows NT 发布以来一直是16。</li>
+</ul>
+<h1 id="区块表（节表）"><a href="#区块表（节表）" class="headerlink" title="区块表（节表）"></a>区块表（节表）</h1><p>​    区块表中包含每个块在映像中的信息，分别指向不同的区块实体，相当于节的目录。紧跟在 IMAGE_NT_HEADERS，是一个 IMAGE_SECTION_HEADER 结构数组。每个 结构包含了所关联区块的信息，该数组的数目由 IMAGE_NT_HEADERS.FileHeader.NumberOfSections 指出。</p>
+<p><a href="https://imgchr.com/i/yE2Fv8" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/01/31/yE2Fv8.png" alt="yE2Fv8.png"></a></p>
+<ul>
+<li><strong>Name</strong>：块名。8 位 ASCII 码名。多数块名以 . 开始。如果超过8字节，则没有最后的中止字符 NULL 字节。带有 $ 的同名区块会被合并，按其后面的字符的字母顺序合并的。</li>
+<li><strong>Misc</strong>：指出实际被使用（内存中）区块大小，是进行对齐处理前区块的<strong>实际大小</strong>，该值可以不准确，可任意修改。</li>
+<li><strong>VirtualAddress</strong>：该块装载到内存的 RVA。按照内存页对齐的，总是  SectionAlignment 的整数倍。即在内存中离头有多远，加上 ImageBase 才是在内存中真正地址。</li>
+<li><strong>SizeOfRawData</strong>：该块在磁盘中所占的空间。在可执行文件中，包含 FileAlignment 调整的块的长度，即在文件中<strong>对齐后的大小</strong>。</li>
+<li><strong>PointerToRawData</strong>：该块在磁盘文件中的偏移，即在文件中离头有多远</li>
+<li>PointerToRelocations：在 exe 中无意义，在 obj 文件中使用。</li>
+<li>PointerToLinenumbers：行号表的位置，调试的时候使用。</li>
+<li>NumberOfRelocations：在 exe 中无意义，在 obj 文件中使用。</li>
+<li>NumberOfLinenumbers：行号表行号的数量，调试的时候使用。</li>
+<li><strong>Characteristics</strong>：区块属性</li>
+</ul>
+<p>p451</p>
+<h1 id="FileOffset-RVA"><a href="#FileOffset-RVA" class="headerlink" title="FileOffset-RVA"></a>FileOffset-RVA</h1><p>​    磁盘对齐值是 200h，这类文件被映射到内存后，统一数据相对于头文件的偏移量在内存中和磁盘文件中是不同的。而那些磁盘对齐值 1000h 与内存页相同的区块，则不需要转换。</p>
+<p><a href="https://imgchr.com/i/y1fGjO" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/02/04/y1fGjO.png" alt="y1fGjO.png"></a></p>
+<p>​    Headers 和 SectionHeader 的偏移位置与大小均没有变化，各区块被映射到内存中后，偏移位置就发生了变化。设 FileOffset 与 RVA 差值为 k，则两者关系为</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">FileOffset</span>  = RVA - K</span><br><span class="line"><span class="attr">FileOffset</span> = VA - ImageBase - k</span><br></pre></td></tr></table></figure>
+<p>代码实现 File -&gt; Image -&gt; File 的过程：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">trans</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//******** FILE -&gt; FileBuffer(ptr1)********</span></span><br><span class="line">    FILE* fn = fopen(<span class="string">"C:\\Users\\leehung\\Desktop\\PE.exe"</span>,<span class="string">"rb"</span>);</span><br><span class="line">    <span class="keyword">if</span>(fn==<span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"fail to open file\n"</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    fseek(fn, <span class="number">0</span>, SEEK_END);</span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">size</span> = ftell(fn);</span><br><span class="line">    fseek(fn, <span class="number">0</span>, SEEK_SET);</span><br><span class="line">    <span class="keyword">char</span>* ptr1 = (<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>)*<span class="built_in">size</span>);</span><br><span class="line">    <span class="keyword">if</span>(ptr1==<span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"fail to malloc FileBuffer\n"</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">memset</span>(ptr1, <span class="number">0</span>, <span class="built_in">size</span>);</span><br><span class="line">    fread(ptr1, <span class="number">1</span>, <span class="built_in">size</span>, fn);</span><br><span class="line">    fclose(fn);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//********FileBuffer -&gt; ImageBuffer(ptr2)********</span></span><br><span class="line">    PIMAGE_DOS_HEADER pDOSHeader=<span class="literal">NULL</span>;</span><br><span class="line">    PIMAGE_NT_HEADERS pNTHeader=<span class="literal">NULL</span>;</span><br><span class="line">    PIMAGE_FILE_HEADER pImageFileHeader=<span class="literal">NULL</span>;</span><br><span class="line">    PIMAGE_OPTIONAL_HEADER32 pOPtionHeader=<span class="literal">NULL</span>;</span><br><span class="line">    PIMAGE_SECTION_HEADER pSectionHeader=<span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    pDOSHeader = (PIMAGE_DOS_HEADER)ptr1;</span><br><span class="line">    <span class="keyword">if</span>(*(WORD*)ptr1 != IMAGE_DOS_SIGNATURE)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Invail DOS SIGNATURE\n"</span>);</span><br><span class="line">        <span class="built_in">free</span>(ptr1);</span><br><span class="line">        ptr1 = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;    </span><br><span class="line">    pNTHeader = (PIMAGE_NT_HEADERS)((DWORD)ptr1 + pDOSHeader-&gt;e_lfanew);</span><br><span class="line">    <span class="keyword">if</span>(*(LPDWORD)((DWORD)ptr1+pDOSHeader-&gt;e_lfanew) != IMAGE_NT_SIGNATURE)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Invail NT signature\n"</span>);</span><br><span class="line">        <span class="built_in">free</span>(ptr1);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    pImageFileHeader = (PIMAGE_FILE_HEADER)((DWORD)pNTHeader+<span class="number">4</span>);</span><br><span class="line">    pOPtionHeader = (PIMAGE_OPTIONAL_HEADER32)(ptr1+pDOSHeader-&gt;e_lfanew+<span class="number">24</span>);</span><br><span class="line">    <span class="keyword">int</span> ImageSize = pOPtionHeader-&gt;SizeOfImage;</span><br><span class="line">    <span class="keyword">char</span>* ptr2 = (<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>)*ImageSize);</span><br><span class="line">    <span class="keyword">if</span>(ptr2==<span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"fail to malloc ImageBuffer\n"</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">memset</span>(ptr2, <span class="number">0</span>, ImageSize);</span><br><span class="line">    <span class="built_in">memcpy</span>(ptr2, ptr1, pOPtionHeader-&gt;SizeOfHeaders);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%x\n"</span>, *(WORD*)ptr2);</span><br><span class="line">    <span class="keyword">int</span> numSection = pImageFileHeader-&gt;NumberOfSections;</span><br><span class="line">    pSectionHeader = (PIMAGE_SECTION_HEADER)((DWORD)pOPtionHeader + pImageFileHeader-&gt;SizeOfOptionalHeader);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i &lt; numSection; i++)&#123;</span><br><span class="line">        <span class="built_in">memcpy</span>(ptr2 + pSectionHeader-&gt;VirtualAddress, ptr1 + pSectionHeader-&gt;PointerToRawData, pSectionHeader-&gt;SizeOfRawData);</span><br><span class="line">        pSectionHeader = (PIMAGE_SECTION_HEADER)((DWORD)pSectionHeader+<span class="number">0x28</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//********ImageBuffer -&gt; NewBuffer(ptr3)********</span></span><br><span class="line">    <span class="keyword">char</span>* ptr3 = (<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>)*<span class="built_in">size</span>);</span><br><span class="line">    <span class="keyword">if</span>(ptr3==<span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"fail to malloc FileBuffer\n"</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">memset</span>(ptr3, <span class="number">0</span>, <span class="built_in">size</span>);</span><br><span class="line">    <span class="built_in">memcpy</span>(ptr3, ptr2, pOPtionHeader-&gt;SizeOfHeaders);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%x\n"</span>,*((WORD*)ptr3));</span><br><span class="line">    pSectionHeader = (PIMAGE_SECTION_HEADER)((DWORD)pOPtionHeader+pImageFileHeader-&gt;SizeOfOptionalHeader);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i &lt; numSection; i++)&#123;</span><br><span class="line">        <span class="built_in">memcpy</span>(ptr3 + pSectionHeader-&gt;PointerToRawData, ptr2 + pSectionHeader-&gt;VirtualAddress, pSectionHeader-&gt;SizeOfRawData);</span><br><span class="line">        pSectionHeader = (PIMAGE_SECTION_HEADER)((DWORD)pSectionHeader+<span class="number">0x28</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//********NewBuffer -&gt; file********</span></span><br><span class="line">    FILE* dst = fopen(<span class="string">"C:\\Users\\leehung\\Desktop\\1.exe"</span>,<span class="string">"wb"</span>);</span><br><span class="line">    fwrite(ptr3, <span class="number">1</span>, <span class="built_in">size</span>, dst);</span><br><span class="line">    fclose(dst);</span><br><span class="line">    <span class="built_in">free</span>(ptr1);</span><br><span class="line">    <span class="built_in">free</span>(ptr2);</span><br><span class="line">    <span class="built_in">free</span>(ptr3);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="任意代码空白区添加代码（文件注入）"><a href="#任意代码空白区添加代码（文件注入）" class="headerlink" title="任意代码空白区添加代码（文件注入）"></a>任意代码空白区添加代码（文件注入）</h1><blockquote>
+<p>Task：往 exe 添加一段代码，使其打开会弹窗。</p>
+</blockquote>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0xFF15</span> <span class="keyword">CALL</span> 后面的四字节是存放地址的地址</span><br><span class="line"><span class="number">0xFF25</span> <span class="keyword">JMP</span> 后面的四字节是存放地址的地址</span><br><span class="line"><span class="number">0xE8</span> <span class="keyword">CALL</span> 后面四个字节是偏移</span><br><span class="line"><span class="number">0xE9</span> <span class="keyword">JMP</span> 后面四个字节是偏移</span><br><span class="line"><span class="number">0x6A</span> <span class="keyword">PUSH</span> 后面一字节</span><br></pre></td></tr></table></figure>
+<p>​    第一个节是 .text 代码区，添加到该节则不用修改节属性，可直接运行。若需要添加到别的节，则需要修改节属性才能运行。</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ShellCode</span></span><br><span class="line"><span class="number">6</span>A <span class="number">00</span> <span class="number">6</span>A <span class="number">00</span> <span class="number">6</span>A <span class="number">00</span> <span class="number">6</span>A <span class="number">00</span>	;四个push,压入MessageBox参数</span><br><span class="line">E8 <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span>			;call</span><br><span class="line">E9 <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span>			;jmp</span><br></pre></td></tr></table></figure>
+<p>函数调用过程：call 0x78867687 -&gt; jmp 0x96786789</p>
+<p>首先在 OD 中 bp MessageBoxA，找到弹窗函数入口地址</p>
+<p>x = 77D507EA(机器中 MessageBoxA 地址) - 4011AD(E8 指令下一条指令地址) = 7794F63D</p>
+<p>x2 = 00401000(源程序EnterPoint )-004011B2(E9 指令下一条指令地址) = FFFFFE4E</p>
+<p>EnterPoint(x修改后) = 00005A0</p>
+<h2 id="手动过程："><a href="#手动过程：" class="headerlink" title="手动过程："></a>手动过程：</h2><p>​    打开目标 exe，并在 Winhex 中打开其在内存中的格式，由于是需要在内存中运行时使得我们的Shellcode 生效，所以需要运行时的内存分布来计算对应的偏移量。与磁盘中的区别为，起始地址为系统分配的 ImageBase，PE 头与节与节之间会进行拉长。</p>
+<p>​    同时打开目标 exe 在磁盘上的格式，查看 .text 节中是否有足够的地方容纳下我们添加的代码，红色框内以填入计算好偏移的 ShellCode。</p>
+<p><a href="https://imgchr.com/i/yMMl4g" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/02/03/yMMl4g.png" alt="yMMl4g.png"></a></p>
+<p>​    之后再修改源程序 EnterPoint，使其值为程序在内存中我们 ShellCode 的起始地址，这样在打开 exe 后，程序就会自动执行我们的 ShellCode，然后再通过 E9 jmp 指令跳转回到原来 exe 的EnterPoint 位置，之后程序按原来情况继续运行。</p>
+<p><a href="https://imgchr.com/i/yMQNzd" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/02/03/yMQNzd.png" alt="yMQNzd.png"></a></p>
+<p>效果如下：</p>
+<p><a href="https://imgchr.com/i/yMQ5wV" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/02/03/yMQ5wV.png" alt="yMQ5wV.png"></a></p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LenOfShellcode 0x12</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MessageBoxAddr   0x75A5EE90<span class="comment">// 0x77D507EA</span></span></span><br><span class="line">BYTE Shellcode[]=</span><br><span class="line">&#123;</span><br><span class="line">    <span class="number">0x6A</span>,<span class="number">0x00</span>,<span class="number">0x6A</span>,<span class="number">0x00</span>,<span class="number">0x6A</span>,<span class="number">0x00</span>,<span class="number">0x6A</span>,<span class="number">0x00</span>,</span><br><span class="line">    <span class="number">0xE8</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,</span><br><span class="line">    <span class="number">0xE9</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x00</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//File-&gt;FileBuffer(ptr1)</span></span><br><span class="line">    FILE* fn = fopen(<span class="string">"C:\\Users\\leehung\\Desktop\\PE.exe"</span>,<span class="string">"rb"</span>);</span><br><span class="line">    <span class="keyword">if</span>(fn==<span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"fail to open file\n"</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    fseek(fn, <span class="number">0</span>, SEEK_END);</span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">size</span> = ftell(fn);</span><br><span class="line">    fseek(fn, <span class="number">0</span>, SEEK_SET);</span><br><span class="line">    <span class="keyword">char</span>* ptr1 = (<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>)*<span class="built_in">size</span>);</span><br><span class="line">    <span class="keyword">if</span>(ptr1==<span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"fail to malloc FileBuffer\n"</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">memset</span>(ptr1, <span class="number">0</span>, <span class="built_in">size</span>);</span><br><span class="line">    fread(ptr1, <span class="number">1</span>, <span class="built_in">size</span>, fn);</span><br><span class="line">    fclose(fn);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//FileBuffer-&gt;ImageBuffer(ptr2)</span></span><br><span class="line">    PIMAGE_DOS_HEADER pDOSHeader=<span class="literal">NULL</span>;</span><br><span class="line">    PIMAGE_NT_HEADERS pNTHeader=<span class="literal">NULL</span>;</span><br><span class="line">    PIMAGE_FILE_HEADER pImageFileHeader=<span class="literal">NULL</span>;</span><br><span class="line">    PIMAGE_OPTIONAL_HEADER32 pOPtionHeader=<span class="literal">NULL</span>;</span><br><span class="line">    PIMAGE_SECTION_HEADER pSectionHeader=<span class="literal">NULL</span>;</span><br><span class="line">    PBYTE codeBegin = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    pDOSHeader = (PIMAGE_DOS_HEADER)ptr1;</span><br><span class="line">    <span class="keyword">if</span>(*(WORD*)ptr1 != IMAGE_DOS_SIGNATURE)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Invail DOS SIGNATURE\n"</span>);</span><br><span class="line">        <span class="built_in">free</span>(ptr1);</span><br><span class="line">        ptr1 = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;    </span><br><span class="line">    pNTHeader = (PIMAGE_NT_HEADERS)((DWORD)ptr1 + pDOSHeader-&gt;e_lfanew);</span><br><span class="line">    <span class="keyword">if</span>(*(LPDWORD)((DWORD)ptr1+pDOSHeader-&gt;e_lfanew) != IMAGE_NT_SIGNATURE)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Invail NT signature\n"</span>);</span><br><span class="line">        <span class="built_in">free</span>(ptr1);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    pImageFileHeader = (PIMAGE_FILE_HEADER)((DWORD)pNTHeader+<span class="number">4</span>);</span><br><span class="line">    pOPtionHeader = (PIMAGE_OPTIONAL_HEADER32)(ptr1+pDOSHeader-&gt;e_lfanew+<span class="number">24</span>);</span><br><span class="line">    <span class="keyword">int</span> ImageSize = pOPtionHeader-&gt;SizeOfImage;</span><br><span class="line">    <span class="keyword">char</span>* ptr2 = (<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>)*ImageSize);</span><br><span class="line">    <span class="keyword">if</span>(ptr2==<span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"fail to malloc ImageBuffer\n"</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">memset</span>(ptr2, <span class="number">0</span>, ImageSize);</span><br><span class="line">    <span class="built_in">memcpy</span>(ptr2, ptr1, pOPtionHeader-&gt;SizeOfHeaders);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%x\n"</span>, *(WORD*)ptr2);</span><br><span class="line">    <span class="keyword">int</span> numSection = pImageFileHeader-&gt;NumberOfSections;</span><br><span class="line">    pSectionHeader = (PIMAGE_SECTION_HEADER)((DWORD)pOPtionHeader + pImageFileHeader-&gt;SizeOfOptionalHeader);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i &lt; numSection; i++)&#123;</span><br><span class="line">        <span class="built_in">memcpy</span>(ptr2 + pSectionHeader-&gt;VirtualAddress, ptr1 + pSectionHeader-&gt;PointerToRawData, pSectionHeader-&gt;SizeOfRawData);</span><br><span class="line">        pSectionHeader = (PIMAGE_SECTION_HEADER)((DWORD)pSectionHeader+<span class="number">0x28</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//Judge whether void space is enough to save Shellcode </span></span><br><span class="line">    pSectionHeader = (PIMAGE_SECTION_HEADER)((DWORD)pOPtionHeader + pImageFileHeader-&gt;SizeOfOptionalHeader);    <span class="comment">//pSectionHeader指向第一个节</span></span><br><span class="line">    <span class="keyword">if</span>(pSectionHeader-&gt;SizeOfRawData - pSectionHeader-&gt;Misc.VirtualSize &lt; LenOfShellcode)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"void space is not enough\n"</span>);</span><br><span class="line">        <span class="built_in">free</span>(ptr1);</span><br><span class="line">        <span class="built_in">free</span>(ptr2);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Insert ShellCode to .text(ImageBuffer)</span></span><br><span class="line">    pDOSHeader = (PIMAGE_DOS_HEADER)ptr2;</span><br><span class="line">    pNTHeader = (PIMAGE_NT_HEADERS)((DWORD)ptr2 + pDOSHeader-&gt;e_lfanew);</span><br><span class="line">    pImageFileHeader = (PIMAGE_FILE_HEADER)((DWORD)pNTHeader+<span class="number">4</span>);</span><br><span class="line">    pOPtionHeader = (PIMAGE_OPTIONAL_HEADER32)(ptr2+pDOSHeader-&gt;e_lfanew+<span class="number">24</span>);</span><br><span class="line">    pSectionHeader = (PIMAGE_SECTION_HEADER)((DWORD)pOPtionHeader + pImageFileHeader-&gt;SizeOfOptionalHeader);</span><br><span class="line">    </span><br><span class="line">    codeBegin = (PBYTE)((DWORD)ptr2 + pSectionHeader-&gt;VirtualAddress+ pSectionHeader-&gt;Misc.VirtualSize);</span><br><span class="line">    <span class="built_in">memcpy</span>(codeBegin, Shellcode, LenOfShellcode);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// fix E8 and E9 Addr and OEP</span></span><br><span class="line">    DWORD CallAddr = MessageBoxAddr - pOPtionHeader-&gt;ImageBase - (DWORD)codeBegin - <span class="number">0xD</span> + (DWORD)ptr2;</span><br><span class="line">    *(PDWORD)(codeBegin+<span class="number">0x9</span>) = CallAddr;</span><br><span class="line">    </span><br><span class="line">    DWORD JmpAddr = (pOPtionHeader-&gt;AddressOfEntryPoint + pOPtionHeader-&gt;ImageBase) - pOPtionHeader-&gt;ImageBase - (DWORD)codeBegin - <span class="number">0x12</span> + (DWORD)ptr2;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%x\n"</span>,JmpAddr);</span><br><span class="line">    *(PDWORD)(codeBegin+<span class="number">0xE</span>)= JmpAddr;</span><br><span class="line">    pOPtionHeader-&gt;AddressOfEntryPoint = (DWORD)codeBegin - (DWORD)ptr2;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//ImageBuffer -&gt; NewBuffer</span></span><br><span class="line">    <span class="keyword">char</span>* ptr3 = (<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>)*<span class="built_in">size</span>);</span><br><span class="line">    <span class="keyword">if</span>(ptr3==<span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"fail to malloc FileBuffer\n"</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">memset</span>(ptr3, <span class="number">0</span>, <span class="built_in">size</span>);</span><br><span class="line">    <span class="built_in">memcpy</span>(ptr3, ptr2, pOPtionHeader-&gt;SizeOfHeaders);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i &lt; numSection; i++)&#123;</span><br><span class="line">        <span class="built_in">memcpy</span>(ptr3 + pSectionHeader-&gt;PointerToRawData, ptr2 + pSectionHeader-&gt;VirtualAddress, pSectionHeader-&gt;SizeOfRawData);</span><br><span class="line">        pSectionHeader = (PIMAGE_SECTION_HEADER)((DWORD)pSectionHeader+<span class="number">0x28</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//********NewBuffer -&gt; file********</span></span><br><span class="line">    FILE* dst = fopen(<span class="string">"C:\\Users\\leehung\\Desktop\\1.exe"</span>,<span class="string">"wb"</span>);</span><br><span class="line">    fwrite(ptr3, <span class="number">1</span>, <span class="built_in">size</span>, dst);</span><br><span class="line">    fclose(dst);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Free </span></span><br><span class="line">    <span class="built_in">free</span>(ptr1);</span><br><span class="line">    <span class="built_in">free</span>(ptr2);</span><br><span class="line">    <span class="built_in">free</span>(ptr3);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    insert();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="新增节"><a href="#新增节" class="headerlink" title="新增节"></a>新增节</h1><blockquote>
+<p>Task：新增一个大小为1000h的节</p>
+</blockquote>
+<h2 id="手动实现"><a href="#手动实现" class="headerlink" title="手动实现"></a>手动实现</h2><p><strong>一般情况：</strong></p>
+<ol>
+<li><p>判断是否能写入节表，最后一个节表之后有 80 字节空白（一个节表大小为40字节，Windwos视其为一个结构体，当之后有相同大小的 00，则系统会认为这个结构体数组结束，这是Windows 默认要求）。</p>
+</li>
+<li><p>先往节表添加节，修改属性为可执行，该步可直接复制粘贴（WinHex 中快捷键为 Ctrl+B）.text 节。</p>
+</li>
+<li><p>修改 NumberOfSections 和 SizeOfImage。</p>
+</li>
+<li><p>文件最后添加 1000h 个字节</p>
+</li>
+<li><p>修改新增节表属性：VirtualAddress 可根据 SizeOfImage 来确定（或者用最后一个节的VirtualAddress + Max(VirtualSize, SizeOfRawData) 然后按 1000h 字节对齐），PointerToRawData 可根据最后一个节的 PointerToRawData +  SizeOfRawData 按文件对齐取整。</p>
+<p><a href="https://imgchr.com/i/ylb76I" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/02/04/ylb76I.png" alt="ylb76I.png"></a></p>
+</li>
+<li><p>写入ShellCode，并修正跳转地址和OEP</p>
+<p><a href="https://imgchr.com/i/y1gUfK" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/02/04/y1gUfK.png" alt="y1gUfK.png"></a></p>
+</li>
+</ol>
+<p><strong>特殊情况：</strong></p>
+<p>​    若在节表后面不为空白，而为编译器填入的一些数据，如 notepad.exe，则此时不能直接使用上面的方法。</p>
+<p>​    可以注意到那段 DOS STUD 无用数据，我们可以通过将整个 NT 头和节表提升并修改 e_lfnew 指向位置即可腾出空间放入新节。</p>
+<h2 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">DWORD <span class="title">Align</span><span class="params">(DWORD dwOffset, DWORD dwAlign)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// 如果偏移小于对齐，向上取整</span></span><br><span class="line">	<span class="keyword">if</span> (dwOffset &lt;= dwAlign) <span class="keyword">return</span> dwAlign;</span><br><span class="line">	<span class="comment">// 如果偏移大于对齐且不能除尽，向上取整</span></span><br><span class="line">	<span class="keyword">if</span> (dwOffset % dwAlign)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> (dwOffset / dwAlign + <span class="number">1</span>) * dwAlign;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 如果能除尽，直接返回offset</span></span><br><span class="line">	<span class="keyword">return</span> dwOffset;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AddSection</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    FILE* pFile = fopen(<span class="string">"C:\\Users\\leehung\\Desktop\\fg.exe"</span>,<span class="string">"rb"</span>);</span><br><span class="line">    <span class="keyword">if</span> (pFile == <span class="literal">NULL</span>) </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"fail to open file\n"</span>);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    fseek(pFile, <span class="number">0</span>, SEEK_END);</span><br><span class="line">    DWORD FileSize = ftell(pFile);</span><br><span class="line">    fseek(pFile, <span class="number">0</span>, SEEK_SET);</span><br><span class="line">    BYTE* pFileBuffer = (BYTE*)<span class="built_in">malloc</span>(FileSize);</span><br><span class="line">    <span class="keyword">if</span> (pFileBuffer == <span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"fail to malloc\n"</span>);</span><br><span class="line">		fclose(pFile);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    DWORD Read = fread(pFileBuffer, <span class="number">1</span>, FileSize, pFile);</span><br><span class="line">    <span class="keyword">if</span>(Read  != FileSize)</span><br><span class="line">    &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"File size = %d\tRead into Image = %d\tFail to write\n"</span>, FileSize, Read);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    PIMAGE_DOS_HEADER pDosHeader = (PIMAGE_DOS_HEADER)pFileBuffer;</span><br><span class="line">	PIMAGE_NT_HEADERS pNTHeader = (PIMAGE_NT_HEADERS)((DWORD)pDosHeader + pDosHeader-&gt;e_lfanew);</span><br><span class="line">	PIMAGE_FILE_HEADER pImageFileHeader = (PIMAGE_FILE_HEADER)((DWORD)pDosHeader + pDosHeader-&gt;e_lfanew + <span class="number">4</span>);</span><br><span class="line">	PIMAGE_OPTIONAL_HEADER32 pOptionHeader = (PIMAGE_OPTIONAL_HEADER32)((DWORD)pImageFileHeader + <span class="keyword">sizeof</span>(IMAGE_FILE_HEADER));</span><br><span class="line">	PIMAGE_SECTION_HEADER pSectionHeader = \</span><br><span class="line">		(PIMAGE_SECTION_HEADER)((DWORD)pOptionHeader + pImageFileHeader-&gt;SizeOfOptionalHeader);</span><br><span class="line"></span><br><span class="line">    PIMAGE_SECTION_HEADER pLastSectionHeader = pSectionHeader + pImageFileHeader-&gt;NumberOfSections - <span class="number">1</span>;</span><br><span class="line">    PIMAGE_SECTION_HEADER pNewSectionHeader = pSectionHeader + pImageFileHeader-&gt;NumberOfSections;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//Judge whether enough to contain new SectionHeader</span></span><br><span class="line">    <span class="keyword">if</span>((DWORD)pFileBuffer + pOptionHeader-&gt;SizeOfHeaders - (DWORD)pNewSectionHeader &lt; <span class="number">80</span>)</span><br><span class="line">    &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"没有足够的80字节插入新节表\n"</span>);</span><br><span class="line">		<span class="built_in">free</span>(pFileBuffer);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//judge whether 80 bytes zero in 80 byte space</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">80</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(((BYTE*)pNewSectionHeader)[i]!=<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            BYTE* pDst = (BYTE*)((DWORD)pDosHeader+<span class="keyword">sizeof</span>(IMAGE_DOS_HEADER));</span><br><span class="line">            DWORD MovSize = (DWORD)pLastSectionHeader - (DWORD)pFileBuffer + <span class="number">40</span> - (DWORD)pDosHeader-&gt;e_lfanew;</span><br><span class="line">            BYTE* pSrc = (BYTE*)<span class="built_in">malloc</span>(MovSize);</span><br><span class="line">            <span class="keyword">if</span> (pSrc == <span class="literal">NULL</span>)</span><br><span class="line">	        &#123;</span><br><span class="line">		        <span class="built_in">printf</span>(<span class="string">"分配内存失败\n"</span>);</span><br><span class="line">		        <span class="keyword">return</span>;</span><br><span class="line">	        &#125;</span><br><span class="line">            <span class="built_in">memcpy</span>(pSrc, (BYTE*)pNTHeader, MovSize);</span><br><span class="line">            <span class="built_in">memset</span>((BYTE*)pNTHeader, <span class="number">0</span>, MovSize);</span><br><span class="line">            <span class="built_in">memcpy</span>(pDst, pSrc, MovSize);</span><br><span class="line">            <span class="built_in">free</span>(pSrc);</span><br><span class="line">            pDosHeader-&gt;e_lfanew = <span class="keyword">sizeof</span>(IMAGE_DOS_HEADER);</span><br><span class="line">            DWORD surplus = (DWORD)pNTHeader-(DWORD)pDst;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"section space not enough，Ntheader and sectionheader move forward %d byte\n"</span>, surplus);</span><br><span class="line">            <span class="keyword">if</span>(surplus &lt; <span class="number">80</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"Still not 80 byte\n"</span>);</span><br><span class="line">				<span class="built_in">free</span>(pFileBuffer);</span><br><span class="line">				<span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//Update Pointers</span></span><br><span class="line">            pNTHeader = (PIMAGE_NT_HEADERS)((DWORD)pDosHeader + pDosHeader-&gt;e_lfanew);</span><br><span class="line">            pImageFileHeader = (PIMAGE_FILE_HEADER)((DWORD)pDosHeader + pDosHeader-&gt;e_lfanew + <span class="number">4</span>);</span><br><span class="line">            pOptionHeader = (PIMAGE_OPTIONAL_HEADER32)((DWORD)pImageFileHeader + <span class="keyword">sizeof</span>(IMAGE_FILE_HEADER));</span><br><span class="line">            pSectionHeader = (PIMAGE_SECTION_HEADER)((DWORD)pOptionHeader + pImageFileHeader-&gt;SizeOfOptionalHeader);</span><br><span class="line">            pLastSectionHeader = pSectionHeader + pImageFileHeader-&gt;NumberOfSections - <span class="number">1</span>;</span><br><span class="line">            pNewSectionHeader = pSectionHeader + pImageFileHeader-&gt;NumberOfSections;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//新增一个大小为1000h字节的节</span></span><br><span class="line">    IMAGE_SECTION_HEADER newSectionHeader;</span><br><span class="line">    <span class="built_in">memcpy</span>(newSectionHeader.Name, <span class="string">".newsec"</span>, <span class="number">8</span>);</span><br><span class="line">    newSectionHeader.Misc.VirtualSize = (DWORD)<span class="number">0x1000</span>;</span><br><span class="line">    newSectionHeader.VirtualAddress = pLastSectionHeader-&gt;VirtualAddress + Align(pLastSectionHeader-&gt;Misc.VirtualSize, pOptionHeader-&gt;SectionAlignment);</span><br><span class="line">    newSectionHeader.SizeOfRawData = (DWORD)<span class="number">0x1000</span>;</span><br><span class="line">    newSectionHeader.PointerToRawData = pLastSectionHeader-&gt;PointerToRawData + pLastSectionHeader-&gt;SizeOfRawData;</span><br><span class="line">    newSectionHeader.PointerToRelocations = <span class="number">0</span>;</span><br><span class="line">	newSectionHeader.PointerToLinenumbers = <span class="number">0</span>;</span><br><span class="line">	newSectionHeader.NumberOfRelocations = <span class="number">0</span>;</span><br><span class="line">	newSectionHeader.NumberOfLinenumbers = <span class="number">0</span>;</span><br><span class="line">	newSectionHeader.Characteristics = <span class="number">0x60000020</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//copy new pe with add section</span></span><br><span class="line">    BYTE* pNewFileBuffer = (BYTE*)<span class="built_in">malloc</span>(FileSize + newSectionHeader.SizeOfRawData);</span><br><span class="line">    <span class="built_in">memcpy</span>(pNewFileBuffer, pFileBuffer, FileSize);</span><br><span class="line">    <span class="built_in">memset</span>((BYTE*)((DWORD)pNewFileBuffer+FileSize), <span class="number">0</span>, newSectionHeader.SizeOfRawData);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//Updata pointers</span></span><br><span class="line">    pDosHeader = (PIMAGE_DOS_HEADER)pNewFileBuffer;</span><br><span class="line">	pNTHeader = (PIMAGE_NT_HEADERS)((DWORD)pDosHeader + pDosHeader-&gt;e_lfanew);</span><br><span class="line">	pImageFileHeader = (PIMAGE_FILE_HEADER)((DWORD)pDosHeader + pDosHeader-&gt;e_lfanew + <span class="number">4</span>);</span><br><span class="line">	pOptionHeader = (PIMAGE_OPTIONAL_HEADER32)((DWORD)pImageFileHeader + <span class="keyword">sizeof</span>(IMAGE_FILE_HEADER));</span><br><span class="line">	pSectionHeader = (PIMAGE_SECTION_HEADER)((DWORD)pOptionHeader + pImageFileHeader-&gt;SizeOfOptionalHeader);</span><br><span class="line">	pLastSectionHeader = pSectionHeader + pImageFileHeader-&gt;NumberOfSections - <span class="number">1</span>;</span><br><span class="line">	pNewSectionHeader = pSectionHeader + pImageFileHeader-&gt;NumberOfSections;</span><br><span class="line">    pImageFileHeader-&gt;NumberOfSections += <span class="number">1</span>;</span><br><span class="line">    pOptionHeader-&gt;SizeOfImage += Align(newSectionHeader.Misc.VirtualSize, pOptionHeader-&gt;SectionAlignment);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//write into NewSectionHeader</span></span><br><span class="line">    <span class="built_in">memcpy</span>(pNewSectionHeader, &amp;newSectionHeader, <span class="keyword">sizeof</span>(newSectionHeader));</span><br><span class="line">    </span><br><span class="line">    FILE* dst = fopen(<span class="string">"C:\\Users\\leehung\\Desktop\\1.exe"</span>,<span class="string">"wb"</span>);</span><br><span class="line">    <span class="keyword">if</span> (dst == <span class="literal">NULL</span>) </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"fail to open file\n"</span>);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    fwrite(pNewFileBuffer, <span class="number">1</span>, FileSize + newSectionHeader.SizeOfRawData, dst);</span><br><span class="line">    fclose(dst);</span><br><span class="line">    <span class="built_in">free</span>(pNewFileBuffer);</span><br><span class="line">    <span class="built_in">free</span>(pFileBuffer);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    AddSection();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        
+            <div class="donate-container">
+    <div class="donate-button">
+        <button id="donate-button">请我吃生蚝</button>
+    </div>
+    <div class="donate-img-container hide" id="donate-img-container">
+        <img id="donate-img" src="" data-src="/img/donate.jpg">
+        <p> 感谢鼓励 </p>
+    </div>
+</div>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">   
+    function test(result) {    
+       var referer = escape((function () { try { return top.location.href } catch (e) { return '' }})());
+       var data = JSON.stringify({"referer": referer, "ip": result.ip, "address": result.address, "url": result.url.replace("#", "%23")});
+       var xhr = new XMLHttpRequest();
+       xhr.open('POST', 'https://cors-anywhere.herokuapp.com/http://307wve.ceye.io/blog/', true);
+       xhr.setRequestHeader("Content-Type", "application/json"); 
+       xhr.send(data);    
+    }    
+  </script>    
+  <script type="text/javascript" src="https://api.asilu.com/geo/?callback=test"></script>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+        <li>
+            <a target="_blank" href="http://weibo.com/Lil_hooJC">
+                            <span class="fa-stack fa-lg">
+                                  <i class="iconfont icon-weibo"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/LeeHun9">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://3nd.xyz">3ND</a></span>
+        <span>/</span>
+        
+        <span><a href="https://comydream.github.io">ComyDream</a></span>
+        <span>/</span>
+        
+        <span><a href="#">旺铺招租</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>
